@@ -1,7 +1,7 @@
 # geojournal
 
 Team Members:
-Michael Zhang
+Michael Zhang, David jiang
 
 User Stories:
 John went to the Alps over the summer and has decided to record the pictures and experiences into the journal. He created a new entry, chose the Alps as the location, and inputted the pictures and a description of his experience into the entry.
