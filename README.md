@@ -13,4 +13,4 @@ User Stories:
 
 4. Patrick uses GeoJournal for storing restuarants he went to. He wants to go to a restuarant that he made an entry for a while ago. He uses the list of entries and sorts by oldest to find the entry.
 
-Jimmy found a bar that he liked so he made an entry for it. the bar changed its name and address so Jimmy edited those things. The bar closed down to Jimmy deleted the entry.
+5. Jimmy found a bar that he liked so he made an entry for it. the bar changed its name and address so Jimmy edited those things. The bar closed down to Jimmy deleted the entry.
