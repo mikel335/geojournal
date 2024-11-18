@@ -23,4 +23,8 @@ public class ChangeSortOutputData {
     public boolean isUseCaseFailed() {
         return useCaseFailed;
     }
+
+    public ArrayList<String>[] getEntries() {
+        return entries;
+    }
 }
