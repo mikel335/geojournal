@@ -16,7 +16,14 @@ public class ListState {
     }
 
     public ListState() {
-
+        list[0] = new ArrayList<>();
+        list[1] = new ArrayList<>();
+        list[0].add("One");
+        list[0].add("Two");
+        list[0].add("Three");
+        list[1].add("1");
+        list[1].add("2");
+        list[1].add("3");
     }
 
     public int getSort() {

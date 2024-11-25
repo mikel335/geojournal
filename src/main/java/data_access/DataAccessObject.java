@@ -17,20 +17,26 @@ public class DataAccessObject implements ChangeSortDataAccessInterface{
     private final TreeMap<Integer, String> dateToNameNew = new TreeMap<Integer, String>(Collections.reverseOrder());
     private final TreeMap<Integer, String> dateToNameOld = new TreeMap<Integer, String>();
 
-    public DataAccessObject(EntryList entryList) {
-        // TODO: populate the treemaps, need to implement file system
-        // this constructor is for sorting purposes (to pass in an entrylist)
-    }
-
     public DataAccessObject() {
         // TODO: populate the treemaps, need to implement file system
         // this version is for init purposes
+        nameToDate.put("one", 1);
+        nameToDate.put("two", 2);
+        nameToDate.put("three", 3);
+        dateToNameOld.put(1, "one");
+        dateToNameOld.put(2, "two");
+        dateToNameOld.put(3, "three");
+        dateToNameNew.put(3, "three");
+        dateToNameNew.put(2, "two");
+        dateToNameNew.put(1, "one");
     }
 
     @Override
     public void changeSortAndUpdate(EntryList entryList) {
         final int sort = entryList.getSortMethod();
         ArrayList<String>[] entries = new ArrayList[2];
+        entries[0] = new ArrayList<String>();
+        entries[1] = new ArrayList<String>();
         TreeMap<Integer, String> dateToName;
         if (sort == 0) {
             dateToName = dateToNameOld;

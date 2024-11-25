@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -32,6 +32,8 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
     private final ListViewModel listViewModel;
     private ChangeSortController changeSortController;
 
+    private final ArrayList<String>[] entries;
+
     private final JButton ascendingButton;
     private final JButton descendingButton;
 
@@ -47,6 +49,14 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
         buttons.add(ascendingButton);
         descendingButton = new JButton(ListViewModel.DESCENDING_BUTTON_LABEL);
         buttons.add(descendingButton);
+
+        this.entries = listViewModel.getState().getList();
+        final JPanel entries = new JPanel();
+        for (String titles : this.entries[0]) {
+            final JLabel label = new JLabel(titles);
+            entries.add(label);
+        }
+
 
         ascendingButton.addActionListener(
             new ActionListener() {
@@ -71,6 +81,7 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
 
         this.add(title);
         this.add(buttons);
+        this.add(entries);
     }
 
     @Override
