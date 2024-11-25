@@ -38,7 +38,7 @@ public class ImageView extends JPanel implements ActionListener {
         deleteAllButton.addActionListener(this);
         buttonPanel.add(deleteAllButton);
 
-        add(buttonPanel, BorderLayout.NORTH);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     @Override
