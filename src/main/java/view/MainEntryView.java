@@ -5,37 +5,52 @@ import java.awt.*;
 
 public class MainEntryView extends JFrame {
 
-    private final JPanel cardPanel;
+
 
     public MainEntryView() {
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        /*
+         **** HEADER (text, description and tab selection) ****
+         */
         JPanel headerPanel = new JPanel(new BorderLayout());
 
-        // Card selection buttons
+        // Buttons to change displayed tab
         JPanel switchTabsButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton imagesButton = new JButton("Images");
         JButton mapButton = new JButton("Map");
 
         // Title panel
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        titlePanel.setBackground(Color.CYAN);
         JLabel placeholderLabel = new JLabel("Placeholder for title and description");
+
+        titlePanel.setBackground(Color.CYAN);
         titlePanel.add(placeholderLabel);
 
-        // Map panel
-        JPanel mapPanel = new MapView(43.6532, -79.3832);
+        headerPanel.add(titlePanel, BorderLayout.NORTH);
+        headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
 
-        // Image panel
-        ImageView imagePanel = new ImageView();
-
+        /*
+         **** CONTENT (Different Tabs)
+         */
         // Card panel to switch between map and image panels
-        cardPanel = new JPanel(new CardLayout());
-
+        final JPanel cardPanel = new JPanel(new CardLayout());
+        JPanel mapPanel = new MapView(43.6532, -79.3832);
+        ImageView imagePanel = new ImageView();
         cardPanel.add(imagePanel, "Images");
         cardPanel.add(mapPanel, "Map");
+
+        /*
+         **** Add everything to view
+         */
+        add(headerPanel, BorderLayout.NORTH);
+        add(cardPanel, BorderLayout.CENTER);
+
+        /*
+         **** Action Listeners ****
+         */
 
         // Action listeners for card and image buttons
         imagesButton.addActionListener(_ -> {
@@ -53,12 +68,6 @@ public class MainEntryView extends JFrame {
             mapButton.setEnabled(false);
         });
         switchTabsButtonPanel.add(mapButton);
-
-        // Add panels
-        headerPanel.add(titlePanel, BorderLayout.NORTH);
-        headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
-        add(headerPanel, BorderLayout.NORTH);
-        add(cardPanel, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {

@@ -41,7 +41,6 @@ public class TextBoxView extends JFrame implements ActionListener {
 
         JScrollPane scrollPane1 = new JScrollPane(textField);
 
-
         add(scrollPane1, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
