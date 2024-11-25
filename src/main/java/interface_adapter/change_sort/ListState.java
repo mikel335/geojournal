@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class ListState {
     private ArrayList<String>[] list = new ArrayList[2];
     private int sort = 0;
+    private String sortError;
 
     public ListState(ListState listState) {
         list = listState.list;
@@ -32,5 +33,13 @@ public class ListState {
 
     public void setList(ArrayList<String>[] list) {
         this.list = list;
+    }
+
+    public String getSortError() {
+        return sortError;
+    }
+
+    public void setSortError(String sortError) {
+        this.sortError = sortError;
     }
 }

@@ -18,7 +18,13 @@ public class DataAccessObject implements ChangeSortDataAccessInterface{
     private final TreeMap<Integer, String> dateToNameOld = new TreeMap<Integer, String>();
 
     public DataAccessObject(EntryList entryList) {
-        // TODO: populate the treemaps
+        // TODO: populate the treemaps, need to implement file system
+        // this constructor is for sorting purposes (to pass in an entrylist)
+    }
+
+    public DataAccessObject() {
+        // TODO: populate the treemaps, need to implement file system
+        // this version is for init purposes
     }
 
     @Override
