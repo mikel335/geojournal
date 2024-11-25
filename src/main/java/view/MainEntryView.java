@@ -12,6 +12,13 @@ public class MainEntryView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        JPanel headerPanel = new JPanel(new BorderLayout());
+
+        // Card selection buttons
+        JPanel switchTabsButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton imagesButton = new JButton("Images");
+        JButton mapButton = new JButton("Map");
+
         // Title panel
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setBackground(Color.CYAN);
@@ -19,40 +26,39 @@ public class MainEntryView extends JFrame {
         titlePanel.add(placeholderLabel);
 
         // Map panel
-        JPanel mapPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        mapPanel.setBackground(Color.RED);
-        JLabel mapLabel = new JLabel("Placeholder for map");
-        mapPanel.setPreferredSize(new Dimension(600, 400));
-        mapPanel.add(mapLabel);
+        JPanel mapPanel = new MapView(43.6532, -79.3832);
 
         // Image panel
         ImageView imagePanel = new ImageView();
 
         // Card panel to switch between map and image panels
         cardPanel = new JPanel(new CardLayout());
-        cardPanel.add(mapPanel, "Map");
-        cardPanel.add(imagePanel, "Images");
 
-        // Map and images buttons
-        JPanel switchTabsButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton imagesButton = new JButton("Images");
-        imagesButton.addActionListener(e -> {
+        cardPanel.add(imagePanel, "Images");
+        cardPanel.add(mapPanel, "Map");
+
+        // Action listeners for card and image buttons
+        imagesButton.addActionListener(_ -> {
             CardLayout cl = (CardLayout) cardPanel.getLayout();
             cl.show(cardPanel, "Images");
+            imagesButton.setEnabled(false);
+            mapButton.setEnabled(true);
         });
         switchTabsButtonPanel.add(imagesButton);
 
-        JButton mapButton = new JButton("Map");
-        mapButton.addActionListener(e -> {
+        mapButton.addActionListener(_ -> {
             CardLayout cl = (CardLayout) cardPanel.getLayout();
             cl.show(cardPanel, "Map");
+            imagesButton.setEnabled(true);
+            mapButton.setEnabled(false);
         });
         switchTabsButtonPanel.add(mapButton);
 
         // Add panels
-        add(titlePanel, BorderLayout.NORTH);
-        add(switchTabsButtonPanel, BorderLayout.CENTER);
-        add(cardPanel, BorderLayout.SOUTH);
+        headerPanel.add(titlePanel, BorderLayout.NORTH);
+        headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
+        add(headerPanel, BorderLayout.NORTH);
+        add(cardPanel, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {
