@@ -1,11 +1,11 @@
 package view;
 
+import view.TextBoxView.TextBoxView;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainEntryView extends JFrame {
-
-
 
     public MainEntryView() {
         setSize(700, 500);
@@ -23,13 +23,8 @@ public class MainEntryView extends JFrame {
         JButton mapButton = new JButton("Map");
 
         // Title panel
-        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel placeholderLabel = new JLabel("Placeholder for title and description");
-
-        titlePanel.setBackground(Color.CYAN);
-        titlePanel.add(placeholderLabel);
-
-        headerPanel.add(titlePanel, BorderLayout.NORTH);
+        TextBoxView textBoxPanel = new TextBoxView();
+        headerPanel.add(textBoxPanel, BorderLayout.NORTH);
         headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
 
         /*
