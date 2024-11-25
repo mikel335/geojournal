@@ -10,6 +10,7 @@ public class TextBoxView extends JFrame implements ActionListener {
     private JTextField textField;
     private JTextArea textArea;
     private final JButton editButton;
+    private final JButton closeButton;
 
     public TextBoxView() {
 
@@ -19,35 +20,41 @@ public class TextBoxView extends JFrame implements ActionListener {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
-        editButton = new JButton("Submit");
+        editButton = new JButton("Save");
         editButton.setSize(150, 75);
         editButton.addActionListener(this);
-        buttonPanel.add(editButton, BorderLayout.NORTH);
+
+        closeButton = new JButton("Close (don't save)");
+        closeButton.setSize(150, 75);
+        closeButton.addActionListener(this);
+
+        buttonPanel.add(editButton, BorderLayout.EAST);
+        buttonPanel.add(closeButton, BorderLayout.WEST);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        textArea = new JTextArea(5, 20);
-        textArea.setEditable(false);
+        textArea = new JTextArea("Edit description here");
+        textArea.setEditable(true);
         JScrollPane scrollPane = new JScrollPane(textArea);
 
+        textField = new JTextField("Edit title here");
+        textField.setEditable(true);
+
+        JScrollPane scrollPane1 = new JScrollPane(textField);
+
+
+        add(scrollPane1, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
-            setSize(700, 500);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLayout(new FlowLayout(FlowLayout.LEFT));
-
-            textField = new JTextField(20);
-            textField.addActionListener(this);
-
-            textArea = new JTextArea(5, 20);
-            textArea.setEditable(false);
-
-            String text = textField.getText();
-            textArea.append(text + System.lineSeparator());
-            textField.selectAll();
+            String descText = textArea.getText();
+            String titleText = textField.getText();
+            // Must save above Strings somewhere
+        }
+        else if (e.getSource() == closeButton) {
+            TextBoxView.this.dispose();
         }
     }
 
