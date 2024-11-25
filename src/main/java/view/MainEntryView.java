@@ -1,6 +1,6 @@
 package view;
 
-import view.TextBoxView.TextBoxView;
+import view.TextBoxView.EditTextView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class MainEntryView extends JFrame {
         JButton mapButton = new JButton("Map");
 
         // Title panel
-        TextBoxView textBoxPanel = new TextBoxView();
+        EditTextView textBoxPanel = new EditTextView();
         headerPanel.add(textBoxPanel, BorderLayout.NORTH);
         headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
 

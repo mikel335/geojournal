@@ -5,13 +5,13 @@ import java.awt.*;
 
 import java.awt.event.*;
 
-public class TextBoxView extends JPanel implements ActionListener {
+public class EditTextView extends JPanel implements ActionListener {
 
     final JButton saveButton = new JButton("Save");
     final JButton closeButton = new JButton("Close (don't save)");
     TextAreaView textEditPanel;
 
-    public TextBoxView() {
+    public EditTextView() {
         // TODO implement data storage to grab constructor values
         textEditPanel = new TextAreaView("", "");
 
@@ -52,7 +52,7 @@ public class TextBoxView extends JPanel implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame demoFrame = new JFrame();
-            demoFrame.add(new TextBoxView());
+            demoFrame.add(new EditTextView());
             demoFrame.setSize(700, 500);
             demoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             demoFrame.setVisible(true);
