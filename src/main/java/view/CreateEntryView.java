@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CreateEntryView extends JFrame {
@@ -15,7 +16,13 @@ public class CreateEntryView extends JFrame {
         final JButton entryButton = new JButton("New Entry");
         add(entryButton, BorderLayout.NORTH);
         entryButton.setVisible(true);
+        entryButton.addActionListener(this::actionPerformed);
 
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        MainEntryView entry = new MainEntryView();
+        entry.setVisible(true);
     }
 
     public static void main(String[] args) {
