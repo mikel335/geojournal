@@ -32,7 +32,7 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
     private final ListViewModel listViewModel;
     private ChangeSortController changeSortController;
 
-    private final ArrayList<String>[] entries;
+    private final ArrayList<JLabel> entries;
 
     private final JButton ascendingButton;
     private final JButton descendingButton;
@@ -50,10 +50,11 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
         descendingButton = new JButton(ListViewModel.DESCENDING_BUTTON_LABEL);
         buttons.add(descendingButton);
 
-        this.entries = listViewModel.getState().getList();
+        this.entries = new ArrayList<JLabel>();
         final JPanel entries = new JPanel();
-        for (String titles : this.entries[0]) {
+        for (String titles : listViewModel.getState().getList()[0]) {
             final JLabel label = new JLabel(titles);
+            this.entries.add(label);
             entries.add(label);
         }
 
@@ -92,8 +93,10 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final ListState state = (ListState) evt.getNewValue();
-        if (state.getSortError() != null) {
-            JOptionPane.showMessageDialog(this, state.getSortError());
+        System.out.println(state.toString());
+        System.out.println(state.getList()[0].size());
+        for (int i = 0; i < state.getList()[0].size(); i++) {
+            entries.get(i).setText(state.getList()[0].get(i));
         }
     }
 

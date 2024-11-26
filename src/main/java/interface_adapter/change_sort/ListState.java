@@ -49,4 +49,18 @@ public class ListState {
     public void setSortError(String sortError) {
         this.sortError = sortError;
     }
+
+    public String toString() {
+        String res1 = "[";
+        for (String title : list[0]){
+            res1 = res1 + title + ",";
+        }
+        res1 = res1 + "]";
+        String res2 = "[";
+        for (String title : list[1]){
+            res2 = res2 + title + ",";
+        }
+        res2 = res2 + "]";
+        return res1 + res2;
+    }
 }
