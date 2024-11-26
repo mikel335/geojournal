@@ -59,12 +59,17 @@ public class ImageView extends JPanel implements ActionListener {
 
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            if (imagePanelsList.size() > 3) {
+            if (imagePanelsList.size() > 11) {
                 JOptionPane.showMessageDialog(this,
                         "You have exceeded the maximum number of images allowed!",
                         "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
                 File selectedFile = fileChooser.getSelectedFile();
+
+                // Grab file and copy it to the filesystem
+                // String newUrl = FileSystem.storeFile(selectcedFile);
+                // ImageIcon imageIcon = new ImageIcon(url);
+                // Display file from file system
                 ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
 
                 Image image = imageIcon.getImage();
