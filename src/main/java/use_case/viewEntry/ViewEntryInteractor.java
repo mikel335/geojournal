@@ -17,7 +17,14 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
-            ViewEntryOutputData outputData = new ViewEntryOutputData(entryData);
+            ViewEntryOutputData outputData = new ViewEntryOutputData(
+                    entryData.getImagePaths(),
+                    entryData.getLatitude(),
+                    entryData.getLongitude(),
+                    entryData.getTitle(),
+                    entryData.getDescription()
+
+            );
             viewEntryPresenter.prepareEditImagesView(outputData);
 
         } catch (Exception e) {
@@ -30,7 +37,12 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
-            ViewEntryOutputData outputData = new ViewEntryOutputData(entryData);
+            ViewEntryOutputData outputData = new ViewEntryOutputData(
+                    entryData.getImagePaths(),
+                    entryData.getLatitude(),
+                    entryData.getLongitude(),
+                    entryData.getTitle(),
+                    entryData.getDescription());
             viewEntryPresenter.prepareUpdateCoordsView(outputData);
 
         } catch (Exception e) {
@@ -43,7 +55,12 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
-            ViewEntryOutputData outputData = new ViewEntryOutputData(entryData);
+            ViewEntryOutputData outputData = new ViewEntryOutputData(
+                    entryData.getImagePaths(),
+                    entryData.getLatitude(),
+                    entryData.getLongitude(),
+                    entryData.getTitle(),
+                    entryData.getDescription());
             viewEntryPresenter.prepareEditTextView(outputData);
 
         } catch (Exception e) {

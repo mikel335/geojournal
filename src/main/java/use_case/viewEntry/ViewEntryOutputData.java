@@ -1,39 +1,46 @@
 package use_case.viewEntry;
 
-import entity.Entry;
-
 import java.util.Map;
 
-// TODO figure out if it would be useful to provide methods to supply data for each edit screen
-
 public class ViewEntryOutputData {
-    private final Entry entry;
-    public ViewEntryOutputData(Entry entry) {
-        this.entry = entry;
+
+    private final Map<Integer, String> imagePaths;
+    private final double latitude;
+    private final double longitude;
+    private final String title;
+    private final String description;
+
+    public ViewEntryOutputData(Map<Integer, String> imagePaths,
+                               double latitude,
+                               double longitude,
+                               String title,
+                               String description) {
+        this.imagePaths = imagePaths;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.title = title;
+        this.description = description;
     }
 
-    public Entry getEntry() {
-        return entry;
-    }
 
     public Map<Integer, String> getImagePaths() {
-        return entry.getImagePaths();
+        return imagePaths;
     }
 
     public double getLatitude() {
-        return entry.getLatitude();
+        return latitude;
     }
 
     public double getLongitude() {
-        return entry.getLongitude();
+        return longitude;
     }
 
     public String getTitle() {
-        return entry.getTitle();
+        return title;
     }
 
     public String getDescription() {
-        return entry.getDescription();
+        return description;
     }
 }
 
