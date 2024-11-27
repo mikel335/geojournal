@@ -1,4 +1,4 @@
-package interface_adapter.addImage;
+package interface_adapter.editImages;
 
 import use_case.editImages.EditImagesInputBoundary;
 import use_case.editImages.AddImageInputData;

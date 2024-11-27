@@ -1,7 +1,7 @@
 package interface_adapter.updateCoords;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.addImage.EditImagesViewModel;
+import interface_adapter.editImages.EditImagesViewModel;
 
 import use_case.updateCoords.UpdateCoordsOutputBoundary;
 import use_case.updateCoords.UpdateCoordsOutputData;

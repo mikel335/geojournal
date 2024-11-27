@@ -1,4 +1,4 @@
-package interface_adapter.addImage;
+package interface_adapter.editImages;
 
 import java.util.Map;
 

@@ -1,7 +1,7 @@
 package interface_adapter.viewEntry;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.addImage.EditImagesViewModel;
+import interface_adapter.editImages.EditImagesViewModel;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
 import interface_adapter.updateText.UpdateTextViewModel;
 import use_case.viewEntry.ViewEntryOutputBoundary;
@@ -36,7 +36,7 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
     public void prepareAddImageView(ViewEntryOutputData outputData) {
 
     }
-    
+
 
     @Override
     public void prepareUpdateCoordsView(ViewEntryOutputData outputData) {
