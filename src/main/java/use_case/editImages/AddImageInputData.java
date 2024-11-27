@@ -1,4 +1,4 @@
-package use_case.addImage;
+package use_case.editImages;
 
 public class AddImageInputData {
     private final String imagePath;

@@ -1,4 +1,4 @@
-package use_case.addImage;
+package use_case.editImages;
 
 public class DeleteImageInputData {
     private final Integer id;

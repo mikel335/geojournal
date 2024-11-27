@@ -1,8 +1,8 @@
 package interface_adapter.addImage;
 
-import use_case.addImage.EditImagesInputBoundary;
-import use_case.addImage.AddImageInputData;
-import use_case.addImage.DeleteImageInputData;
+import use_case.editImages.EditImagesInputBoundary;
+import use_case.editImages.AddImageInputData;
+import use_case.editImages.DeleteImageInputData;
 
 public class EditImagesController {
     private final EditImagesInputBoundary addImageInteractor;
