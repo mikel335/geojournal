@@ -3,6 +3,7 @@ package interface_adapter.updateText;
 public class UpdateTextState {
     private String title = "";
     private String description = "";
+    private String updateTextError;
 
     public String getTitle() {
         return title;
@@ -18,5 +19,13 @@ public class UpdateTextState {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUpdateTextError() {
+        return updateTextError;
+    }
+
+    public void setUpdateTextError(String updateTextError) {
+        this.updateTextError = updateTextError;
     }
 }
