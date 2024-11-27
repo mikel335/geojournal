@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The state information representing the list view/
  */
 public class ListState {
-    private ArrayList<String>[] list = new ArrayList[2];
+    private ArrayList<String>[] list = new ArrayList[3];
     private int sort = 0;
     private String sortError;
 

@@ -1,7 +1,5 @@
 package use_case.change_sort;
 
-import java.util.ArrayList;
-
 import entity.EntryList;
 
 /**
