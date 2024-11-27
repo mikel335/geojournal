@@ -1,0 +1,25 @@
+
+data_access
+    <Entity>DataAccessObject implements <UseCase>DataAccessInterface (for all use cases that need it)
+
+entity
+    <Entity>
+    <Entity>Factory (not always needed)
+
+interface_adapter
+    <UseCase>
+        <UseCase>Controller
+        <UseCase>Presenter implements <UseCase>OutputBoundary(Interface)
+        <UseCase>State
+
+use_case
+    <UseCase>
+        <UseCase>InputBoundary(Interface)
+        <UseCase>InputData
+        <UseCase>Interactor implements <UseCase>InputBoundary(Interface)
+        <UseCase>OutputBoundary(Interface)
+        <UseCase>OutputData
+        <UseCase>DataAccessInterface(Interface)
+
+
+Gotta figure out where to put ViewModel and ViewState
