@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 public class UpdateTextViewModel extends ViewModel<UpdateTextState> {
 
     public UpdateTextViewModel() {
-        super("viewEntry");
+        super("updateText");
         setState(new UpdateTextState());
     }
 }

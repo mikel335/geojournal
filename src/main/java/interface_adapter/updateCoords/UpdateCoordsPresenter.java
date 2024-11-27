@@ -24,22 +24,8 @@ public class UpdateCoordsPresenter implements UpdateCoordsOutputBoundary {
     // On success, switch to the view entry view
     @Override
     public void prepareSuccessView(UpdateCoordsOutputData outputData) {
-        final AddImageState entryState =
+
     }
-
-    //    @Override
-    //    public void prepareSuccessView(LoginOutputData response) {
-    //        // On success, switch to the logged in view.
-    //
-    //        final LoggedInState loggedInState = loggedInViewModel.getState();
-    //        loggedInState.setUsername(response.getUsername());
-    //        this.loggedInViewModel.setState(loggedInState);
-    //        this.loggedInViewModel.firePropertyChanged();
-    //
-    //        this.viewManagerModel.setState(loggedInViewModel.getViewName());
-    //        this.viewManagerModel.firePropertyChanged();
-    //    }
-
 
     // On failure, stay on the edit coords view and display an error
     @Override
