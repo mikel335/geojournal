@@ -8,11 +8,6 @@ public interface ViewEntryOutputBoundary {
      */
     void prepareAddImageView(ViewEntryOutputData outputData);
 
-    /**
-     * Prepares the view to delete an image
-     * @param outputData the output data
-     */
-    void prepareDeleteImageView(ViewEntryOutputData outputData);
 
     /**
      * Prepares the view to update coords

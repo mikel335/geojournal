@@ -1,7 +1,7 @@
 package interface_adapter.updateCoords;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.addImage.AddImageViewModel;
+import interface_adapter.addImage.EditImagesViewModel;
 
 import use_case.updateCoords.UpdateCoordsOutputBoundary;
 import use_case.updateCoords.UpdateCoordsOutputData;
@@ -9,12 +9,12 @@ import use_case.updateCoords.UpdateCoordsOutputData;
 public class UpdateCoordsPresenter implements UpdateCoordsOutputBoundary {
 
     private final UpdateCoordsViewModel updateCoordsView;
-    private final AddImageViewModel updateImageView;
+    private final EditImagesViewModel updateImageView;
     private final ViewManagerModel viewManagerModel;
 
 
     public UpdateCoordsPresenter(UpdateCoordsViewModel updateCoordsView,
-                                 AddImageViewModel addImageView,
+                                 EditImagesViewModel addImageView,
                                  ViewManagerModel viewManagerModel) {
         this.updateCoordsView = updateCoordsView;
         this.updateImageView = addImageView;

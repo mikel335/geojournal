@@ -4,10 +4,10 @@ import use_case.addImage.EditImagesInputBoundary;
 import use_case.addImage.AddImageInputData;
 import use_case.addImage.DeleteImageInputData;
 
-public class AddImageController {
+public class EditImagesController {
     private final EditImagesInputBoundary addImageInteractor;
 
-    public AddImageController(EditImagesInputBoundary addImageInteractor) {
+    public EditImagesController(EditImagesInputBoundary addImageInteractor) {
         this.addImageInteractor = addImageInteractor;
     }
 
