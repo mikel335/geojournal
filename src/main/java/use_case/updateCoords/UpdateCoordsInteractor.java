@@ -1,5 +1,7 @@
 package use_case.updateCoords;
 
+import entity.Entry;
+
 public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
 
     private final UpdateCoordsDataAccessInterface coordsDataAccess;
@@ -18,11 +20,12 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
         final double longitude = updateCoordsInputData.longitude();
 
         if (90 >= Math.abs(latitude) && 180 >= Math.abs(longitude)) {
-            coordsDataAccess.setCoords(latitude, longitude);
+            coordsDataAccess.setCoordinates(latitude, longitude);
 
+            Entry updatedEntry = coordsDataAccess.getCurrentEntry();
             final UpdateCoordsOutputData outputData = new UpdateCoordsOutputData(
-                    coordsDataAccess.getLatitude(),
-                    coordsDataAccess.getLongitude());
+                    updatedEntry.getLatitude(),
+                    updatedEntry.getLongitude());
 
             updateCoordsPresenter.prepareSuccessView(outputData);
         }

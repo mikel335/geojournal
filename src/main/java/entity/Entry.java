@@ -1,8 +1,8 @@
 package entity;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Entry {
-
     final private int id;
 
     // Title and description
@@ -10,7 +10,7 @@ public class Entry {
     private String description;
 
     // Image Data
-    private ArrayList<String> imagePaths = new ArrayList<>();
+    private Map<Integer, String> imagePaths;
 
     // Map Data
     private double longitude;
@@ -19,15 +19,15 @@ public class Entry {
     public Entry(int id,
                  String title,
                  String description,
-                 ArrayList<String> imagePaths,
+                 Map<Integer, String> imagePaths,
                  double longitude,
                  double latitude) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.imagePaths = imagePaths;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.imagePaths = new HashMap<>(imagePaths);
     }
 
 
@@ -51,10 +51,15 @@ public class Entry {
         this.description = description;
     }
 
-    public void addImagePath(String imagePath) {}
-    public void removeImagePath(String imagePath) {}
+    public void addImagePath(Integer id, String path) {
+        imagePaths.put(id, path);
+    }
 
-    public ArrayList<String> getImagePaths() {
+    public void removeImagePath(Integer id) {
+        imagePaths.remove(id);
+    }
+
+    public Map<Integer, String> getImagePaths() {
         return imagePaths;
     }
 

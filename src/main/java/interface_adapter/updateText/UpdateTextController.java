@@ -2,8 +2,6 @@ package interface_adapter.updateText;
 
 import use_case.updateText.UpdateTextInputBoundary;
 import use_case.updateText.UpdateTextInputData;
-import use_case.viewEntry.ViewEntryInputBoundary;
-import use_case.viewEntry.ViewEntryInputData;
 
 
 public class UpdateTextController {

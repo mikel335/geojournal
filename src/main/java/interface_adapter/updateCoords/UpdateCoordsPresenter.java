@@ -1,40 +1,60 @@
 package interface_adapter.updateCoords;
 
+import entity.Entry;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.editImages.EditImagesState;
 import interface_adapter.editImages.EditImagesViewModel;
 
+import interface_adapter.viewEntry.ViewEntryState;
+import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.updateCoords.UpdateCoordsOutputBoundary;
 import use_case.updateCoords.UpdateCoordsOutputData;
 
 public class UpdateCoordsPresenter implements UpdateCoordsOutputBoundary {
 
     private final UpdateCoordsViewModel updateCoordsView;
-    private final EditImagesViewModel updateImageView;
+    private final ViewEntryViewModel entryView;
     private final ViewManagerModel viewManagerModel;
 
 
     public UpdateCoordsPresenter(UpdateCoordsViewModel updateCoordsView,
-                                 EditImagesViewModel addImageView,
+                                 ViewEntryViewModel entryView,
                                  ViewManagerModel viewManagerModel) {
         this.updateCoordsView = updateCoordsView;
-        this.updateImageView = addImageView;
+        this.entryView = entryView;
         this.viewManagerModel = viewManagerModel;
     }
 
-    // On success, switch to the view entry view
+    // TODO figure out a way to end up on the correct tab
+    // TODO get rid of error on success
+
+    // On success switch back to entry view
     @Override
     public void prepareSuccessView(UpdateCoordsOutputData outputData) {
+        // Create new entry view state with new coordinates
+        final ViewEntryState newViewEntryState = entryView.getState();
+        newViewEntryState.setLatitude(outputData.latitude());
+        newViewEntryState.setLongitude(outputData.longitude());
 
+        // Update the state
+        this.entryView.setState(newViewEntryState);
+        this.entryView.firePropertyChanged();
+
+        // Update the view manager model with the new view
+        this.viewManagerModel.setState(this.entryView.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     // On failure, stay on the edit coords view and display an error
     @Override
     public void prepareFailView(String errorMessage) {
-        final UpdateCoordsState updateCoordsState = updateCoordsView.getState();
-        updateCoordsState.setUpdateCoordsError(errorMessage);
-        updateCoordsView.firePropertyChanged("updateCoordsError");
+        // Create new entry view state with new coordinates
+        final UpdateCoordsState newUpdateCoordsState = updateCoordsView.getState();
+        newUpdateCoordsState.setUpdateCoordsError(errorMessage);
+
+        // Update the state
+        this.updateCoordsView.setState(newUpdateCoordsState);
+        this.updateCoordsView.firePropertyChanged();
     }
-
-
 
 }

@@ -1,14 +1,16 @@
 package use_case.editImages;
 
+import entity.Entry;
+
 public class EditImagesInteractor implements EditImagesInputBoundary {
 
-    private final EditImagesDataAccessInterface addImageDataAccess;
-    private final EditImagesOutputBoundary addImagePresenter;
+    private final EditImagesDataAccessInterface editImageDataAccess;
+    private final EditImagesOutputBoundary editImagePresenter;
 
-    public EditImagesInteractor(EditImagesDataAccessInterface addImageDataAccess,
-                                EditImagesOutputBoundary addImagePresenter) {
-        this.addImageDataAccess = addImageDataAccess;
-        this.addImagePresenter = addImagePresenter;
+    public EditImagesInteractor(EditImagesDataAccessInterface editImageDataAccess,
+                                EditImagesOutputBoundary editImagePresenter) {
+        this.editImageDataAccess = editImageDataAccess;
+        this.editImagePresenter = editImagePresenter;
     }
 
     @Override
@@ -17,16 +19,15 @@ public class EditImagesInteractor implements EditImagesInputBoundary {
 
         try {
             // Attempt to add image to persistent storage
-            addImageDataAccess.addImage(imagePath);
+            editImageDataAccess.addImageToCurrentEntry(imagePath);
 
             // Get the new list of images and display them
-            EditImagesOutputData editImagesOutputData = new EditImagesOutputData(
-                    addImageDataAccess.getImagePaths()
-            );
-            addImagePresenter.prepareSuccessView(editImagesOutputData);
+            Entry updatedEntry = editImageDataAccess.getCurrentEntry();
+            EditImagesOutputData editImagesOutputData = new EditImagesOutputData(updatedEntry.getImagePaths());
+            editImagePresenter.prepareSuccessView(editImagesOutputData);
 
         } catch (Exception e) {
-            addImagePresenter.prepareFailView(e.getMessage());
+            editImagePresenter.prepareFailView(e.getMessage());
         }
     }
 
@@ -36,17 +37,16 @@ public class EditImagesInteractor implements EditImagesInputBoundary {
 
         try {
             // Attempt to delete image from persistent storage
-            addImageDataAccess.deleteImage(id);
+            editImageDataAccess.deleteImageFromCurrentEntry(id);
 
-            // Get new images and display them
-            EditImagesOutputData editImagesOutputData = new EditImagesOutputData(
-                    addImageDataAccess.getImagePaths()
-            );
-            addImagePresenter.prepareSuccessView(editImagesOutputData);
+            // Get the new list of images and display them
+            Entry updatedEntry = editImageDataAccess.getCurrentEntry();
+            EditImagesOutputData editImagesOutputData = new EditImagesOutputData(updatedEntry.getImagePaths());
+            editImagePresenter.prepareSuccessView(editImagesOutputData);
 
         }
         catch (Exception e) {
-            addImagePresenter.prepareFailView(e.getMessage());
+            editImagePresenter.prepareFailView(e.getMessage());
         }
     }
 }

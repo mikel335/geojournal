@@ -12,7 +12,7 @@ public class EditImagesOutputData {
         this.imagePaths = imagePaths;
     }
 
-    public Map<Integer, String> getImagePath() {
+    public Map<Integer, String> getImagePaths() {
         return imagePaths;
     }
 }

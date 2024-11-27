@@ -1,5 +1,7 @@
 package use_case.updateCoords;
 
+import entity.Entry;
+
 public interface UpdateCoordsDataAccessInterface {
 
     /**
@@ -7,17 +9,8 @@ public interface UpdateCoordsDataAccessInterface {
      * @param latitude Latitude value
      * @param longitude Longitude value
      */
-    void setCoords(double latitude, double longitude);
+    void setCoordinates(double latitude, double longitude);
 
-    /**
-     * Gets the current value of the longitude from persistent storage
-     * @return The latitude
-     */
-    double getLatitude();
+    Entry getCurrentEntry();
 
-    /**
-     * Gets the current value of the latitude from persistent storage
-     * @return The longitude
-     */
-    double getLongitude();
 }

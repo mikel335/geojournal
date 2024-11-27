@@ -1,5 +1,7 @@
 package use_case.updateText;
 
+import entity.Entry;
+
 public class UpdateTextInteractor implements UpdateTextInputBoundary {
     private final UpdateTextOutputBoundary updateTextPresenter;
     private final UpdateTextDataAccessInterface updateTextDataAccess;
@@ -20,10 +22,11 @@ public class UpdateTextInteractor implements UpdateTextInputBoundary {
                 updateTextDataAccess.setTitle(title);
                 updateTextDataAccess.setDescription(description);
 
-                // Update UI with new data
+                // Grab the new text and display it on the UI
+                Entry updatedEntry = updateTextDataAccess.getCurrentEntry();
                 final UpdateTextOutputData outputData = new UpdateTextOutputData(
-                        updateTextDataAccess.getTitle(),
-                        updateTextDataAccess.getDescription());
+                        updatedEntry.getTitle(),
+                        updatedEntry.getDescription());
                 updateTextPresenter.prepareSuccessView(outputData);
 
         } catch (Exception e) {
