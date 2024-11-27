@@ -3,17 +3,22 @@ package use_case.viewEntry;
 public interface ViewEntryOutputBoundary {
 
     /**
-     * Prepares the view to add an image
-     * @param outputData the output data
+     * Prepares the view to edit the images
+     * @param outputData the entry data
      */
-    void prepareAddImageView(ViewEntryOutputData outputData);
-
+    void prepareEditImagesView(ViewEntryOutputData outputData);
 
     /**
      * Prepares the view to update coords
-     * @param outputData the output data
+     * @param outputData the entry data
      */
     void prepareUpdateCoordsView(ViewEntryOutputData outputData);
+
+    /**
+     * Prepares the view to update text
+     * @param outputData the entry data
+     */
+    void prepareEditTextView(ViewEntryOutputData outputData);
 
     /**
      * Prepares the failure view

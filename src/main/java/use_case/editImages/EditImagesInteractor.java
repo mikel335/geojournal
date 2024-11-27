@@ -13,7 +13,7 @@ public class EditImagesInteractor implements EditImagesInputBoundary {
 
     @Override
     public void addImage(AddImageInputData addImageInputData) {
-        final String imagePath = addImageInputData.getImagePath();
+        final String imagePath = addImageInputData.imagePath();
 
         try {
             // Attempt to add image to persistent storage
@@ -32,7 +32,7 @@ public class EditImagesInteractor implements EditImagesInputBoundary {
 
     @Override
     public void deleteImage(DeleteImageInputData deleteImageInputData) {
-        final Integer id = deleteImageInputData.getId();
+        final Integer id = deleteImageInputData.id();
 
         try {
             // Attempt to delete image from persistent storage

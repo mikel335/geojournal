@@ -13,8 +13,8 @@ public class UpdateTextInteractor implements UpdateTextInputBoundary {
     @Override
     public void execute(UpdateTextInputData updateTextInputData) {
         try {
-                final String title = updateTextInputData.getTitle();
-                final String description = updateTextInputData.getDescription();
+                final String title = updateTextInputData.title();
+                final String description = updateTextInputData.description();
 
                 // Change text in the backend
                 updateTextDataAccess.setTitle(title);

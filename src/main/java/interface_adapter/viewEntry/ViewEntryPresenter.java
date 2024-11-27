@@ -33,10 +33,9 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
 
 
     @Override
-    public void prepareAddImageView(ViewEntryOutputData outputData) {
+    public void prepareEditImagesView(ViewEntryOutputData outputData) {
 
     }
-
 
     @Override
     public void prepareUpdateCoordsView(ViewEntryOutputData outputData) {
@@ -44,16 +43,15 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
     }
 
     @Override
-    public void prepare(ViewEntryOutputData outputData) {
+    public void prepareEditTextView(ViewEntryOutputData outputData) {
 
     }
+
 
     // On failure, stay on the edit coords view and display an error
     @Override
     public void prepareFailView(String errorMessage) {
 
     }
-
-
 
 }

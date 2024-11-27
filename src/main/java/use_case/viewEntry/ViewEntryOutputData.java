@@ -1,21 +1,17 @@
 package use_case.viewEntry;
 
+import entity.Entry;
+
+// TODO figure out if it would be useful to provide methods to supply data for each edit screen
+
 public class ViewEntryOutputData {
-
-    private final double latitude;
-    private final double longitude;
-
-    public ViewEntryOutputData(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    private final Entry entry;
+    public ViewEntryOutputData(Entry entry) {
+        this.entry = entry;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
+    public Entry getEntry() {
+        return entry;
     }
 }
 

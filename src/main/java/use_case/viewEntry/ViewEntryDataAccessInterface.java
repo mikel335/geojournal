@@ -1,11 +1,11 @@
 package use_case.viewEntry;
 
-public interface ViewEntryDataAccessInterface {
+import entity.Entry;
 
+public interface ViewEntryDataAccessInterface {
     /**
-     * Sets the long/lat coordinates for the map on a journal entry
-     * @param latitude Latitude value
-     * @param longitude Longitude value
+     * Fetches all data for an entry from persistent storage
+     * @param entryId ID of entry to get data for
      */
-    void setCoords(double latitude, double longitude);
+    Entry getEntryData(Integer entryId);
 }

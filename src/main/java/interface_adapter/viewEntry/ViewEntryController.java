@@ -11,8 +11,19 @@ public class ViewEntryController {
         this.viewEntryInteractor = viewEntryInteractor;
     }
 
-    public void execute(double latitude, double longitude) {
-        final ViewEntryInputData viewEntryInputData = new ViewEntryInputData(latitude, longitude);
-        viewEntryInteractor.execute(viewEntryInputData);
+    public void editImages(Integer id) {
+        final ViewEntryInputData viewEntryInputData = new ViewEntryInputData(id);
+        viewEntryInteractor.editImages(viewEntryInputData);
     }
+
+    public void editText(Integer id) {
+        final ViewEntryInputData viewEntryInputData = new ViewEntryInputData(id);
+        viewEntryInteractor.editText(viewEntryInputData);
+    }
+
+    public void updateCoords(Integer id) {
+        final ViewEntryInputData viewEntryInputData = new ViewEntryInputData(id);
+        viewEntryInteractor.updateCoords(viewEntryInputData);
+    }
+
 }

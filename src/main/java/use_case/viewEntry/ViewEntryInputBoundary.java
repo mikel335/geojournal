@@ -1,10 +1,21 @@
 package use_case.viewEntry;
 
 public interface ViewEntryInputBoundary {
+    /**
+     * Go to edit images view
+     * @param viewEntryInputData entry information for the next page
+     */
+    void editImages(ViewEntryInputData viewEntryInputData);
 
     /**
-     * Executes the add image use case
-     * @param updateCoordsInputData new coordinate data
+     * Go to update coordinate view
+     * @param viewEntryInputData entry information for the next page
      */
-    void execute(ViewEntryInputData updateCoordsInputData);
+    void updateCoords(ViewEntryInputData viewEntryInputData);
+
+    /**
+     * Go to edit text view
+     * @param viewEntryInputData entry information for the next page
+     */
+    void editText(ViewEntryInputData viewEntryInputData);
 }

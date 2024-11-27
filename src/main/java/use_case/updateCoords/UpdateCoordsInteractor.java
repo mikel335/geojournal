@@ -14,8 +14,8 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
 
     @Override
     public void execute(UpdateCoordsInputData updateCoordsInputData) {
-        final double latitude = updateCoordsInputData.getLatitude();
-        final double longitude = updateCoordsInputData.getLongitude();
+        final double latitude = updateCoordsInputData.latitude();
+        final double longitude = updateCoordsInputData.longitude();
 
         if (90 >= Math.abs(latitude) && 180 >= Math.abs(longitude)) {
             coordsDataAccess.setCoords(latitude, longitude);
