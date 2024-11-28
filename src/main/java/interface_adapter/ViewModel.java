@@ -3,7 +3,17 @@ package interface_adapter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ViewModel<T>  {
+/**
+ * The view model for the clean architecture.
+ * This class pushes work to another class for managing property changes.
+ *
+ * Taken from CSC207 lab 5
+ *
+ * @param <T> The type of state object contained in the model
+ */
+
+public class ViewModel<T> {
+
     private final String viewName;
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -53,6 +63,4 @@ public class ViewModel<T>  {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.support.addPropertyChangeListener(listener);
     }
-
-
 }
