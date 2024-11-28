@@ -1,22 +1,21 @@
 package app;
 
-import java.awt.CardLayout;
+import javax.swing.JFrame;
 
-import javax.swing.*;
-
+/**
+ * The Main class of our application.
+ */
 public class Main {
+    /**
+     * Builds and runs the CA architecture of the application.
+     */
     public static void main(String[] args) {
-
-        final JFrame application = new JFrame("My Entries");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        application.setSize(500, 650);
-
-        CardLayout cardLayout = new CardLayout();
-
-        final JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
+        final Builder builder = new Builder();
+        final JFrame application = builder
+                .addEntryListView()
+                .addChangeSortUseCase()
+                .build();
+        application.pack();
         application.setVisible(true);
-
     }
 }
