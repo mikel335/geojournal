@@ -15,6 +15,7 @@ public class Main {
                 .addEntryListView()
                 .addChangeSortUseCase()
                 .addOpenEntryUseCase()
+                .addEntryView()
                 .build();
         application.pack();
         application.setVisible(true);

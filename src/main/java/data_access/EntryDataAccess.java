@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.Entry;
+import entity.EntryFactory;
 import use_case.editImages.EditImagesDataAccessInterface;
 import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
@@ -8,6 +9,7 @@ import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntryDataAccess implements EditImagesDataAccessInterface,
@@ -19,6 +21,15 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     private Entry currentEntry;
     private Map<Integer, Entry> allEntries;
 
+    public EntryDataAccess() {
+        final EntryFactory entryFactory = new EntryFactory();
+        allEntries = new HashMap<Integer, Entry>();
+        HashMap<Integer, String> path = new HashMap<>();
+        path.put(123, "123");
+        allEntries.put(1, entryFactory.createEntry(1, "One","This is one", path, 1.1, 1.1, "Jan 1"));
+        allEntries.put(2, entryFactory.createEntry(2, "Two","This is two", path, 2.2, 2.2, "Feb 2"));
+        allEntries.put(3, entryFactory.createEntry(3, "three","This is three", path, 3.3, 3.3, "Mar 3"));
+    }
 
     @Override
     public void addImageToCurrentEntry(String imagePath) {

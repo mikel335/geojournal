@@ -24,6 +24,7 @@ import use_case.open_entry.OpenEntryInputBoundary;
 import use_case.open_entry.OpenEntryInteractor;
 import use_case.open_entry.OpenEntryOutputBoundary;
 import view.EntryListView;
+import view.MainEntryView;
 import view.ViewManager;
 
 /**
@@ -43,6 +44,7 @@ public class Builder{
     private EntryListView entryListView;
     private ListViewModel listViewModel;
     private ViewEntryViewModel viewEntryViewModel;
+    private MainEntryView mainEntryView;
 
     public Builder(){
         cardPanel.setLayout(cardLayout);
@@ -53,6 +55,13 @@ public class Builder{
         entryListView = new EntryListView(listViewModel);
         viewEntryViewModel = new ViewEntryViewModel();
         cardPanel.add(entryListView, entryListView.getViewName());
+        return this;
+    }
+
+    public Builder addEntryView(){
+        viewEntryViewModel = new ViewEntryViewModel();
+        mainEntryView = new MainEntryView();
+        cardPanel.add(mainEntryView, mainEntryView.getViewName());
         return this;
     }
 
