@@ -12,10 +12,10 @@ public class ImageView extends JPanel implements ActionListener {
     private static final int IMAGE_WIDTH = 350;
     private static final int IMAGE_HEIGHT = 300;
 
-    private final JPanel imagesPanel;
-    private final JButton uploadButton;
-    private final JButton deleteAllButton;
-    private final ArrayList<JPanel> imagePanelsList;
+    public final JPanel imagesPanel;
+    public final JButton uploadButton;
+    public final JButton deleteAllButton;
+    public final ArrayList<JPanel> imagePanelsList;
 
     public ImageView() {
         setLayout(new BorderLayout());
@@ -31,10 +31,12 @@ public class ImageView extends JPanel implements ActionListener {
         add(scrollPane, BorderLayout.CENTER);
 
         uploadButton = new JButton("Upload Image");
+        uploadButton.setForeground(Color.GREEN.darker());
         uploadButton.addActionListener(this);
         buttonPanel.add(uploadButton);
 
         deleteAllButton = new JButton("Delete All Images");
+        deleteAllButton.setForeground(Color.RED);
         deleteAllButton.addActionListener(this);
         buttonPanel.add(deleteAllButton);
 
@@ -46,11 +48,20 @@ public class ImageView extends JPanel implements ActionListener {
         if (e.getSource() == uploadButton) {
             uploadImage();
         } else if (e.getSource() == deleteAllButton) {
-            deleteAllImages();
+            // Show confirmation dialog before deleting all images
+            int response = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to do this?\nThey will be lost forever",
+                    "Delete All Images",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                deleteAllImages();
+            }
         }
     }
 
-    private void uploadImage() {
+    public void uploadImage() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -59,7 +70,7 @@ public class ImageView extends JPanel implements ActionListener {
 
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            if (imagePanelsList.size() > 3) {
+            if (imagePanelsList.size() > 11) {
                 JOptionPane.showMessageDialog(this,
                         "You have exceeded the maximum number of images allowed!",
                         "Warning", JOptionPane.WARNING_MESSAGE);
@@ -88,7 +99,7 @@ public class ImageView extends JPanel implements ActionListener {
         }
     }
 
-    private void deleteSingleImage(JLabel imageLabel) {
+    public void deleteSingleImage(JLabel imageLabel) {
         imagesPanel.remove(imageLabel.getParent());
         imagePanelsList.remove(imageLabel.getParent());
         imagesPanel.revalidate();

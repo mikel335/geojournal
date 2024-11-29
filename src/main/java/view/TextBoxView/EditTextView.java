@@ -2,35 +2,37 @@ package view.TextBoxView;
 
 import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.*;
 
 public class EditTextView extends JPanel implements ActionListener {
 
     final JButton saveButton = new JButton("Save");
-    final JButton closeButton = new JButton("Close (don't save)");
+    final JButton closeButton = new JButton("Cancel");
     TextAreaView textEditPanel;
 
     public EditTextView() {
         // TODO implement data storage to grab constructor values
         textEditPanel = new TextAreaView("", "");
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 1, 1)); // Align buttons to the right
 
         // configuring buttons
-        saveButton.setSize(150, 75);
+        saveButton.setPreferredSize(new Dimension(75, 30));
+        saveButton.setForeground(Color.GREEN.darker());
         saveButton.addActionListener(this);
 
-        closeButton.setSize(150, 75);
+        closeButton.setPreferredSize(new Dimension(75, 30));
+        closeButton.setForeground(Color.RED);
         closeButton.addActionListener(this);
 
-        // Setting up the view
-        buttonPanel.add(saveButton, BorderLayout.EAST);
-        buttonPanel.add(closeButton, BorderLayout.WEST);
+        // Adding buttons to the panel
+        buttonPanel.add(saveButton);
+        buttonPanel.add(closeButton);
 
+        // Setting up the view
         setLayout(new BorderLayout());
-        add(textEditPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.CENTER);
+        add(textEditPanel, BorderLayout.NORTH); // Text area view at the top
+        add(buttonPanel, BorderLayout.SOUTH); // Button panel at the bottom (aligned right)
     }
 
     @Override
