@@ -2,6 +2,7 @@ package data_access;
 
 import entity.Entry;
 import use_case.editImages.EditImagesDataAccessInterface;
+import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
 import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
@@ -12,7 +13,8 @@ import java.util.Map;
 public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateCoordsDataAccessInterface,
         UpdateTextDataAccessInterface,
-        ViewEntryDataAccessInterface {
+        ViewEntryDataAccessInterface,
+        OpenEntryDataAccessInterface {
 
     private Entry currentEntry;
     private Map<Integer, Entry> allEntries;
@@ -55,7 +57,14 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         return currentEntry;
     }
 
+    public Entry getEntry(Integer id) { return allEntries.get(id); }
+
     private void save() {
         //TODO filesystem stuff for persistent storage
+    }
+
+    @Override
+    public Entry getEntry(int id) {
+        return allEntries.get(id);
     }
 }

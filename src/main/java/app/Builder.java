@@ -7,15 +7,22 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import data_access.DataAccessObject;
+import data_access.EntryDataAccess;
 import entity.EntryFactory;
 import entity.EntryListFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
+import interface_adapter.open_entry.OpenEntryController;
+import interface_adapter.open_entry.OpenEntryPresenter;
+import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.open_entry.OpenEntryInputBoundary;
+import use_case.open_entry.OpenEntryInteractor;
+import use_case.open_entry.OpenEntryOutputBoundary;
 import view.EntryListView;
 import view.ViewManager;
 
@@ -31,9 +38,11 @@ public class Builder{
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     private final DataAccessObject dao = new DataAccessObject();
+    private final EntryDataAccess edao = new EntryDataAccess();
 
     private EntryListView entryListView;
     private ListViewModel listViewModel;
+    private ViewEntryViewModel viewEntryViewModel;
 
     public Builder(){
         cardPanel.setLayout(cardLayout);
@@ -42,6 +51,7 @@ public class Builder{
     public Builder addEntryListView(){
         listViewModel = new ListViewModel();
         entryListView = new EntryListView(listViewModel);
+        viewEntryViewModel = new ViewEntryViewModel();
         cardPanel.add(entryListView, entryListView.getViewName());
         return this;
     }
@@ -52,6 +62,14 @@ public class Builder{
                 dao,changeSortOutputBoundary, entryListFactory);
         final ChangeSortController controller = new ChangeSortController(changeSortInteractor);
         entryListView.setChangeSortController(controller);
+        return this;
+    }
+
+    public Builder addOpenEntryUseCase(){
+        final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
+        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(edao, openEntryOutputBoundary, entryFactory);
+        final OpenEntryController controller = new OpenEntryController(openEntryInteractor);
+        entryListView.setOpenEntryController(controller);
         return this;
     }
 

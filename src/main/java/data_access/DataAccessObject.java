@@ -8,6 +8,7 @@ import entity.Entry;
 import entity.EntryFactory;
 import entity.EntryList;
 import use_case.change_sort.ChangeSortDataAccessInterface;
+import use_case.open_entry.OpenEntryDataAccessInterface;
 
 
 public class DataAccessObject implements ChangeSortDataAccessInterface{

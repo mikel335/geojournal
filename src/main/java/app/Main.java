@@ -14,6 +14,7 @@ public class Main {
         final JFrame application = builder
                 .addEntryListView()
                 .addChangeSortUseCase()
+                .addOpenEntryUseCase()
                 .build();
         application.pack();
         application.setVisible(true);
