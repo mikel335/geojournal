@@ -38,11 +38,12 @@ public class EditTextView extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
+            // TODO implement confirmation message for overriding 
             saveText();
         }
 
         else if (e.getSource() == deleteButton) {
-
+            // TODO implement confirmation message for deleting
         }
     }
 
