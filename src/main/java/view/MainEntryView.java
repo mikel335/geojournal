@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 public class MainEntryView extends JFrame {
 
     public MainEntryView() {
-        setSize(700, 500);
+        setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -46,7 +46,7 @@ public class MainEntryView extends JFrame {
          */
         // Card panel to switch between map, image, and text panels on the left
         final JPanel cardPanel = new JPanel(new CardLayout());
-        cardPanel.setPreferredSize(new Dimension(400, 250));
+        cardPanel.setPreferredSize(new Dimension(900, 600));
         JPanel mapPanel = new MapView(43.6532, -79.3832);
         ImageView imagePanel = new ImageView();
         EditTextView editPanel = new EditTextView();
@@ -56,7 +56,7 @@ public class MainEntryView extends JFrame {
 
         // View panel to display title and description on the right
         final JPanel viewPanel = new JPanel(new BorderLayout());
-        viewPanel.setPreferredSize(new Dimension(300, 250));
+        viewPanel.setPreferredSize(new Dimension(300, 600));
         TextField filler = new TextField("Filler");
         viewPanel.add(filler);
 
