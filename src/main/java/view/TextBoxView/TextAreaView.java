@@ -13,7 +13,8 @@ public class TextAreaView extends JPanel {
     JTextArea descriptionTextArea;
 
     public TextAreaView(String title, String description) {
-
+        
+        //Setting up the view
         this.titleTextField = new JTextField("Enter your title here...");
         this.descriptionTextArea = new JTextArea("Enter your description here...");
         this.titleTextField.setForeground(Color.GRAY);
