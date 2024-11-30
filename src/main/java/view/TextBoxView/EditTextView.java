@@ -5,8 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class EditTextView extends JPanel implements ActionListener {
-
+    final private JPanel textPanel;
     final JButton saveButton = new JButton("Save");
+
+    final JButton deleteButton = new JButton("Delete");
+
     final JButton closeButton = new JButton("Cancel");
     TextAreaView textEditPanel;
 
@@ -14,6 +17,21 @@ public class EditTextView extends JPanel implements ActionListener {
         // TODO implement data storage to grab constructor values
         textEditPanel = new TextAreaView("", "");
 
+        textPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+
+        // configuring buttons
+        saveButton.setSize(150, 75);
+        saveButton.setForeground(Color.GREEN.darker());
+        saveButton.addActionListener(this);
+
+        deleteButton.setSize(150, 75);
+        deleteButton.setForeground(Color.RED);
+        deleteButton.addActionListener(this);
+
+        // Setting up the view
+        textPanel.add(saveButton, BorderLayout.EAST);
+
+        textPanel.add(deleteButton, BorderLayout.WEST);
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 1, 1)); // Align buttons to the right
 
         // configuring buttons
@@ -31,6 +49,9 @@ public class EditTextView extends JPanel implements ActionListener {
 
         // Setting up the view
         setLayout(new BorderLayout());
+        add(textEditPanel, BorderLayout.NORTH);
+        add(textPanel, BorderLayout.CENTER);
+
         add(textEditPanel, BorderLayout.NORTH); // Text area view at the top
         add(buttonPanel, BorderLayout.SOUTH); // Button panel at the bottom (aligned right)
     }
@@ -39,6 +60,10 @@ public class EditTextView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             saveText();
+        }
+
+        else if (e.getSource() == deleteButton) {
+
         }
     }
 
