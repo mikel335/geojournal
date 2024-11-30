@@ -2,14 +2,15 @@ package view.TextBoxView;
 
 import javax.swing.*;
 import java.awt.*;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.text.JTextComponent;
 
 public class TextAreaView extends JPanel {
 
-    private final JTextField titleTextField;
-    private final JTextArea descriptionTextArea;
+    JTextField titleTextField;
+    JTextArea descriptionTextArea;
 
     public TextAreaView(String title, String description) {
 
@@ -17,35 +18,12 @@ public class TextAreaView extends JPanel {
         this.descriptionTextArea = new JTextArea("Enter your description here...");
         this.titleTextField.setForeground(Color.GRAY);
         this.descriptionTextArea.setForeground(Color.GRAY);
-        this.titleTextField = new JTextField(title);
-        this.descriptionTextArea = new JTextArea(description);
 
-        // Configure titleTextField
         titleTextField.setEditable(true);
         descriptionTextArea.setEditable(true);
 
-        descriptionTextArea.setRows(20);
-        titleTextField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-                if (titleTextField.getText().equals("Choose a title")) {
-                    titleTextField.setText("");
-                }
-            }
+        descriptionTextArea.setRows(40);
 
-            public void focusLost(FocusEvent e) {
-                if (titleTextField.getText().isEmpty()) {
-                    titleTextField.setText("Choose a title");
-                }
-            }
-        });
-
-        // Configure descriptionTextArea
-        descriptionTextArea.setEditable(true);
-        descriptionTextArea.setRows(5);
-        descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setWrapStyleWord(true);
-
-        // Wrap text fields in JScrollPane
         JScrollPane titleScrollPane = new JScrollPane(titleTextField);
         JScrollPane descriptionScrollPane = new JScrollPane(descriptionTextArea);
 
@@ -53,15 +31,8 @@ public class TextAreaView extends JPanel {
         addPlaceholder(descriptionTextArea, "Enter your description here...");
 
         setLayout(new BorderLayout());
-        // Use vertical BoxLayout for stacking components
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        // Add title field and small gap
         add(titleScrollPane, BorderLayout.NORTH);
-        add(Box.createVerticalStrut(-1));
-
-        // Add description field
-        add(descriptionScrollPane);
+        add(descriptionScrollPane, BorderLayout.CENTER);
     }
         private static void addPlaceholder(JTextComponent textComponent, String placeholder){
             textComponent.addFocusListener(new FocusListener() {
@@ -93,4 +64,5 @@ public class TextAreaView extends JPanel {
     public String getDescriptionText() {
         return descriptionTextArea.getText();
     }
+
 }
