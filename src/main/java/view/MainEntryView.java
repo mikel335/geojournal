@@ -21,24 +21,10 @@ public class MainEntryView extends JFrame {
         // Buttons to change displayed tab
         JPanel switchTabsButtonPanel = new JPanel(new BorderLayout());
         switchTabsButtonPanel.setLayout(new BoxLayout(switchTabsButtonPanel, BoxLayout.X_AXIS));
-
         JButton imagesButton = new JButton("Images");
         JButton mapButton = new JButton("Map");
         JButton editButton = new JButton("Edit Title and Description");
 
-
-        // Create a vertical panel to hold the buttons (align to the left)
-        JPanel leftButtonPanel = new JPanel();
-        leftButtonPanel.setLayout(new BoxLayout(leftButtonPanel, BoxLayout.X_AXIS));
-        leftButtonPanel.add(imagesButton);
-        leftButtonPanel.add(mapButton);
-
-        switchTabsButtonPanel.add(leftButtonPanel, BorderLayout.WEST); // Add buttons to the left
-
-        // Title panel
-        EditTextView textBoxPanel = new EditTextView();
-        headerPanel.add(textBoxPanel, BorderLayout.NORTH);
-        headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
 
         headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
         /*
@@ -79,6 +65,7 @@ public class MainEntryView extends JFrame {
             mapButton.setEnabled(true);
             editButton.setEnabled(true);
         });
+        switchTabsButtonPanel.add(imagesButton);
 
         mapButton.addActionListener(_ -> {
             CardLayout cl = (CardLayout) cardPanel.getLayout();
@@ -87,7 +74,6 @@ public class MainEntryView extends JFrame {
             mapButton.setEnabled(false);
             editButton.setEnabled(true);
         });
-
         switchTabsButtonPanel.add(mapButton);
 
         editButton.addActionListener(_ -> {
