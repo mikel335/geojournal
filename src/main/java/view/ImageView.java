@@ -48,7 +48,16 @@ public class ImageView extends JPanel implements ActionListener {
         if (e.getSource() == uploadButton) {
             uploadImage();
         } else if (e.getSource() == deleteAllButton) {
-            deleteAllImages();
+            // Show confirmation dialog before deleting all images
+            int response = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to do this?\nThey will be lost forever",
+                    "Delete All Images",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                deleteAllImages();
+            }
         }
     }
 
@@ -61,7 +70,7 @@ public class ImageView extends JPanel implements ActionListener {
 
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            if (imagePanelsList.size() > 3) {
+            if (imagePanelsList.size() > 11) {
                 JOptionPane.showMessageDialog(this,
                         "You have exceeded the maximum number of images allowed!",
                         "Warning", JOptionPane.WARNING_MESSAGE);
