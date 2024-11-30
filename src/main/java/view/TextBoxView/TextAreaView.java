@@ -22,7 +22,7 @@ public class TextAreaView extends JPanel {
         titleTextField.setEditable(true);
         descriptionTextArea.setEditable(true);
 
-        descriptionTextArea.setRows(20);
+        descriptionTextArea.setRows(40);
 
         JScrollPane titleScrollPane = new JScrollPane(titleTextField);
         JScrollPane descriptionScrollPane = new JScrollPane(descriptionTextArea);
