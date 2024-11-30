@@ -12,10 +12,10 @@ public class ImageView extends JPanel implements ActionListener {
     private static final int IMAGE_WIDTH = 350;
     private static final int IMAGE_HEIGHT = 300;
 
-    public final JPanel imagesPanel;
-    public final JButton uploadButton;
-    public final JButton deleteAllButton;
-    public final ArrayList<JPanel> imagePanelsList;
+    private final JPanel imagesPanel;
+    private final JButton uploadButton;
+    private final JButton deleteAllButton;
+    private final ArrayList<JPanel> imagePanelsList;
 
     public ImageView() {
         setLayout(new BorderLayout());
