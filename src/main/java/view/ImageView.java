@@ -61,7 +61,7 @@ public class ImageView extends JPanel implements ActionListener {
         }
     }
 
-    public void uploadImage() {
+    private void uploadImage() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -99,7 +99,7 @@ public class ImageView extends JPanel implements ActionListener {
         }
     }
 
-    public void deleteSingleImage(JLabel imageLabel) {
+    private void deleteSingleImage(JLabel imageLabel) {
         imagesPanel.remove(imageLabel.getParent());
         imagePanelsList.remove(imageLabel.getParent());
         imagesPanel.revalidate();
