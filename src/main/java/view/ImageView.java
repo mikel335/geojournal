@@ -31,10 +31,12 @@ public class ImageView extends JPanel implements ActionListener {
         add(scrollPane, BorderLayout.CENTER);
 
         uploadButton = new JButton("Upload Image");
+        uploadButton.setForeground(Color.GREEN.darker());
         uploadButton.addActionListener(this);
         buttonPanel.add(uploadButton);
 
         deleteAllButton = new JButton("Delete All Images");
+        deleteAllButton.setForeground(Color.RED);
         deleteAllButton.addActionListener(this);
         buttonPanel.add(deleteAllButton);
 

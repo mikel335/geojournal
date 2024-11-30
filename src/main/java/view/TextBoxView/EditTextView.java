@@ -6,37 +6,45 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class EditTextView extends JPanel implements ActionListener {
-
+    final private JPanel textPanel;
     final JButton saveButton = new JButton("Save");
-    final JButton closeButton = new JButton("Close (don't save)");
+    final JButton deleteButton = new JButton("Delete");
     TextAreaView textEditPanel;
 
     public EditTextView() {
         // TODO implement data storage to grab constructor values
         textEditPanel = new TextAreaView("", "");
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        textPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         // configuring buttons
         saveButton.setSize(150, 75);
+        saveButton.setForeground(Color.GREEN.darker());
         saveButton.addActionListener(this);
 
-        closeButton.setSize(150, 75);
-        closeButton.addActionListener(this);
+        deleteButton.setSize(150, 75);
+        deleteButton.setForeground(Color.RED);
+        deleteButton.addActionListener(this);
 
         // Setting up the view
-        buttonPanel.add(saveButton, BorderLayout.EAST);
-        buttonPanel.add(closeButton, BorderLayout.WEST);
+        textPanel.add(saveButton, BorderLayout.EAST);
+
+        textPanel.add(deleteButton, BorderLayout.WEST);
 
         setLayout(new BorderLayout());
         add(textEditPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.CENTER);
+        add(textPanel, BorderLayout.CENTER);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             saveText();
+        }
+
+        else if (e.getSource() == deleteButton) {
+
         }
     }
 
