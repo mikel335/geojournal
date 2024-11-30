@@ -1,106 +1,97 @@
 package view;
 
+import view.TextBoxView.EditTextView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
 
-public class ImageView extends JPanel implements ActionListener {
+public class MainEntryView extends JFrame {
 
-    private static final int IMAGE_WIDTH = 350;
-    private static final int IMAGE_HEIGHT = 300;
-
-    private final JPanel imagesPanel;
-    private final JButton uploadButton;
-    private final JButton deleteAllButton;
-    private final ArrayList<JPanel> imagePanelsList;
-
-    public ImageView() {
+    public MainEntryView() {
+        setSize(700, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        imagesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        /*
+         **** HEADER (text, description and tab selection) ****
+         */
+        JPanel headerPanel = new JPanel(new GridLayout());
 
-        imagePanelsList = new ArrayList<>();
+        // Buttons to change displayed tab
+        JPanel switchTabsButtonPanel = new JPanel(new BorderLayout());
+        switchTabsButtonPanel.setLayout(new BoxLayout(switchTabsButtonPanel, BoxLayout.X_AXIS));
+        JButton imagesButton = new JButton("Images");
+        JButton mapButton = new JButton("Map");
+        JButton editButton = new JButton("Edit Title and Description");
 
-        JScrollPane scrollPane = new JScrollPane(imagesPanel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        add(scrollPane, BorderLayout.CENTER);
 
-        uploadButton = new JButton("Upload Image");
-        uploadButton.setForeground(Color.GREEN.darker());
-        uploadButton.addActionListener(this);
-        buttonPanel.add(uploadButton);
+        headerPanel.add(switchTabsButtonPanel, BorderLayout.SOUTH);
+        /*
+         **** CONTENT (Different Tabs)
+         */
+        // Card panel to switch between map, image, and text panels on the left
+        final JPanel cardPanel = new JPanel(new CardLayout());
+        cardPanel.setPreferredSize(new Dimension(400, 250));
+        JPanel mapPanel = new MapView(43.6532, -79.3832);
+        ImageView imagePanel = new ImageView();
+        EditTextView editPanel = new EditTextView();
+        cardPanel.add(imagePanel, "Images");
+        cardPanel.add(mapPanel, "Map");
+        cardPanel.add(editPanel, "Edit Title and Description");
 
-        deleteAllButton = new JButton("Delete All Images");
-        deleteAllButton.setForeground(Color.RED);
-        deleteAllButton.addActionListener(this);
-        buttonPanel.add(deleteAllButton);
+        // View panel to display title and description on the right
+        final JPanel viewPanel = new JPanel(new BorderLayout());
+        viewPanel.setPreferredSize(new Dimension(300, 250));
+        TextField filler = new TextField("Filler");
+        viewPanel.add(filler);
 
-        add(buttonPanel, BorderLayout.SOUTH);
+        /*
+         **** Add everything to view
+         */
+        add(headerPanel, BorderLayout.NORTH);
+        add(cardPanel, BorderLayout.WEST);
+        add(viewPanel, BorderLayout.CENTER);
+
+        /*
+         **** Action Listeners ****
+         */
+
+        // Action listeners for card and image and text buttons
+        imagesButton.addActionListener(_ -> {
+            CardLayout cl = (CardLayout) cardPanel.getLayout();
+            cl.show(cardPanel, "Images");
+            imagesButton.setEnabled(false);
+            mapButton.setEnabled(true);
+            editButton.setEnabled(true);
+        });
+        switchTabsButtonPanel.add(imagesButton);
+
+        mapButton.addActionListener(_ -> {
+            CardLayout cl = (CardLayout) cardPanel.getLayout();
+            cl.show(cardPanel, "Map");
+            imagesButton.setEnabled(true);
+            mapButton.setEnabled(false);
+            editButton.setEnabled(true);
+        });
+        switchTabsButtonPanel.add(mapButton);
+
+        editButton.addActionListener(_ -> {
+            CardLayout cl = (CardLayout) cardPanel.getLayout();
+            cl.show(cardPanel, "Edit Title and Description");
+            imagesButton.setEnabled(true);
+            mapButton.setEnabled(true);
+            editButton.setEnabled(false);
+        });
+        switchTabsButtonPanel.add(editButton);
+
+
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == uploadButton) {
-            uploadImage();
-        } else if (e.getSource() == deleteAllButton) {
-            deleteAllImages();
-        }
-    }
-
-    private void uploadImage() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
-                "Image files", "jpg", "png", "jpeg", "gif"));
-
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            if (imagePanelsList.size() > 3) {
-                JOptionPane.showMessageDialog(this,
-                        "You have exceeded the maximum number of images allowed!",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
-            } else {
-                File selectedFile = fileChooser.getSelectedFile();
-                ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-
-                Image image = imageIcon.getImage();
-                Image resizedImage = image.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH);
-                ImageIcon resizedIcon = new ImageIcon(resizedImage);
-                JLabel imageLabel = new JLabel(resizedIcon);
-                imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-                JButton deleteSingleImageButton = new JButton("Delete");
-                deleteSingleImageButton.addActionListener(event -> deleteSingleImage(imageLabel));
-                JPanel imagePanel = new JPanel(new BorderLayout());
-                imagePanel.add(imageLabel, BorderLayout.CENTER);
-                imagePanel.add(deleteSingleImageButton, BorderLayout.SOUTH);
-
-                imagePanelsList.add(imagePanel);
-                imagesPanel.add(imagePanel);
-                imagesPanel.setPreferredSize(new Dimension(210 * imagePanelsList.size(), IMAGE_HEIGHT + 40));
-                imagesPanel.revalidate();
-                imagesPanel.repaint();
-            }
-        }
-    }
-
-    private void deleteSingleImage(JLabel imageLabel) {
-        imagesPanel.remove(imageLabel.getParent());
-        imagePanelsList.remove(imageLabel.getParent());
-        imagesPanel.revalidate();
-        imagesPanel.repaint();
-    }
-
-    private void deleteAllImages() {
-        imagesPanel.removeAll();
-        imagePanelsList.clear();
-        imagesPanel.revalidate();
-        imagesPanel.repaint();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            MainEntryView demo = new MainEntryView();
+            demo.setVisible(true);
+        });
     }
 }
