@@ -1,4 +1,4 @@
-package viewWithCA.UpdateText;
+package viewWithCA.UpdateCoords;
 
 import interface_adapter.updateText.UpdateTextController;
 import interface_adapter.updateText.UpdateTextViewModel;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class UpdateTextView extends JPanel implements ActionListener, PropertyChangeListener {
+public class UpdateCoords extends JPanel implements ActionListener, PropertyChangeListener {
     private final UpdateTextViewModel viewModel;
     private UpdateTextController updateTextController;
 
@@ -18,7 +18,7 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
     final JButton saveButton = new JButton("Save");
     final JButton cancelButton = new JButton("Cancel");
 
-    public UpdateTextView(UpdateTextViewModel updateTextModel) {
+    public UpdateCoords(UpdateTextViewModel updateTextModel) {
         this.viewModel = updateTextModel;
         this.viewModel.addPropertyChangeListener(this);
 
@@ -57,7 +57,10 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
         }
 
         else if (e.getSource() == cancelButton) {
-            updateTextController.cancelUpdate();
+            updateTextController.execute(
+                    viewModel.getState().getTitle(),
+                    viewModel.getState().getDescription()
+            );
         }
     }
 

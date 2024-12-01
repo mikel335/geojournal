@@ -15,4 +15,8 @@ public class UpdateTextController {
         final UpdateTextInputData updateTextInput = new UpdateTextInputData(title, description);
         updateTextInteractor.execute(updateTextInput);
     }
+
+    public void cancelUpdate() {
+        updateTextInteractor.cancelUpdate();
+    }
 }

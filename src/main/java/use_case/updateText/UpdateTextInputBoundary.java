@@ -7,4 +7,9 @@ public interface UpdateTextInputBoundary {
      * @param updateTextInputData new text data
      */
     void execute(UpdateTextInputData updateTextInputData);
+
+    /**
+     * Cancels the update and returns to view entry
+     */
+    void cancelUpdate();
 }

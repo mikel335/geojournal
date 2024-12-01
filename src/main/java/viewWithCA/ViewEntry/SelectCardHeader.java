@@ -6,7 +6,7 @@ import java.awt.*;
 public class SelectCardHeader extends JPanel {
 
     public SelectCardHeader(JPanel contentCards) {
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton imagesButton = new JButton("Images");
         JButton mapButton = new JButton("Map");
         imagesButton.setEnabled(false);

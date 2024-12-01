@@ -23,7 +23,8 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
         viewModel.addPropertyChangeListener(this);
 
         setSize(1200, 800);
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(30, 30));
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         // Prefill everything with the state data
         this.imagesCard = new ImagesCard(viewModel.getState().getImagePaths());
@@ -53,12 +54,15 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
         leftPanel.add(titleDescArea, BorderLayout.CENTER);
         leftPanel.add(editOptions, BorderLayout.SOUTH);
 
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.add(selectHeader, BorderLayout.NORTH);
+        rightPanel.add(contentCards, BorderLayout.CENTER);
+
         /*
          **** Add everything to view
          */
-        add(selectHeader, BorderLayout.NORTH);
         add(leftPanel, BorderLayout.WEST);
-        add(contentCards, BorderLayout.CENTER);
+        add(rightPanel, BorderLayout.CENTER);
     }
 
     // Get new state data when firePropertyChanged is called on ViewEntryState
