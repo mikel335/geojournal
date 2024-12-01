@@ -14,6 +14,8 @@ import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
 import interface_adapter.editImages.EditImagesViewModel;
+import interface_adapter.updateCoords.UpdateCoordsController;
+import interface_adapter.updateCoords.UpdateCoordsPresenter;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
 import interface_adapter.updateText.UpdateTextController;
 import interface_adapter.updateText.UpdateTextPresenter;
@@ -24,6 +26,9 @@ import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.updateCoords.UpdateCoordsInputBoundary;
+import use_case.updateCoords.UpdateCoordsInteractor;
+import use_case.updateCoords.UpdateCoordsOutputBoundary;
 import use_case.updateText.UpdateTextInputBoundary;
 import use_case.updateText.UpdateTextInteractor;
 import use_case.updateText.UpdateTextOutputBoundary;
@@ -34,6 +39,7 @@ import view.EntryListView;
 import view.ViewManager;
 
 // New View stuff
+import viewWithCA.UpdateCoords.UpdateCoordsView;
 import viewWithCA.UpdateText.UpdateTextView;
 import viewWithCA.ViewEntry.ViewEntryView;
 
@@ -68,7 +74,7 @@ public class Builder{
     // TODO EditImages use case
     private EditImagesViewModel editImagesViewModel;
 
-    // TODO updateCoords use case
+    private UpdateCoordsView updateCoordsView;
     private UpdateCoordsViewModel updateCoordsViewModel;
 
     private UpdateTextViewModel updateTextViewModel;
@@ -109,7 +115,8 @@ public class Builder{
 
     public Builder addUpdateCoordsView() {
         updateCoordsViewModel = new UpdateCoordsViewModel();
-        // TODO build UpdateCoordsView
+        updateCoordsView = new UpdateCoordsView(updateCoordsViewModel);
+        cardPanel.add(updateCoordsView, updateCoordsViewModel.getViewName());
         return this;
     }
 
@@ -152,6 +159,24 @@ public class Builder{
 
         final UpdateTextController controller = new UpdateTextController(updateTextInteractor);
         updateTextView.setUpdateTextController(controller);
+
+        return this;
+    }
+
+    public Builder addUpdateCoordsUseCase() {
+        final UpdateCoordsOutputBoundary updateCoordsPresenter = new UpdateCoordsPresenter(
+            updateCoordsViewModel,
+            viewEntryViewModel,
+            viewManagerModel
+        );
+
+        final UpdateCoordsInputBoundary updateCoordsInteractor = new UpdateCoordsInteractor(
+                dataAccess,
+                updateCoordsPresenter
+        );
+
+        final UpdateCoordsController controller = new UpdateCoordsController(updateCoordsInteractor);
+        updateCoordsView.setUpdateCoordsController(controller);
 
         return this;
     }

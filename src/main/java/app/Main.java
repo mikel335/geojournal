@@ -20,6 +20,7 @@ public class Main {
                 .addViewEntryView()
                 .addViewEntryUseCase()
                 .addUpdateTextUseCase()
+                .addUpdateCoordsUseCase()
                 .build();
 
         application.pack();
