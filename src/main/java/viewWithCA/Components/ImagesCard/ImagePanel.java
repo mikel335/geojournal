@@ -1,4 +1,4 @@
-package view2.ViewEntry.ImagesCard;
+package viewWithCA.Components.ImagesCard;
 
 import javax.swing.*;
 import java.awt.*;

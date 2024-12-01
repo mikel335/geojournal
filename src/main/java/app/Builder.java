@@ -8,7 +8,6 @@ import javax.swing.WindowConstants;
 
 import data_access.DataAccessObject;
 import data_access.EntryDataAccess;
-import entity.EntryFactory;
 import entity.EntryListFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
@@ -30,7 +29,8 @@ import view.EntryListView;
 import view.ViewManager;
 
 // New View stuff
-import view2.ViewEntry.ViewEntryView;
+import viewWithCA.UpdateText.UpdateTextView;
+import viewWithCA.ViewEntry.ViewEntryView;
 
 /**
  * The Builder puts the CA architecture together.
@@ -66,8 +66,8 @@ public class Builder{
     // TODO updateCoords use case
     private UpdateCoordsViewModel updateCoordsViewModel;
 
-    // TODO updateText use case
     private UpdateTextViewModel updateTextViewModel;
+    private UpdateTextView updateTextView;
 
     public Builder(){
         cardPanel.setLayout(cardLayout);
@@ -92,7 +92,7 @@ public class Builder{
     public Builder addViewEntryView() {
         viewEntryViewModel = new ViewEntryViewModel();
         viewEntryView = new ViewEntryView(viewEntryViewModel);
-        cardPanel.add(viewEntryView, entryListView.getViewName());
+        cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
         return this;
     };
 
@@ -110,7 +110,8 @@ public class Builder{
 
     public Builder addUpdateTextView() {
         updateTextViewModel = new UpdateTextViewModel();
-        // TODO build UpdateTextView
+        updateTextView = new UpdateTextView(updateTextViewModel);
+        cardPanel.add(updateTextView, updateTextViewModel.getViewName());
         return this;
     }
 
@@ -139,7 +140,7 @@ public class Builder{
         application.add(cardPanel);
 
         // TODO change this back to the entry list
-        viewManagerModel.setState(viewEntryView.getViewName());
+        viewManagerModel.setState(viewEntryViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
 
         return application;

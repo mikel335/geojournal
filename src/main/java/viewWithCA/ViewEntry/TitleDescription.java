@@ -1,4 +1,4 @@
-package view2.ViewEntry;
+package viewWithCA.ViewEntry;
 
 import javax.swing.*;
 import java.awt.*;

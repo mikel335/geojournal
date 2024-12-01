@@ -1,16 +1,9 @@
-package view2.ViewEntry;
+package viewWithCA.ViewEntry;
 
 import org.jxmapviewer.JXMapKit;
-import org.jxmapviewer.JXMapViewer;
-import org.jxmapviewer.OSMTileFactoryInfo;
-import org.jxmapviewer.input.PanMouseInputListener;
-import org.jxmapviewer.input.ZoomMouseWheelListenerCenter;
-import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
-import org.jxmapviewer.viewer.TileFactoryInfo;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 import java.awt.*;
 
 

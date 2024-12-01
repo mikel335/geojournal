@@ -1,7 +1,6 @@
-package view2;
+package viewWithCA;
 
 import interface_adapter.ViewManagerModel;
-import view.MainEntryView;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,9 +1,9 @@
-package view2.ViewEntry;
+package viewWithCA.ViewEntry;
 
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
-import view2.ViewEntry.ImagesCard.ImagesCard;
+import viewWithCA.ViewEntry.ImagesCard.ImagesCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,6 @@ public class ViewEntryView extends JPanel implements ActionListener, PropertyCha
         contentCards.add(imagesCard, "Images");
         contentCards.add(mapCard, "Map");
         contentCards.setPreferredSize(new Dimension(900, 600));
-
 
         // Set up the display area for the title and description
         titleDescView = new TitleDescription();
@@ -98,7 +97,4 @@ public class ViewEntryView extends JPanel implements ActionListener, PropertyCha
         controller.viewEntry();
     }
 
-    public String getViewName() {
-        return "list";
-    }
 }

@@ -1,4 +1,4 @@
-package view2.ViewEntry.ImagesCard;
+package viewWithCA.ViewEntry.ImagesCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,8 +56,5 @@ public class ImagesCard extends JPanel {
         this.gridLayout.setRows(rows);
         this.gridLayout.setHgap(10);
         this.gridLayout.setVgap(10);
-
-        revalidate();
-        repaint();
     }
 }

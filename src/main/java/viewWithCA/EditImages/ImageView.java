@@ -1,4 +1,4 @@
-package view2.EditImages;
+package viewWithCA.EditImages;
 
 import javax.swing.*;
 import java.awt.*;
