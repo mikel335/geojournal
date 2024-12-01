@@ -9,11 +9,13 @@ public class ImagesCard extends JPanel {
     private final GridLayout gridLayout;
     private final JPanel grid;
 
-    public ImagesCard() {
+    public ImagesCard(Map<Integer, String> imagePaths) {
         setLayout(new BorderLayout());
-        this.imagePanelById = new HashMap<>();
         gridLayout = new GridLayout(3, 3);
         grid = new JPanel(gridLayout);
+
+        this.imagePanelById = new HashMap<>();
+        this.updateImagePaths(imagePaths);
 
         JScrollPane scrollPane = new JScrollPane(grid);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

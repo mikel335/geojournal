@@ -8,14 +8,23 @@ import java.awt.event.FocusListener;
 
 public class TitleDescEditBoxes extends JPanel {
 
-    JTextField titleTextField;
-    JTextArea descriptionTextArea;
+    private final JTextField titleTextField;
+    private final JTextArea descriptionTextArea;
+    private final static String TITLE_PLACEHOLDER = "Enter title ...";
+    private final static String DESCRIPTION_PLACEHOLDER = "Enter description ...";
 
     public TitleDescEditBoxes(String title, String description) {
         
         //Setting up the view
-        this.titleTextField = new JTextField("Enter your title here...");
-        this.descriptionTextArea = new JTextArea("Enter your description here...");
+        this.titleTextField = new JTextField(title);
+        this.descriptionTextArea = new JTextArea(description);
+
+        addPlaceholder(titleTextField, TITLE_PLACEHOLDER);
+        resetPlaceholder(titleTextField, TITLE_PLACEHOLDER);
+
+        addPlaceholder(descriptionTextArea, DESCRIPTION_PLACEHOLDER);
+        resetPlaceholder(descriptionTextArea, DESCRIPTION_PLACEHOLDER);
+
         this.titleTextField.setForeground(Color.GRAY);
         this.descriptionTextArea.setForeground(Color.GRAY);
 
@@ -26,9 +35,6 @@ public class TitleDescEditBoxes extends JPanel {
 
         JScrollPane titleScrollPane = new JScrollPane(titleTextField);
         JScrollPane descriptionScrollPane = new JScrollPane(descriptionTextArea);
-
-        addPlaceholder(titleTextField, "Enter your title here...");
-        addPlaceholder(descriptionTextArea, "Enter your description here...");
 
         setLayout(new BorderLayout());
         add(titleScrollPane, BorderLayout.NORTH);
@@ -57,6 +63,15 @@ public class TitleDescEditBoxes extends JPanel {
         });
     }
 
+    private static void resetPlaceholder(JTextComponent textComponent, String placeholder){
+        if (textComponent.getText().trim().isEmpty() || textComponent.getText().trim().equals(placeholder)) {
+            textComponent.setText(placeholder);
+            textComponent.setForeground(Color.GRAY);
+        } else {
+            textComponent.setForeground(Color.BLACK);
+        }
+    }
+
     public String getTitleText() {
         return titleTextField.getText();
     }
@@ -65,4 +80,13 @@ public class TitleDescEditBoxes extends JPanel {
         return descriptionTextArea.getText();
     }
 
+    public void setTitleText(String title) {
+        titleTextField.setText(title);
+        resetPlaceholder(titleTextField, TITLE_PLACEHOLDER);
+    }
+
+    public void setDescriptionText(String description) {
+        descriptionTextArea.setText(description);
+        resetPlaceholder(descriptionTextArea, DESCRIPTION_PLACEHOLDER);
+    }
 }

@@ -7,15 +7,15 @@ public class TitleDescription extends JPanel {
     JLabel titleLabel;
     JLabel descriptionLabel;
 
-    public TitleDescription() {
-        this.titleLabel = new JLabel();
-        this.descriptionLabel = new JLabel();
+    public TitleDescription(String title, String description) {
+        this.titleLabel = new JLabel(title);
+        this.descriptionLabel = new JLabel(description);
 
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout(FlowLayout.CENTER));
         setPreferredSize(new Dimension(300, 600));
 
-        add(titleLabel, BorderLayout.NORTH);
-        add(descriptionLabel, BorderLayout.SOUTH);
+        add(titleLabel);
+        add(descriptionLabel);
     }
 
 

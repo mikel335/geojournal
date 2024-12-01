@@ -9,13 +9,12 @@ import java.awt.*;
 
 // TODO add the pin
 public class MapCard extends JPanel {
-
     private JXMapKit mapViewer;
 
-    public MapCard() {
+    public MapCard(double latitude, double longitude) {
         setLayout(new BorderLayout());
         mapViewer = new JXMapKit();
-        mapViewer.setCenterPosition(new GeoPosition(0,0));
+        mapViewer.setCenterPosition(new GeoPosition(latitude,longitude));
         mapViewer.setPreferredSize(new Dimension(800, 600));
         add(mapViewer, BorderLayout.CENTER);
     }

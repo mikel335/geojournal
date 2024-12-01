@@ -23,5 +23,4 @@ public class ViewEntryController {
     }
 
     public void viewEntry() { viewEntryInteractor.viewEntry(); }
-
 }

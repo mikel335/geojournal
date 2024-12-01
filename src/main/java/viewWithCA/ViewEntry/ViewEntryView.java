@@ -7,94 +7,74 @@ import viewWithCA.ViewEntry.ImagesCard.ImagesCard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ViewEntryView extends JPanel implements ActionListener, PropertyChangeListener {
-
-    private final ViewEntryViewModel viewModel;
+public class ViewEntryView extends JPanel implements PropertyChangeListener {
     private ViewEntryController controller;
-    private final JPanel contentCards;
 
-    private final TitleDescription titleDescView;
+    private final TitleDescription titleDescArea;
     private final ImagesCard imagesCard;
     private final MapCard mapCard;
 
+    private final EditOptions editOptions;
+
     public ViewEntryView(ViewEntryViewModel viewModel) {
-        this.viewModel = viewModel;
-        this.viewModel.addPropertyChangeListener(this);
+        viewModel.addPropertyChangeListener(this);
 
         setSize(1200, 800);
         setLayout(new BorderLayout());
 
-        // Set up the two content cards for the images and the map
-        this.imagesCard = new ImagesCard();
-        this.mapCard = new MapCard();
-        this.contentCards = new JPanel(new CardLayout());
+        // Prefill everything with the state data
+        this.imagesCard = new ImagesCard(viewModel.getState().getImagePaths());
+        this.mapCard = new MapCard(
+                viewModel.getState().getLatitude(),
+                viewModel.getState().getLongitude()
+        );
+        titleDescArea = new TitleDescription(
+                viewModel.getState().getTitle(),
+                viewModel.getState().getDescription()
+        );
+
+        // Set up the edit options. Controller will be updated with this class
+        editOptions = new EditOptions(controller);
+
+        // Content cards contain the images and map view
+        JPanel contentCards = new JPanel(new CardLayout());
         contentCards.add(imagesCard, "Images");
         contentCards.add(mapCard, "Map");
         contentCards.setPreferredSize(new Dimension(900, 600));
 
-        // Set up the display area for the title and description
-        titleDescView = new TitleDescription();
+        // Header containing tab selection buttons
+        JPanel selectHeader = new SelectCardHeader(contentCards);
+
+        // Panel containing title, description and edit buttons
+        JPanel leftPanel = new JPanel(new BorderLayout());
+        leftPanel.add(titleDescArea, BorderLayout.CENTER);
+        leftPanel.add(editOptions, BorderLayout.SOUTH);
 
         /*
          **** Add everything to view
          */
-        add(getSwitchCardButtons(), BorderLayout.NORTH);
-        add(titleDescView, BorderLayout.WEST);
+        add(selectHeader, BorderLayout.NORTH);
+        add(leftPanel, BorderLayout.WEST);
         add(contentCards, BorderLayout.CENTER);
     }
 
-    private JPanel getSwitchCardButtons() {
-        JPanel switchTabsButtons = new JPanel(new BorderLayout());
-        switchTabsButtons.setLayout(new BoxLayout(switchTabsButtons, BoxLayout.X_AXIS));
-        JButton imagesButton = new JButton("Images");
-        JButton mapButton = new JButton("Map");
-
-        // Action listeners for card and image and text buttons
-        imagesButton.addActionListener(_ -> {
-            CardLayout cl = (CardLayout) contentCards.getLayout();
-            cl.show(contentCards, "Images");
-            imagesButton.setEnabled(false);
-            mapButton.setEnabled(true);
-        });
-
-        mapButton.addActionListener(_ -> {
-            CardLayout cl = (CardLayout) contentCards.getLayout();
-            cl.show(contentCards, "Map");
-            imagesButton.setEnabled(true);
-            mapButton.setEnabled(false);
-        });
-
-        switchTabsButtons.add(imagesButton);
-        switchTabsButtons.add(mapButton);
-
-        return switchTabsButtons;
-    }
-
-    // TODO Add the ability to go to edit screens
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-    // This should work
+    // Get new state data when firePropertyChanged is called on ViewEntryState
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final ViewEntryState newState = (ViewEntryState) evt.getNewValue();
 
-        titleDescView.setTitle(newState.getTitle());
-        titleDescView.setDescription(newState.getDescription());
+        titleDescArea.setTitle(newState.getTitle());
+        titleDescArea.setDescription(newState.getDescription());
         imagesCard.updateImagePaths(newState.getImagePaths());
         mapCard.updateCoords(newState.getLatitude(), newState.getLongitude());
     }
 
     public void addController(ViewEntryController controller) {
         this.controller = controller;
+        this.editOptions.setViewEntryController(controller);
         controller.viewEntry();
     }
-
 }

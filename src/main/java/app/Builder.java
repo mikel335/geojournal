@@ -15,6 +15,8 @@ import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
 import interface_adapter.editImages.EditImagesViewModel;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
+import interface_adapter.updateText.UpdateTextController;
+import interface_adapter.updateText.UpdateTextPresenter;
 import interface_adapter.updateText.UpdateTextViewModel;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryPresenter;
@@ -22,6 +24,9 @@ import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.updateText.UpdateTextInputBoundary;
+import use_case.updateText.UpdateTextInteractor;
+import use_case.updateText.UpdateTextOutputBoundary;
 import use_case.viewEntry.ViewEntryInputBoundary;
 import use_case.viewEntry.ViewEntryInteractor;
 import use_case.viewEntry.ViewEntryOutputBoundary;
@@ -130,6 +135,24 @@ public class Builder{
 
         final ViewEntryController controller = new ViewEntryController(viewEntryInteractor);
         viewEntryView.addController(controller);
+        return this;
+    }
+
+    public Builder addUpdateTextUseCase() {
+        final UpdateTextOutputBoundary updateTextPresenter = new UpdateTextPresenter(
+                updateTextViewModel,
+                viewEntryViewModel,
+                viewManagerModel
+        );
+
+        final UpdateTextInputBoundary updateTextInteractor = new UpdateTextInteractor(
+                updateTextPresenter,
+                dataAccess
+        );
+
+        final UpdateTextController controller = new UpdateTextController(updateTextInteractor);
+        updateTextView.setUpdateTextController(controller);
+
         return this;
     }
 

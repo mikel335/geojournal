@@ -19,6 +19,7 @@ public class Main {
                 .addUpdateTextView()
                 .addViewEntryView()
                 .addViewEntryUseCase()
+                .addUpdateTextUseCase()
                 .build();
 
         application.pack();

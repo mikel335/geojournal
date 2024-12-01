@@ -7,20 +7,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class UpdateTextView extends JPanel implements ActionListener {
+public class UpdateTextView extends JPanel implements ActionListener, PropertyChangeListener {
     private final UpdateTextViewModel viewModel;
     private UpdateTextController updateTextController;
 
+    private final TitleDescEditBoxes titleDescEditBoxes;
     final JButton saveButton = new JButton("Save");
     final JButton cancelButton = new JButton("Cancel");
 
-    TitleDescEditBoxes textEditPanel;
-
     public UpdateTextView(UpdateTextViewModel updateTextModel) {
         this.viewModel = updateTextModel;
+        this.viewModel.addPropertyChangeListener(this);
 
-        textEditPanel = new TitleDescEditBoxes(
+        titleDescEditBoxes = new TitleDescEditBoxes(
                 viewModel.getState().getTitle(),
                 viewModel.getState().getDescription()
         );
@@ -41,7 +43,7 @@ public class UpdateTextView extends JPanel implements ActionListener {
         buttonPanel1.add(cancelButton, BorderLayout.WEST);
 
         setLayout(new BorderLayout());
-        add(textEditPanel, BorderLayout.NORTH); // Text area view at the top
+        add(titleDescEditBoxes, BorderLayout.NORTH); // Text area view at the top
         add(buttonPanel1, BorderLayout.CENTER); // Button panel at the bottom (aligned right)
     }
 
@@ -49,8 +51,8 @@ public class UpdateTextView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             updateTextController.execute(
-                    textEditPanel.getTitleText(),
-                    textEditPanel.getDescriptionText()
+                    titleDescEditBoxes.getTitleText(),
+                    titleDescEditBoxes.getDescriptionText()
             );
         }
 
@@ -64,6 +66,12 @@ public class UpdateTextView extends JPanel implements ActionListener {
 
     public void setUpdateTextController(UpdateTextController updateTextController) {
         this.updateTextController = updateTextController;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        this.titleDescEditBoxes.setTitleText(viewModel.getState().getTitle());
+        this.titleDescEditBoxes.setDescriptionText(viewModel.getState().getDescription());
     }
 }
 
