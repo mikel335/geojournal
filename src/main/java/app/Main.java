@@ -19,6 +19,7 @@ public class Main {
                 .addUpdateTextView()
                 .addViewEntryView()
                 .addViewEntryUseCase()
+                .addEditImagesUseCase()
                 .addUpdateTextUseCase()
                 .addUpdateCoordsUseCase()
                 .build();

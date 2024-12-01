@@ -1,21 +1,26 @@
-package viewWithCA.Components.ImagesCard;
+package viewWithCA.Components;
+
+import interface_adapter.editImages.EditImagesController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class ImagesCard extends JPanel {
+public class ImageDisplayPanel extends JPanel {
     private final Map<Integer, ImagePanel> imagePanelById;
     private final GridLayout gridLayout;
     private final JPanel grid;
+    private final boolean editMode;
 
-    public ImagesCard() {
+    public ImageDisplayPanel(Map<Integer, String> imagePaths, boolean editMode) {
+        this.editMode = editMode;
+
         setLayout(new BorderLayout());
-        this.imagePanelById = new HashMap<>();
-        gridLayout = new GridLayout(3, 3);
+        gridLayout = new GridLayout();
         grid = new JPanel(gridLayout);
+
+        this.imagePanelById = new HashMap<>();
+        this.updateImagePaths(imagePaths);
 
         JScrollPane scrollPane = new JScrollPane(grid);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -37,7 +42,8 @@ public class ImagesCard extends JPanel {
         for (Integer newImageId : currentStateImages) {
             // If newImageId is not currently displayed, add it to the view
             if (!currentlyDisplayedImages.contains(newImageId)) {
-                ImagePanel imagePanel = new ImagePanel(imagePaths.get(newImageId));
+                ImagePanel imagePanel = new ImagePanel(imagePaths.get(newImageId), newImageId);
+                imagePanel.setEditMode(editMode);
                 grid.add(imagePanel);
                 this.imagePanelById.put(newImageId, imagePanel);
             }
@@ -58,5 +64,12 @@ public class ImagesCard extends JPanel {
         this.gridLayout.setRows(rows);
         this.gridLayout.setHgap(10);
         this.gridLayout.setVgap(10);
+    }
+
+    public void updateImagePanelControllers(EditImagesController controller) {
+        for (ImagePanel imagePanel : this.imagePanelById.values()) {
+            imagePanel.setEditMode(editMode);
+            imagePanel.setEditImagesController(controller);
+        }
     }
 }

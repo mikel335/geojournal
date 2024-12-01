@@ -3,7 +3,7 @@ package viewWithCA.ViewEntry;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
-import viewWithCA.ViewEntry.ImagesCard.ImagesCard;
+import viewWithCA.Components.ImageDisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
     private ViewEntryController controller;
 
     private final TitleDescription titleDescArea;
-    private final ImagesCard imagesCard;
+    private final ImageDisplayPanel imagesCard;
     private final MapCard mapCard;
 
     private final EditOptions editOptions;
@@ -27,7 +27,7 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         // Prefill everything with the state data
-        this.imagesCard = new ImagesCard(viewModel.getState().getImagePaths());
+        this.imagesCard = new ImageDisplayPanel(viewModel.getState().getImagePaths(), false);
         this.mapCard = new MapCard(
                 viewModel.getState().getLatitude(),
                 viewModel.getState().getLongitude()

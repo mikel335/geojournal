@@ -13,6 +13,8 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
+import interface_adapter.editImages.EditImagesController;
+import interface_adapter.editImages.EditImagesPresenter;
 import interface_adapter.editImages.EditImagesViewModel;
 import interface_adapter.updateCoords.UpdateCoordsController;
 import interface_adapter.updateCoords.UpdateCoordsPresenter;
@@ -26,6 +28,9 @@ import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.editImages.EditImagesInputBoundary;
+import use_case.editImages.EditImagesInteractor;
+import use_case.editImages.EditImagesOutputBoundary;
 import use_case.updateCoords.UpdateCoordsInputBoundary;
 import use_case.updateCoords.UpdateCoordsInteractor;
 import use_case.updateCoords.UpdateCoordsOutputBoundary;
@@ -39,6 +44,7 @@ import view.EntryListView;
 import view.ViewManager;
 
 // New View stuff
+import viewWithCA.EditImages.EditImagesView;
 import viewWithCA.UpdateCoords.UpdateCoordsView;
 import viewWithCA.UpdateText.UpdateTextView;
 import viewWithCA.ViewEntry.ViewEntryView;
@@ -71,7 +77,7 @@ public class Builder{
     private ViewEntryView viewEntryView;
     private ViewEntryViewModel viewEntryViewModel;
 
-    // TODO EditImages use case
+    private EditImagesView editImagesView;
     private EditImagesViewModel editImagesViewModel;
 
     private UpdateCoordsView updateCoordsView;
@@ -109,7 +115,8 @@ public class Builder{
 
     public Builder addEditImagesView() {
         editImagesViewModel = new EditImagesViewModel();
-        // TODO build EditImagesView
+        editImagesView = new EditImagesView(editImagesViewModel);
+        cardPanel.add(editImagesView, editImagesViewModel.getViewName());
         return this;
     }
 
@@ -126,6 +133,7 @@ public class Builder{
         cardPanel.add(updateTextView, updateTextViewModel.getViewName());
         return this;
     }
+
 
     public Builder addViewEntryUseCase() {
         final ViewEntryOutputBoundary viewEntryPresenter = new ViewEntryPresenter(
@@ -159,6 +167,24 @@ public class Builder{
 
         final UpdateTextController controller = new UpdateTextController(updateTextInteractor);
         updateTextView.setUpdateTextController(controller);
+
+        return this;
+    }
+
+    public Builder addEditImagesUseCase() {
+        final EditImagesOutputBoundary editImagesPresenter = new EditImagesPresenter(
+                editImagesViewModel,
+                viewEntryViewModel,
+                viewManagerModel
+        );
+
+        final EditImagesInputBoundary editImagesInteractor = new EditImagesInteractor(
+                dataAccess,
+                editImagesPresenter
+        );
+
+        final EditImagesController controller = new EditImagesController(editImagesInteractor);
+        editImagesView.setEditImagesController(controller);
 
         return this;
     }
