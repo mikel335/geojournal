@@ -30,13 +30,8 @@ public class ViewEntryView extends JPanel implements ActionListener, PropertyCha
         setLayout(new BorderLayout());
 
         // Set up the two content cards for the images and the map
-        this.imagesCard = new ImagesCard(
-                this.viewModel.getState().getImagePaths()
-        );
-        this.mapCard = new MapCard(
-                this.viewModel.getState().getLatitude(),
-                this.viewModel.getState().getLongitude()
-        );
+        this.imagesCard = new ImagesCard();
+        this.mapCard = new MapCard();
         this.contentCards = new JPanel(new CardLayout());
         contentCards.add(imagesCard, "Images");
         contentCards.add(mapCard, "Map");
@@ -44,10 +39,7 @@ public class ViewEntryView extends JPanel implements ActionListener, PropertyCha
 
 
         // Set up the display area for the title and description
-        titleDescView = new TitleDescription(
-                this.viewModel.getState().getTitle(),
-                this.viewModel.getState().getDescription()
-        );
+        titleDescView = new TitleDescription();
 
         /*
          **** Add everything to view
@@ -103,6 +95,7 @@ public class ViewEntryView extends JPanel implements ActionListener, PropertyCha
 
     public void addController(ViewEntryController controller) {
         this.controller = controller;
+        controller.viewEntry();
     }
 
     public String getViewName() {

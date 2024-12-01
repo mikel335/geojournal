@@ -5,45 +5,59 @@ import java.awt.*;
 import java.util.*;
 
 public class ImagesCard extends JPanel {
-    private Map<Integer, String> imagePaths;
-    private final Map<Integer, JPanel> imagePanels;
+    private final Map<Integer, ImagePanel> imagePanelById;
+    private final GridLayout gridLayout;
+    private final JPanel grid;
 
-    private final JPanel imagesPanel;
+    public ImagesCard() {
+        setLayout(new BorderLayout());
+        this.imagePanelById = new HashMap<>();
+        gridLayout = new GridLayout(3, 3);
+        grid = new JPanel(gridLayout);
 
-    public ImagesCard(Map<Integer, String> imagePaths) {
-        this.imagePaths = imagePaths;
-        this.imagePanels = new HashMap<>();
-
-        imagesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        JScrollPane scrollPane = new JScrollPane(imagesPanel);
+        JScrollPane scrollPane = new JScrollPane(grid);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        add(scrollPane);
+        add(scrollPane, BorderLayout.CENTER);
     }
 
 
     // Note all IDs are unique to an image even after it has been removed
     public void updateImagePaths(Map<Integer, String> imagePaths) {
-        Set<Integer> newImages = imagePaths.keySet();
-        Set<Integer> oldImages = this.imagePaths.keySet();
+        if (imagePaths == null) {
+            return;
+        }
 
-        // Add all new images not in the current state
-        // Create a panel for them as well
-        for (Integer newImageId : newImages) {
-            if (!oldImages.contains(newImageId)) {
-                this.imagePaths.put(newImageId, imagePaths.get(newImageId));
+        Set<Integer> currentStateImages = imagePaths.keySet();
+        Set<Integer> currentlyDisplayedImages = this.imagePanelById.keySet();
+
+        for (Integer newImageId : currentStateImages) {
+            // If newImageId is not currently displayed, add it to the view
+            if (!currentlyDisplayedImages.contains(newImageId)) {
                 ImagePanel imagePanel = new ImagePanel(imagePaths.get(newImageId));
-                this.imagePanels.put(newImageId, imagePanel);
+                grid.add(imagePanel);
+                this.imagePanelById.put(newImageId, imagePanel);
             }
         }
 
-        // Remove all old images that have been deleted
-        for (Integer oldImageId : oldImages) {
-            if (!newImages.contains(oldImageId)) {
-                this.imagePaths.remove(oldImageId);
-                this.imagePanels.remove(oldImageId);
+        for (Integer oldImageId : currentlyDisplayedImages) {
+            // If oldImageId is not in the current state (ie shouldn't be displayed),
+            //      it should be removed from the view
+            if (!currentStateImages.contains(oldImageId)) {
+                grid.remove(this.imagePanelById.get(oldImageId));
+                this.imagePanelById.remove(oldImageId);
             }
         }
+
+        // Set up the columns and rows to fit all the images
+        int rows = Math.ceilDiv(currentStateImages.size(), 3);
+        this.gridLayout.setColumns(3);
+        this.gridLayout.setRows(rows);
+        this.gridLayout.setHgap(10);
+        this.gridLayout.setVgap(10);
+
+        revalidate();
+        repaint();
     }
 }

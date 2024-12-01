@@ -22,4 +22,6 @@ public class ViewEntryController {
         viewEntryInteractor.updateCoords();
     }
 
+    public void viewEntry() { viewEntryInteractor.viewEntry(); }
+
 }

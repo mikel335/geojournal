@@ -23,7 +23,6 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
                     entryData.getLongitude(),
                     entryData.getTitle(),
                     entryData.getDescription()
-
             );
             viewEntryPresenter.prepareEditImagesView(outputData);
 
@@ -62,6 +61,22 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
                     entryData.getTitle(),
                     entryData.getDescription());
             viewEntryPresenter.prepareEditTextView(outputData);
+
+        } catch (Exception e) {
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+        }
+    }
+
+    public void viewEntry() {
+        try {
+            Entry entryData = viewEntryDataAccess.getCurrentEntry();
+            ViewEntryOutputData outputData = new ViewEntryOutputData(
+                    entryData.getImagePaths(),
+                    entryData.getLatitude(),
+                    entryData.getLongitude(),
+                    entryData.getTitle(),
+                    entryData.getDescription());
+            viewEntryPresenter.prepareViewEntryView(outputData);
 
         } catch (Exception e) {
             viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");

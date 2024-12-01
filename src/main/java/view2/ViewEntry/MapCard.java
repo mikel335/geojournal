@@ -1,5 +1,6 @@
 package view2.ViewEntry;
 
+import org.jxmapviewer.JXMapKit;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -16,36 +17,18 @@ import java.awt.*;
 // TODO add the pin
 public class MapCard extends JPanel {
 
-    private JXMapViewer mapViewer;
-    TileFactoryInfo info;
-    DefaultTileFactory tileFactory;
+    private JXMapKit mapViewer;
 
-
-    public MapCard(double latitude, double longitude) {
-
-        this.info = new OSMTileFactoryInfo();
-        this.tileFactory = new DefaultTileFactory(info);
-
-        this.mapViewer.setTileFactory(tileFactory);
-
-        tileFactory.setThreadPoolSize(8);
-
-        mapViewer.setZoom(7);
-        mapViewer.setAddressLocation(new GeoPosition(latitude, longitude));
-
-        MouseInputListener mouseInputListener = new PanMouseInputListener(mapViewer);
-        mapViewer.addMouseListener(mouseInputListener);
-        mapViewer.addMouseMotionListener(mouseInputListener);
-        mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCenter(mapViewer));
-
-        add(mapViewer, BorderLayout.CENTER);
-
+    public MapCard() {
         setLayout(new BorderLayout());
+        mapViewer = new JXMapKit();
+        mapViewer.setCenterPosition(new GeoPosition(0,0));
+        mapViewer.setPreferredSize(new Dimension(800, 600));
+        add(mapViewer, BorderLayout.CENTER);
     }
 
     public void updateCoords(double latitude, double longitude) {
-        mapViewer.setZoom(7);
-        mapViewer.setAddressLocation(new GeoPosition(latitude, longitude));
+        mapViewer.setCenterPosition(new GeoPosition(latitude, longitude));
     }
 
 }

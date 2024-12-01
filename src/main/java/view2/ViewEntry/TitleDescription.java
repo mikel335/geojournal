@@ -4,36 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TitleDescription extends JPanel {
-    private String title;
-    private String description;
+    JLabel titleLabel;
+    JLabel descriptionLabel;
 
-    public TitleDescription(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public TitleDescription() {
+        this.titleLabel = new JLabel();
+        this.descriptionLabel = new JLabel();
 
         setLayout(new BorderLayout());
-
         setPreferredSize(new Dimension(300, 600));
-        JLabel titleLabel = new JLabel(title);
-        JLabel descriptionLabel = new JLabel(description);
 
         add(titleLabel, BorderLayout.NORTH);
         add(descriptionLabel, BorderLayout.SOUTH);
     }
 
-    public String getTitle() {
-        return title;
-    }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
+        titleLabel.setText(title);
+        titleLabel.repaint();
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        descriptionLabel.setText(description);
+        descriptionLabel.repaint();
     }
 }

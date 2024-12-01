@@ -85,6 +85,24 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
+    @Override
+    public void prepareViewEntryView(ViewEntryOutputData outputData) {
+        // Create a new view entry state
+        final ViewEntryState newViewEntryState = this.viewEntryView.getState();
+
+        newViewEntryState.setTitle(outputData.getTitle());
+        newViewEntryState.setDescription(outputData.getDescription());
+        newViewEntryState.setLatitude(outputData.getLatitude());
+        newViewEntryState.setLongitude(outputData.getLongitude());
+        newViewEntryState.setImagePaths(outputData.getImagePaths());
+
+        this.viewEntryView.setState(newViewEntryState);
+        this.viewEntryView.firePropertyChanged();
+
+        this.viewManagerModel.setState(this.viewEntryView.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
+
 
     // On failure, stay on the view entry view and display an error
     @Override

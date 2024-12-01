@@ -6,7 +6,7 @@ import use_case.updateCoords.UpdateCoordsDataAccessInterface;
 import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntryDataAccess implements EditImagesDataAccessInterface,
@@ -17,6 +17,33 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     private Entry currentEntry;
     private Map<Integer, Entry> allEntries;
 
+
+    // TODO remove this. This is for testing purposes
+    public EntryDataAccess() {
+
+        this.currentEntry = new Entry(
+                1,
+                "Test Title",
+                "Test Description",
+                new HashMap<>(),
+                43.6532,
+                -79.3832
+        );
+        this.allEntries = new HashMap<>();
+
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+        this.addImageToCurrentEntry("/Users/sebastienpsarianos/Desktop/Screenshot 2024-10-07 at 12.34.17 PM.png");
+
+        this.allEntries.put(1, this.currentEntry);
+    }
 
     @Override
     public void addImageToCurrentEntry(String imagePath) {
