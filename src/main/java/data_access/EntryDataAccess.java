@@ -20,8 +20,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
 
     @Override
     public void addImageToCurrentEntry(String imagePath) {
-        Integer newId = Collections.max(currentEntry.getImagePaths().keySet()) + 1;
-        currentEntry.addImagePath(newId, imagePath);
+        // TODO figure out if I need this
+        int id = currentEntry.addImagePath(imagePath);
         save();
     }
 

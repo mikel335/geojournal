@@ -1,10 +1,7 @@
 package interface_adapter.editImages;
 
-import interface_adapter.ViewManagerModel;
 import use_case.editImages.EditImagesOutputBoundary;
 import use_case.editImages.EditImagesOutputData;
-
-import java.util.Map;
 
 public class EditImagesPresenter implements EditImagesOutputBoundary {
 
@@ -23,7 +20,7 @@ public class EditImagesPresenter implements EditImagesOutputBoundary {
     public void prepareSuccessView(EditImagesOutputData outputData) {
         // Create new state with new images
         final EditImagesState newEditImageState = editImagesViewModel.getState();
-        newEditImageState.setImagePaths(outputData.getImagePaths());
+        newEditImageState.setImagePaths(outputData.imagePaths());
 
         // Update the view model with the new state
         this.editImagesViewModel.setState(newEditImageState);
