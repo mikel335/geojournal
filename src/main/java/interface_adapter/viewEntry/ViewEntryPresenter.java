@@ -80,9 +80,6 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         this.updateTextView.setState(newUpdateTextState);
         this.updateTextView.firePropertyChanged();
 
-        System.out.println(this.updateTextView.getState().getTitle());
-        System.out.println(this.updateTextView.getState().getDescription());
-
         // Send the view manager to the new page
         this.viewManagerModel.setState(this.updateTextView.getViewName());
         this.viewManagerModel.firePropertyChanged();
