@@ -6,9 +6,7 @@ import interface_adapter.weather.WeatherPresenter;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 import use_case.weathercheck.WeatherInputBoundary;
-import use_case.weathercheck.WeatherInputData;
 import use_case.weathercheck.WeatherInteractor;
-import use_case.weathercheck.WeatherOutputBoundary;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -99,9 +97,9 @@ public class WeatherView extends JFrame implements ActionListener, PropertyChang
                 JOptionPane.showMessageDialog(this, state.getErrorMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                locationLabel.setText(WeatherViewModel.LOCATION_LABEL + ": " + state.getLocation());
-                temperatureLabel.setText(WeatherViewModel.TEMPERATURE_LABEL + ": " + state.getTemperature());
-                descriptionLabel.setText(WeatherViewModel.DESCRIPTION_LABEL + ": " + state.getDescription());
+                locationLabel.setText(WeatherViewModel.LOCATION_LABEL + " " + state.getLocation());
+                temperatureLabel.setText(WeatherViewModel.TEMPERATURE_LABEL + " " + state.getTemperature());
+                descriptionLabel.setText(WeatherViewModel.DESCRIPTION_LABEL + " " + state.getDescription());
             }
         }
     }
@@ -112,12 +110,14 @@ public class WeatherView extends JFrame implements ActionListener, PropertyChang
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // Instantiate WeatherView with a new WeatherViewModel and WeatherController
+            WeatherViewModel weatherViewModel = new WeatherViewModel();
+
             final WeatherDataAccess weatherDataAccessObject = new WeatherDataAccess();
-            final WeatherOutputBoundary weatherOutputBoundary = new WeatherPresenter(new WeatherViewModel());
-            final WeatherInputBoundary weatherInteractor = new WeatherInteractor(weatherDataAccessObject,
-                    weatherOutputBoundary);
-            WeatherView demo = new WeatherView(new WeatherViewModel(), new WeatherController(weatherInteractor));
+            final WeatherPresenter weatherPresenter = new WeatherPresenter(weatherViewModel);
+            final WeatherInputBoundary weatherInteractor = new WeatherInteractor(weatherDataAccessObject, weatherPresenter);
+            WeatherController weatherController = new WeatherController(weatherInteractor);
+
+            WeatherView demo = new WeatherView(weatherViewModel, weatherController);
             demo.setVisible(true);
         });
     }

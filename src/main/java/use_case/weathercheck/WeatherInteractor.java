@@ -1,6 +1,5 @@
 package use_case.weathercheck;
 
-import data_access.WeatherDataAccess;
 import entity.Weather;
 
 public class WeatherInteractor implements WeatherInputBoundary {
@@ -24,7 +23,7 @@ public class WeatherInteractor implements WeatherInputBoundary {
             );
             weatherPresenter.prepareSuccessView(outputData);
         } catch (Exception unableCheckWeather) {
-            String errorOutput = new String("Error:" + " Unable to fetch weather data");
+            String errorOutput = new String("Error:" + " Unable to check weather data");
             weatherPresenter.prepareFailView(errorOutput);
         }
     }

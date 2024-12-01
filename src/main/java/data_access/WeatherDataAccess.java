@@ -15,15 +15,11 @@ public class WeatherDataAccess implements WeatherDataAccessInterface {
 
     @Override
     public Weather checkWeather(double latitude, double longitude) throws Exception {
-        // Build the API URL
         String urlString = BASE_URL + "?lat=" + latitude + "&lon=" + longitude + "&units=metric&appid=" + API_KEY;
         URL url = new URL(urlString);
-
-        // Open the connection
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
-        // Read the response
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder response = new StringBuilder();
         String line;
@@ -32,14 +28,12 @@ public class WeatherDataAccess implements WeatherDataAccessInterface {
         }
         reader.close();
 
-        // Analyze the JSON response
         JSONObject jsonResponse = new JSONObject(response.toString());
         String weatherDescription = jsonResponse.getJSONArray("weather").
                 getJSONObject(0).getString("description");
         String locationName = jsonResponse.getString("name");
         double temperature = jsonResponse.getJSONObject("main").getDouble("temp");
 
-        // Create and return the Weather
         return new Weather(locationName, temperature, weatherDescription);
     }
 }

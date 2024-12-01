@@ -6,7 +6,8 @@ import use_case.weathercheck.WeatherInputData;
 /**
  * Controller for the Weather Use Case.
  */
-public class WeatherController {
+public class
+WeatherController {
 
     private final WeatherInputBoundary weatherUseCaseInteractor;
 
