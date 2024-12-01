@@ -25,15 +25,4 @@ WeatherController {
 
         weatherUseCaseInteractor.checkweather(signupInputData);
     }
-
-//    /**
-//     * Refreshes weather data using default location or previously stored coordinates.
-//     * This is useful for a "Refresh" button in the View.
-//     */
-//    public void refreshWeather() {
-//        // Provide default coordinates or retrieve them from a stored state.
-//        double defaultLongitude = 0.0;
-//        double defaultLatitude = 0.0;
-//        execute(defaultLongitude, defaultLatitude);
-//    }
 }
