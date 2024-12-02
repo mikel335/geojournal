@@ -15,7 +15,6 @@ public class Main {
                 .addEntryListView()
                 .addChangeSortUseCase()
                 .addOpenEntryUseCase()
-                .addEntryView()
                 .addEditImagesView()
                 .addUpdateCoordsView()
                 .addUpdateTextView()

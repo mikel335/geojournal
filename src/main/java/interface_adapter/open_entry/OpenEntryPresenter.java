@@ -5,8 +5,6 @@ import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.open_entry.OpenEntryOutputBoundary;
 import use_case.open_entry.OpenEntryOutputData;
-import view.MainEntryView;
-import view.ViewManager;
 
 public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
@@ -19,9 +17,14 @@ public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
     @Override
     public void prepareSuccessView(OpenEntryOutputData data) {
-        final ViewEntryState state = viewModel.getState();
-        // TODO: change the state with the given data
-        viewModel.setState(state);
+        final ViewEntryState viewState = this.viewModel.getState();
+        viewState.setTitle(data.title());
+        viewState.setDescription(data.desc());
+        viewState.setLatitude(data.latitude());
+        viewState.setLongitude(data.longitude());
+        viewState.setImagePaths(data.imagePath());
+
+        viewModel.setState(viewState);
         viewModel.firePropertyChanged();
 
         viewManagerModel.setState(viewModel.getViewName());

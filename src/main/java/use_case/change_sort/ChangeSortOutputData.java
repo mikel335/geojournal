@@ -27,4 +27,5 @@ public class ChangeSortOutputData {
     public ArrayList<String>[] getEntries() {
         return entries;
     }
+
 }

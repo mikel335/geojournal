@@ -9,7 +9,6 @@ import javax.swing.WindowConstants;
 import data_access.DataAccessObject;
 import data_access.EntryDataAccess;
 import entity.EntryFactory;
-import data_access.EntryDataAccess;
 import entity.EntryListFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
@@ -29,7 +28,6 @@ import interface_adapter.updateText.UpdateTextPresenter;
 import interface_adapter.updateText.UpdateTextViewModel;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryPresenter;
-import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
@@ -49,7 +47,6 @@ import use_case.viewEntry.ViewEntryInputBoundary;
 import use_case.viewEntry.ViewEntryInteractor;
 import use_case.viewEntry.ViewEntryOutputBoundary;
 import view.EntryListView;
-import view.MainEntryView;
 import view.ViewManager;
 
 // New View stuff
@@ -67,7 +64,7 @@ public class Builder{
     private final CardLayout cardLayout = new CardLayout();
 
     // TODO figure out if we need this EntryFactory
-    // private final EntryFactory entryFactory = new EntryFactory();
+    private final EntryFactory entryFactory = new EntryFactory();
     private final EntryListFactory entryListFactory = new EntryListFactory();
 
     // View Manager to manage which view to display
@@ -75,15 +72,12 @@ public class Builder{
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     private final DataAccessObject dao = new DataAccessObject();
-    private final EntryDataAccess edao = new EntryDataAccess();
 
     // Filesystem storage access
     private final EntryDataAccess dataAccess = new EntryDataAccess();
 
     private EntryListView entryListView;
     private ListViewModel listViewModel;
-    private ViewEntryViewModel viewEntryViewModel;
-    private MainEntryView mainEntryView;
 
     // ViewEntry use case
     private ViewEntryView viewEntryView;
@@ -110,13 +104,6 @@ public class Builder{
         return this;
     }
 
-    public Builder addEntryView(){
-        viewEntryViewModel = new ViewEntryViewModel();
-        mainEntryView = new MainEntryView();
-        cardPanel.add(mainEntryView, mainEntryView.getViewName());
-        return this;
-    }
-
     public Builder addChangeSortUseCase(){
         final ChangeSortOutputBoundary changeSortOutputBoundary = new ChangeSortPresenter(viewManagerModel, listViewModel);
         final ChangeSortInputBoundary changeSortInteractor = new ChangeSortInteractor(
@@ -128,7 +115,7 @@ public class Builder{
 
     public Builder addOpenEntryUseCase(){
         final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
-        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(edao, openEntryOutputBoundary, entryFactory);
+        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(dataAccess, openEntryOutputBoundary);
         final OpenEntryController controller = new OpenEntryController(openEntryInteractor);
         entryListView.setOpenEntryController(controller);
         return this;
@@ -241,7 +228,6 @@ public class Builder{
 
         application.add(cardPanel);
 
-        // TODO change this back to the entry list
         viewManagerModel.setState(viewEntryViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
 

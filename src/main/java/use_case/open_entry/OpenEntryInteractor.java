@@ -9,14 +9,11 @@ import entity.EntryFactory;
 public class OpenEntryInteractor implements OpenEntryInputBoundary {
     private final OpenEntryDataAccessInterface dataAccessObject;
     private final OpenEntryOutputBoundary presenter;
-    private final EntryFactory entryFactory;
 
     public OpenEntryInteractor(OpenEntryDataAccessInterface openEntryDataAccessInterface,
-                                OpenEntryOutputBoundary openEntryOutputBoundary,
-                                EntryFactory entryFactory) {
+                                OpenEntryOutputBoundary openEntryOutputBoundary) {
         this.dataAccessObject = openEntryDataAccessInterface;
         this.presenter = openEntryOutputBoundary;
-        this.entryFactory = entryFactory;
     }
 
     @Override

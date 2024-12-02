@@ -185,7 +185,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
                 jsonObject.getString("description"),
                 imgData,
                 jsonObject.getDouble("longitude"),
-                jsonObject.getDouble("latitude")
+                jsonObject.getDouble("latitude"),
+                jsonObject.getString("date")
             );
     }
 
@@ -264,6 +265,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         entryValues.put("latitude", String.valueOf(entry.getLatitude()));
         entryValues.put("longitude", String.valueOf(entry.getLongitude()));
         entryValues.put("id", String.valueOf(entry.getId()));
+        entryValues.put("date", String.valueOf(entry.getDate()));
 
         JSONObject imgIds = new JSONObject();
 
