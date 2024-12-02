@@ -1,12 +1,15 @@
 package interface_adapter.viewEntry;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.change_sort.ListState;
+import interface_adapter.change_sort.ListViewModel;
 import interface_adapter.editImages.EditImagesState;
 import interface_adapter.editImages.EditImagesViewModel;
 import interface_adapter.updateCoords.UpdateCoordsState;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
 import interface_adapter.updateText.UpdateTextState;
 import interface_adapter.updateText.UpdateTextViewModel;
+import use_case.change_sort.ChangeSortOutputData;
 import use_case.viewEntry.ViewEntryOutputBoundary;
 import use_case.viewEntry.ViewEntryOutputData;
 
@@ -15,6 +18,7 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
     // TODO figure out a way to end up on the correct tab
     // TODO get rid of error on success
     private final ViewEntryViewModel viewEntryView;
+    private final ListViewModel entryListViewModel;
 
     // All potential edit screens
     private final EditImagesViewModel editImagesView;
@@ -29,12 +33,14 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
                               EditImagesViewModel editImagesView,
                               UpdateCoordsViewModel updateCoordsView,
                               UpdateTextViewModel updateTextViewModel,
-                              ViewManagerModel viewManagerModel) {
+                              ViewManagerModel viewManagerModel,
+                              ListViewModel entryListViewModel) {
         this.viewEntryView = viewEntryView;
         this.editImagesView = editImagesView;
         this.updateCoordsView = updateCoordsView;
         this.updateTextView = updateTextViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.entryListViewModel = entryListViewModel;
     }
 
 
@@ -100,6 +106,20 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         this.viewEntryView.firePropertyChanged();
 
         this.viewManagerModel.setState(this.viewEntryView.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareEntryList(ChangeSortOutputData outputData) {
+        final ListState listState = entryListViewModel.getState();
+
+        listState.setEntryList(outputData.orderedEntries());
+        listState.setSortMethod(outputData.sortMethod());
+
+        this.entryListViewModel.setState(listState);
+        this.entryListViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setState(entryListViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 

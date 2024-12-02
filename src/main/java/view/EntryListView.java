@@ -87,7 +87,7 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
     }
 
     public String getViewName() {
-        return "list";
+        return "listView";
     }
 
     public void setChangeSortController(ChangeSortController controller) {

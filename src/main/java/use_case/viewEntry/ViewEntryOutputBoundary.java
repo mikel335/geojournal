@@ -1,5 +1,7 @@
 package use_case.viewEntry;
 
+import use_case.change_sort.ChangeSortOutputData;
+
 public interface ViewEntryOutputBoundary {
 
     /**
@@ -25,6 +27,11 @@ public interface ViewEntryOutputBoundary {
      * @param outputData the entry data
      */
     void prepareViewEntryView(ViewEntryOutputData outputData);
+
+    /**
+     * Prepares the view to go back to entry list
+     */
+    void prepareEntryList(ChangeSortOutputData outputData);
 
     /**
      * Prepares the failure view

@@ -23,4 +23,6 @@ public class ViewEntryController {
     }
 
     public void viewEntry() { viewEntryInteractor.viewEntry(); }
+
+    public void returnToHome() { viewEntryInteractor.returnToList(); }
 }

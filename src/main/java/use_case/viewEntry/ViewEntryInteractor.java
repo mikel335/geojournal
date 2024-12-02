@@ -1,6 +1,12 @@
 package use_case.viewEntry;
 
 import entity.Entry;
+import use_case.change_sort.ChangeSortOutputData;
+import use_case.change_sort.EntryListButtonData;
+import use_case.change_sort.EntryListButtonDataComparitor;
+import use_case.change_sort.SortMethod;
+
+import java.util.ArrayList;
 
 public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
@@ -63,6 +69,22 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
         } catch (Exception e) {
             viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to edit text");
+        }
+    }
+
+    @Override
+    public void returnToList() {
+        try {
+            ArrayList<EntryListButtonData> sortedEntries = new ArrayList<>();
+            for (Entry entry : viewEntryDataAccess.getEntryList().values()) {
+                sortedEntries.add(new EntryListButtonData(entry));
+            }
+            sortedEntries.sort(new EntryListButtonDataComparitor(SortMethod.DATE_ASCENDING));
+            ChangeSortOutputData output = new ChangeSortOutputData(SortMethod.DATE_ASCENDING, sortedEntries);
+
+            viewEntryPresenter.prepareEntryList(output);
+        } catch (Exception e) {
+            viewEntryPresenter.prepareFailView("There was an issue returning to the main page");
         }
     }
 

@@ -154,7 +154,8 @@ public class Builder{
                 editImagesViewModel,
                 updateCoordsViewModel,
                 updateTextViewModel,
-                viewManagerModel);
+                viewManagerModel,
+                listViewModel);
 
         final ViewEntryInputBoundary viewEntryInteractor = new ViewEntryInteractor(
                 viewEntryPresenter,

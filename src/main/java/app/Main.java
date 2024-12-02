@@ -13,11 +13,11 @@ public class Main {
         final Builder builder = new Builder();
         final JFrame application = builder
                 .addEntryListView()
-                .addChangeSortUseCase()
                 .addEditImagesView()
                 .addUpdateCoordsView()
                 .addUpdateTextView()
                 .addViewEntryView()
+                .addChangeSortUseCase()
                 .addViewEntryUseCase()
                 .addEditImagesUseCase()
                 .addUpdateTextUseCase()
