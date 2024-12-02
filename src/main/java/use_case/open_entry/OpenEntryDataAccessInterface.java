@@ -11,4 +11,10 @@ public interface OpenEntryDataAccessInterface {
      * @param id The id of the entry
      */
     Entry getEntry(int id);
+
+    /**
+     * Sets the current entry
+     * @param id The id of the entry to set as the current entry
+     */
+    void setCurrentEntry(int id);
 }

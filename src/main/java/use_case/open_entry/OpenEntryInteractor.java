@@ -19,7 +19,9 @@ public class OpenEntryInteractor implements OpenEntryInputBoundary {
     @Override
     public void execute(OpenEntryInputData openEntryInputData) {
         final int id = openEntryInputData.getID();
+        dataAccessObject.setCurrentEntry(id);
         final Entry entry = dataAccessObject.getEntry(id);
+
         final OpenEntryOutputData openEntryOutputData = new OpenEntryOutputData(entry.getId(),
                 entry.getTitle(),
                 entry.getDescription(),

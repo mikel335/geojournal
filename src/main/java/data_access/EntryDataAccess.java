@@ -31,24 +31,17 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     private static final String geoJournalLocationData = System.getProperty("user.home") + File.separator + "geoJournalApplicationData";
 
 
-    // TODO for testing
     public Map<Integer, Entry> getAllEntries() {
         return allEntries;
     }
-    // TODO remove this. This is for testing purposes
-    public EntryDataAccess() {
 
-        this.currentEntry = new Entry(
-                1,
-                "Test Title",
-                "Test Description",
-                new HashMap<>(),
-                43.6532,
-                -79.3832,
-                "Mar 3"
-        );
+    public EntryDataAccess() {
         this.allEntries = new HashMap<>();
-        this.allEntries.put(1, this.currentEntry);
+        readApplicationData();
+    }
+
+    public void setCurrentEntry(int id) {
+        this.currentEntry = allEntries.get(id);
     }
 
     @Override
@@ -124,20 +117,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     @Override
     public Entry getCurrentEntry() {
         return currentEntry;
-    }
-
-    public static void main(String [] args) {
-        EntryDataAccess entryDataAccess = new EntryDataAccess();
-        entryDataAccess.readApplicationData();
-        for(Entry entry : entryDataAccess.getAllEntries().values()) {
-            System.out.println("Entries Generated");
-            System.out.println(entry.getId());
-            System.out.println(entry.getTitle());
-            System.out.println(entry.getDescription());
-            System.out.println(entry.getLatitude());
-            System.out.println(entry.getLongitude());
-            System.out.println(entry.getImagePaths());
-        }
     }
 
     private void readApplicationData() {

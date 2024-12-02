@@ -14,14 +14,10 @@ public class EntryListButtonDataComparitor implements Comparator<EntryListButton
     public int compare(EntryListButtonData o1, EntryListButtonData o2) {
         switch (sortMethod) {
             case DATE_ASCENDING -> {
-                LocalDate date1 = LocalDate.parse(o1.getDate());
-                LocalDate date2 = LocalDate.parse(o2.getDate());
-                return date1.compareTo(date2);
+                return o1.getDate().compareTo(o2.getDate());
             }
             case DATE_DESCENDING -> {
-                LocalDate date1 = LocalDate.parse(o1.getDate());
-                LocalDate date2 = LocalDate.parse(o2.getDate());
-                return date2.compareTo(date1);
+                return o2.getDate().compareTo(o1.getDate());
             }
             case TITLE_ASCENDING -> {
                 return o1.getTitle().compareTo(o2.getTitle());

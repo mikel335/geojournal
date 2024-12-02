@@ -32,7 +32,6 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     private final JPanel entriesPanel;
 
-
     public EntryListView(ListViewModel listViewModel) {
         this.setLayout(new BorderLayout());
         listViewModel.addPropertyChangeListener(this);
@@ -49,19 +48,19 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
         final JButton titleAsc = new JButton("Title Ascending");
         final JButton titleDesc = new JButton("Title Descending");
 
-        dateAsc.addActionListener((ActionEvent e)-> {
+        dateAsc.addActionListener((ActionEvent _)-> {
             changeSortController.execute(SortMethod.DATE_ASCENDING);
         });
 
-        dateDesc.addActionListener((ActionEvent e)-> {
+        dateDesc.addActionListener((ActionEvent _)-> {
             changeSortController.execute(SortMethod.DATE_DESCENDING);
         });
 
-        titleAsc.addActionListener((ActionEvent e)-> {
+        titleAsc.addActionListener((ActionEvent _)-> {
             changeSortController.execute(SortMethod.TITLE_ASCENDING);
         });
 
-        titleDesc.addActionListener((ActionEvent e)-> {
+        titleDesc.addActionListener((ActionEvent _)-> {
             changeSortController.execute(SortMethod.TITLE_DESCENDING);
         });
 
@@ -93,6 +92,7 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     public void setChangeSortController(ChangeSortController controller) {
         this.changeSortController = controller;
+        controller.execute(SortMethod.DATE_ASCENDING);
     }
 
     public void setOpenEntryController(OpenEntryController controller) {
@@ -101,19 +101,26 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     private void populateEntryButtons(ArrayList<EntryListButtonData > entryList) {
         entriesPanel.removeAll();
+        entriesPanel.validate();
+        entriesPanel.repaint();
 
-        for (EntryListButtonData entryListButtonData : entryList) {
+        if (entryList != null ) {
 
-            final JButton button = new JButton(entryListButtonData.getTitle());
-            entriesPanel.add(button);
+            for (EntryListButtonData entryListButtonData : entryList) {
 
-            button.addActionListener(
-                    (ActionEvent e)-> {
-                        if (e.getSource().equals(button)) {
-                            openEntryController.execute(entryListButtonData.getId());
+                final JButton button = new JButton(entryListButtonData.getTitle());
+                entriesPanel.add(button);
+
+                button.addActionListener(
+                        (ActionEvent e)-> {
+                            if (e.getSource().equals(button)) {
+                                openEntryController.execute(entryListButtonData.getId());
+                            }
                         }
-                    }
-            );
+                );
+            }
+            entriesPanel.revalidate();
+            entriesPanel.repaint();
         }
     }
 }

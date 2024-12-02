@@ -225,7 +225,7 @@ public class Builder{
 
         application.add(cardPanel);
 
-        viewManagerModel.setState(viewEntryViewModel.getViewName());
+        viewManagerModel.setState(entryListView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         return application;

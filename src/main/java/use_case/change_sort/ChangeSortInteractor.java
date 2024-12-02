@@ -35,7 +35,6 @@ public class ChangeSortInteractor implements ChangeSortInputBoundary{
             sortedEntries.sort(new EntryListButtonDataComparitor(changeSortInputData.getSortMethod()));
 
             ChangeSortOutputData output = new ChangeSortOutputData(changeSortInputData.getSortMethod(), sortedEntries);
-
             presenter.prepareSuccessView(output);
 
         } catch(Exception e) {
