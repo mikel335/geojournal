@@ -16,6 +16,7 @@ public class ListState {
     }
 
     public ListState() {
+        // TODO: Take in the arraylists as parameters and simply set equals to
         list[0] = new ArrayList<>(); // Title
         list[1] = new ArrayList<>(); // Date
         list[2] = new ArrayList<>(); // ID

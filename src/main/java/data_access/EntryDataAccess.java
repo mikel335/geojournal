@@ -2,19 +2,25 @@ package data_access;
 
 import entity.Entry;
 import entity.EntryFactory;
+import entity.EntryList;
+import use_case.change_sort.ChangeSortDataAccessInterface;
 import use_case.editImages.EditImagesDataAccessInterface;
 import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
 import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.io.*;
+import java.util.Map;
+import java.util.TreeMap;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -22,11 +28,18 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateCoordsDataAccessInterface,
         UpdateTextDataAccessInterface,
         ViewEntryDataAccessInterface,
-        OpenEntryDataAccessInterface {
+        OpenEntryDataAccessInterface,
+        ChangeSortDataAccessInterface {
 
     private Entry currentEntry;
     private final Map<Integer, Entry> allEntries;
     private static final String geoJournalLocationData = System.getProperty("user.home") + File.separator + "geoJournalApplicationData";
+    // dateToNameNew sorts by newest entry to oldest, the other one is the other way around
+    private final TreeMap<String, Integer> nameToDate = new TreeMap<String, Integer>();
+    private final TreeMap<Integer, String> dateToNameNew = new TreeMap<Integer, String>(Collections.reverseOrder());
+    private final TreeMap<Integer, String> dateToNameOld = new TreeMap<Integer, String>();
+    private final TreeMap<Integer, String> idToName = new TreeMap<Integer, String>();
+    private final TreeMap<String, Integer> nameToID = new TreeMap<String, Integer>();
 
 
     public EntryDataAccess() {
@@ -37,13 +50,28 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         allEntries.put(1, entryFactory.createEntry(1, "One","This is one", path, 1.1, 1.1, "Jan 1"));
         allEntries.put(2, entryFactory.createEntry(2, "Two","This is two", path, 2.2, 2.2, "Feb 2"));
         allEntries.put(3, entryFactory.createEntry(3, "three","This is three", path, 3.3, 3.3, "Mar 3"));
+        nameToDate.put("one", 1);
+        nameToDate.put("two", 2);
+        nameToDate.put("three", 3);
+        dateToNameOld.put(1, "one");
+        dateToNameOld.put(2, "two");
+        dateToNameOld.put(3, "three");
+        dateToNameNew.put(3, "three");
+        dateToNameNew.put(2, "two");
+        dateToNameNew.put(1, "one");
+        idToName.put(1, "one");
+        idToName.put(2, "two");
+        idToName.put(3, "three");
+        nameToID.put("one", 1);
+        nameToID.put("two", 2);
+        nameToID.put("three", 3);
     }
     // TODO for testing
     public Map<Integer, Entry> getAllEntries() {
         return allEntries;
     }
     // TODO remove this. This is for testing purposes
-    public EntryDataAccess() {
+    public EntryDataAccess(int i) {
 
         this.currentEntry = new Entry(
                 1,
@@ -51,7 +79,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
                 "Test Description",
                 new HashMap<>(),
                 43.6532,
-                -79.3832
+                -79.3832,
+                "test date"
         );
         this.allEntries = new HashMap<>();
         this.allEntries.put(1, this.currentEntry);
@@ -134,7 +163,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
 
     public Entry getEntry(Integer id) { return allEntries.get(id); }
 
-    private void save() {
+    private void save() {}
         //TODO filesystem stuff for persistent storage
     public static void main(String [] args) {
         EntryDataAccess entryDataAccess = new EntryDataAccess();
@@ -197,7 +226,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
                 jsonObject.getString("description"),
                 imgData,
                 jsonObject.getDouble("longitude"),
-                jsonObject.getDouble("latitude")
+                jsonObject.getDouble("latitude"),
+                jsonObject.getString("date")
             );
     }
 
@@ -291,5 +321,26 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     @Override
     public Entry getEntry(int id) {
         return allEntries.get(id);
+    }
+
+    @Override
+    public void changeSortAndUpdate(EntryList entryList) {
+        final int sort = entryList.getSortMethod();
+        ArrayList<String>[] entries = new ArrayList[3];
+        entries[0] = new ArrayList<String>();
+        entries[1] = new ArrayList<String>();
+        entries[2] = new ArrayList<String>();
+        TreeMap<Integer, String> dateToName;
+        if (sort == 1) {
+            dateToName = dateToNameOld;
+        } else {
+            dateToName = dateToNameNew;
+        }
+        for (Integer i : dateToName.descendingKeySet()) {
+            entries[0].add(dateToName.get(i));
+            entries[1].add(i.toString());
+            entries[2].add(nameToID.get(dateToName.get(i)).toString());
+        }
+        entryList.setEntries(entries);
     }
 }

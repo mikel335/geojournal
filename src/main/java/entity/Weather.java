@@ -11,14 +11,26 @@ public class Weather {
         this.description = description;
     }
 
+    /**
+     * Gets the location associated with this weather
+     * @return The name of the location associated with this weather
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Gets the temperature
+     * @return The temperature
+     */
     public double getTemperature() {
         return temperature;
     }
 
+    /**
+     * Gets the description of the weather
+     * @return The description of the weather
+     */
     public String getDescription() {
         return description;
     }

@@ -5,7 +5,7 @@ import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.open_entry.OpenEntryOutputBoundary;
 import use_case.open_entry.OpenEntryOutputData;
-import view.MainEntryView;
+import view.ViewEntry.ViewEntryView;
 import view.ViewManager;
 
 public class OpenEntryPresenter implements OpenEntryOutputBoundary {
