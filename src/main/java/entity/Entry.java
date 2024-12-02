@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Entry {
     final private int id;
+    private int newImgId = 0;
 
     // Title and description and date
     private String title;
@@ -11,7 +12,7 @@ public class Entry {
     private String date;
 
     // Image Data
-    private Map<Integer, String> imagePaths;
+    final private Map<Integer, String> imagePaths;
 
     // Map Data
     private double longitude;
@@ -54,8 +55,10 @@ public class Entry {
         this.description = description;
     }
 
-    public void addImagePath(Integer id, String path) {
-        imagePaths.put(id, path);
+    public int addImagePath(String path) {
+        imagePaths.put(newImgId, path);
+        newImgId++;
+        return newImgId;
     }
 
     public void removeImagePath(Integer id) {
@@ -80,6 +83,10 @@ public class Entry {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public int getNewImgId() {
+        return newImgId;
     }
 
     public String getDate() { return date; }

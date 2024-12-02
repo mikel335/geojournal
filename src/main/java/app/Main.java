@@ -16,7 +16,16 @@ public class Main {
                 .addChangeSortUseCase()
                 .addOpenEntryUseCase()
                 .addEntryView()
+                .addEditImagesView()
+                .addUpdateCoordsView()
+                .addUpdateTextView()
+                .addViewEntryView()
+                .addViewEntryUseCase()
+                .addEditImagesUseCase()
+                .addUpdateTextUseCase()
+                .addUpdateCoordsUseCase()
                 .build();
+
         application.pack();
         application.setVisible(true);
     }
