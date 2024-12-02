@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class ListState {
     private ArrayList<EntryListButtonData> entryList;
     private SortMethod sortMethod;
+    private String errorMessage;
 
     public ArrayList<EntryListButtonData> getEntryList() {
         return entryList;
@@ -26,5 +27,13 @@ public class ListState {
 
     public void setSortMethod(SortMethod sortMethod) {
         this.sortMethod = sortMethod;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+    
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
