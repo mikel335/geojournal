@@ -13,7 +13,6 @@ import java.beans.PropertyChangeSupport;
  */
 
 public class ViewModel<T> {
-
     private final String viewName;
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
