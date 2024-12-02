@@ -9,11 +9,17 @@ import javax.swing.WindowConstants;
 import data_access.DataAccessObject;
 import data_access.EntryDataAccess;
 import data_access.WeatherDataAccess;
+import entity.EntryFactory;
+import data_access.EntryDataAccess;
+
 import entity.EntryListFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
+import interface_adapter.open_entry.OpenEntryController;
+import interface_adapter.open_entry.OpenEntryPresenter;
+import interface_adapter.viewEntry.ViewEntryViewModel;
 import interface_adapter.editImages.EditImagesController;
 import interface_adapter.editImages.EditImagesPresenter;
 import interface_adapter.editImages.EditImagesViewModel;
@@ -32,6 +38,9 @@ import interface_adapter.weather.WeatherViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.open_entry.OpenEntryInputBoundary;
+import use_case.open_entry.OpenEntryInteractor;
+import use_case.open_entry.OpenEntryOutputBoundary;
 import use_case.editImages.EditImagesInputBoundary;
 import use_case.editImages.EditImagesInteractor;
 import use_case.editImages.EditImagesOutputBoundary;
@@ -48,6 +57,7 @@ import use_case.weathercheck.WeatherInputBoundary;
 import use_case.weathercheck.WeatherInteractor;
 import use_case.weathercheck.WeatherOutputBoundary;
 import view.EntryListView;
+import view.MainEntryView;
 import view.ViewManager;
 
 // New View stuff
@@ -71,6 +81,7 @@ public class Builder{
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     private final DataAccessObject dao = new DataAccessObject();
+    private final EntryDataAccess edao = new EntryDataAccess();
 
     // Filesystem storage access
     private final EntryDataAccess dataAccess = new EntryDataAccess();
@@ -80,6 +91,8 @@ public class Builder{
 
     private EntryListView entryListView;
     private ListViewModel listViewModel;
+    private ViewEntryViewModel viewEntryViewModel;
+    private MainEntryView mainEntryView;
 
     // ViewEntry use case
     private ViewEntryView viewEntryView;
@@ -103,7 +116,15 @@ public class Builder{
     public Builder addEntryListView(){
         listViewModel = new ListViewModel();
         entryListView = new EntryListView(listViewModel);
+        viewEntryViewModel = new ViewEntryViewModel();
         cardPanel.add(entryListView, entryListView.getViewName());
+        return this;
+    }
+
+    public Builder addEntryView(){
+        viewEntryViewModel = new ViewEntryViewModel();
+        mainEntryView = new MainEntryView();
+        cardPanel.add(mainEntryView, mainEntryView.getViewName());
         return this;
     }
 
@@ -118,6 +139,14 @@ public class Builder{
 
     public Builder addWeatherViewModel() {
         weatherViewModel = new WeatherViewModel();
+        return this;
+    }
+
+    public Builder addOpenEntryUseCase(){
+        final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
+        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(edao, openEntryOutputBoundary, entryFactory);
+        final OpenEntryController controller = new OpenEntryController(openEntryInteractor);
+        entryListView.setOpenEntryController(controller);
         return this;
     }
 

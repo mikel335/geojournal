@@ -5,7 +5,7 @@ import entity.Entry;
 public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
     private final ViewEntryOutputBoundary viewEntryPresenter;
-    public final ViewEntryDataAccessInterface viewEntryDataAccess;
+    private final ViewEntryDataAccessInterface viewEntryDataAccess;
 
     public ViewEntryInteractor(ViewEntryOutputBoundary viewEntryPresenter, ViewEntryDataAccessInterface viewEntryDataAccess) {
         this.viewEntryPresenter = viewEntryPresenter;

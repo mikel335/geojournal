@@ -6,9 +6,10 @@ public class Entry {
     final private int id;
     private int newImgId = 0;
 
-    // Title and description
+    // Title and description and date
     private String title;
     private String description;
+    private String date;
 
     // Image Data
     final private Map<Integer, String> imagePaths;
@@ -22,9 +23,11 @@ public class Entry {
                  String description,
                  Map<Integer, String> imagePaths,
                  double longitude,
-                 double latitude) {
+                 double latitude,
+                 String date) {
         this.id = id;
         this.title = title;
+        this.date = date;
         this.description = description;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -81,6 +84,8 @@ public class Entry {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+    public String getDate() { return date; }
 
     public int getNewImgId() {
         return newImgId;
