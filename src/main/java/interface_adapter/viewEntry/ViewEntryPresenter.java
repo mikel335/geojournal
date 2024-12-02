@@ -14,7 +14,7 @@ import use_case.viewEntry.ViewEntryOutputBoundary;
 import use_case.viewEntry.ViewEntryOutputData;
 
 public class ViewEntryPresenter implements ViewEntryOutputBoundary {
-    
+
     private final ViewEntryViewModel viewEntryView;
     private final ListViewModel entryListViewModel;
 
@@ -46,7 +46,7 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
     public void prepareEditImagesView(ViewEntryOutputData outputData) {
         // Create a new edit images state
         final EditImagesState newEditImagesState = this.editImagesView.getState();
-        newEditImagesState.setImagePaths(outputData.getImagePaths());
+        newEditImagesState.setImagePaths(outputData.imagePaths());
 
         // Update the state
         this.editImagesView.setState(newEditImagesState);
@@ -61,8 +61,8 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
     public void prepareUpdateCoordsView(ViewEntryOutputData outputData) {
         // Create a new update coords state
         final UpdateCoordsState newUpdateCoordsState = this.updateCoordsView.getState();
-        newUpdateCoordsState.setLatitude(outputData.getLatitude());
-        newUpdateCoordsState.setLongitude(outputData.getLongitude());
+        newUpdateCoordsState.setLatitude(outputData.latitude());
+        newUpdateCoordsState.setLongitude(outputData.longitude());
 
         // Update the state
         this.updateCoordsView.setState(newUpdateCoordsState);
@@ -77,8 +77,8 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
     public void prepareEditTextView(ViewEntryOutputData outputData) {
         // Create a new edit text state
         final UpdateTextState newUpdateTextState = this.updateTextView.getState();
-        newUpdateTextState.setTitle(outputData.getTitle());
-        newUpdateTextState.setDescription(outputData.getDescription());
+        newUpdateTextState.setTitle(outputData.title());
+        newUpdateTextState.setDescription(outputData.description());
 
         // Update the state
         this.updateTextView.setState(newUpdateTextState);
@@ -94,11 +94,11 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         // Create a new view entry state
         final ViewEntryState newViewEntryState = this.viewEntryView.getState();
 
-        newViewEntryState.setTitle(outputData.getTitle());
-        newViewEntryState.setDescription(outputData.getDescription());
-        newViewEntryState.setLatitude(outputData.getLatitude());
-        newViewEntryState.setLongitude(outputData.getLongitude());
-        newViewEntryState.setImagePaths(outputData.getImagePaths());
+        newViewEntryState.setTitle(outputData.title());
+        newViewEntryState.setDescription(outputData.description());
+        newViewEntryState.setLatitude(outputData.latitude());
+        newViewEntryState.setLongitude(outputData.longitude());
+        newViewEntryState.setImagePaths(outputData.imagePaths());
 
         this.viewEntryView.setState(newViewEntryState);
         this.viewEntryView.firePropertyChanged();
