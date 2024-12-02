@@ -160,7 +160,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
 
         } catch(IOException e) {
             System.out.println("There was a problem reading the data file");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -198,7 +198,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
 
         } catch(IOException e) {
             System.out.println("There was an issue saving the data");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

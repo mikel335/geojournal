@@ -1,4 +1,4 @@
-package viewWithCA.UpdateText;
+package view.UpdateText;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

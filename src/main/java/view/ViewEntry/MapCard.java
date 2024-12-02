@@ -1,4 +1,4 @@
-package viewWithCA.ViewEntry;
+package view.ViewEntry;
 
 import org.jxmapviewer.JXMapKit;
 import org.jxmapviewer.viewer.GeoPosition;

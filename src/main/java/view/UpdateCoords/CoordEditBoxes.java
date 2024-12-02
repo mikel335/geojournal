@@ -1,4 +1,4 @@
-package viewWithCA.UpdateCoords;
+package view.UpdateCoords;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

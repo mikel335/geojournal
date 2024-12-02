@@ -1,4 +1,4 @@
-package viewWithCA.UpdateText;
+package view.UpdateText;
 
 import interface_adapter.updateText.UpdateTextController;
 import interface_adapter.updateText.UpdateTextViewModel;

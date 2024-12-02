@@ -1,4 +1,4 @@
-package viewWithCA.ViewEntry;
+package view.ViewEntry;
 
 import interface_adapter.viewEntry.ViewEntryController;
 

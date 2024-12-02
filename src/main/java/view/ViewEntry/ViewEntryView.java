@@ -1,9 +1,9 @@
-package viewWithCA.ViewEntry;
+package view.ViewEntry;
 
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
-import viewWithCA.Components.ImageDisplayPanel;
+import view.Components.ImageDisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;

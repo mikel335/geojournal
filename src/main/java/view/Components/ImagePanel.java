@@ -1,4 +1,4 @@
-package viewWithCA.Components;
+package view.Components;
 
 import interface_adapter.editImages.EditImagesController;
 

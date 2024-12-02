@@ -44,10 +44,10 @@ import view.EntryListView;
 import view.ViewManager;
 
 // New View stuff
-import viewWithCA.EditImages.EditImagesView;
-import viewWithCA.UpdateCoords.UpdateCoordsView;
-import viewWithCA.UpdateText.UpdateTextView;
-import viewWithCA.ViewEntry.ViewEntryView;
+import view.EditImages.EditImagesView;
+import view.UpdateCoords.UpdateCoordsView;
+import view.UpdateText.UpdateTextView;
+import view.ViewEntry.ViewEntryView;
 
 /**
  * The Builder puts the CA architecture together.

@@ -1,8 +1,8 @@
-package viewWithCA.EditImages;
+package view.EditImages;
 
 import interface_adapter.editImages.EditImagesController;
 import interface_adapter.editImages.EditImagesViewModel;
-import viewWithCA.Components.ImageDisplayPanel;
+import view.Components.ImageDisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;

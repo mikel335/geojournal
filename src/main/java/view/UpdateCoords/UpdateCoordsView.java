@@ -1,4 +1,4 @@
-package viewWithCA.UpdateCoords;
+package view.UpdateCoords;
 
 import interface_adapter.updateCoords.UpdateCoordsController;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
