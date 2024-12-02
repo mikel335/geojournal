@@ -10,7 +10,7 @@ public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
     private final ViewEntryViewModel viewEntryModel;
     private final ViewManagerModel viewManagerModel;
-    
+
     public OpenEntryPresenter(ViewEntryViewModel viewEntryModel, ViewManagerModel viewManagerModel) {
         this.viewEntryModel = viewEntryModel;
         this.viewManagerModel = viewManagerModel;
@@ -35,6 +35,13 @@ public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        // TODO add error message to state
+        final ViewEntryState viewState = this.viewEntryModel.getState();
+        viewState.setViewEntryError(error);
+
+        viewEntryModel.setState(viewState);
+        viewEntryModel.firePropertyChanged();
+
+        viewManagerModel.setState(viewEntryModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }

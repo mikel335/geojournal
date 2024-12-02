@@ -14,9 +14,7 @@ import use_case.viewEntry.ViewEntryOutputBoundary;
 import use_case.viewEntry.ViewEntryOutputData;
 
 public class ViewEntryPresenter implements ViewEntryOutputBoundary {
-
-    // TODO figure out a way to end up on the correct tab
-    // TODO get rid of error on success
+    
     private final ViewEntryViewModel viewEntryView;
     private final ListViewModel entryListViewModel;
 

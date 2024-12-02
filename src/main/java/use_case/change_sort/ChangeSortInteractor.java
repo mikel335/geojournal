@@ -1,11 +1,8 @@
 package use_case.change_sort;
 
 import entity.Entry;
-import entity.EntryList;
-import entity.EntryListFactory;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * The change sort interactor.
@@ -13,14 +10,11 @@ import java.util.Map;
 public class ChangeSortInteractor implements ChangeSortInputBoundary{
     private final ChangeSortDataAccessInterface dataAccessObject;
     private final ChangeSortOutputBoundary presenter;
-    private final EntryListFactory entryListFactory;
 
     public ChangeSortInteractor(ChangeSortDataAccessInterface changeSortDataAccessInterface,
-                                ChangeSortOutputBoundary changeSortOutputBoundary,
-                                EntryListFactory entryListFactory) {
+                                ChangeSortOutputBoundary changeSortOutputBoundary) {
         this.dataAccessObject = changeSortDataAccessInterface;
         this.presenter = changeSortOutputBoundary;
-        this.entryListFactory = entryListFactory;
     }
 
     @Override

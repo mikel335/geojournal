@@ -1,7 +1,6 @@
 package data_access;
 
 import entity.Entry;
-import entity.EntryFactory;
 import use_case.change_sort.ChangeSortDataAccessInterface;
 import use_case.editImages.EditImagesDataAccessInterface;
 import use_case.open_entry.OpenEntryDataAccessInterface;
@@ -12,8 +11,6 @@ import use_case.viewEntry.ViewEntryDataAccessInterface;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 

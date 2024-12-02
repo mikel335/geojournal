@@ -1,7 +1,6 @@
 package use_case.open_entry;
 
 import entity.Entry;
-import entity.EntryFactory;
 
 /**
  * The change sort interactor.

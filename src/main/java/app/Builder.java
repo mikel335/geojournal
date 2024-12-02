@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import data_access.EntryDataAccess;
-import entity.EntryFactory;
-import entity.EntryListFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
@@ -62,10 +60,6 @@ public class Builder{
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
 
-    // TODO figure out if we need this EntryFactory
-    private final EntryFactory entryFactory = new EntryFactory();
-    private final EntryListFactory entryListFactory = new EntryListFactory();
-
     // View Manager to manage which view to display
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
@@ -104,7 +98,7 @@ public class Builder{
     public Builder addChangeSortUseCase(){
         final ChangeSortOutputBoundary changeSortOutputBoundary = new ChangeSortPresenter(viewManagerModel, listViewModel);
         final ChangeSortInputBoundary changeSortInteractor = new ChangeSortInteractor(
-                dataAccess ,changeSortOutputBoundary, entryListFactory);
+                dataAccess ,changeSortOutputBoundary);
         final ChangeSortController controller = new ChangeSortController(changeSortInteractor);
         entryListView.setChangeSortController(controller);
         return this;
