@@ -105,12 +105,9 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
         entriesPanel.repaint();
 
         if (entryList != null ) {
-
             for (EntryListButtonData entryListButtonData : entryList) {
-
                 final JButton button = new JButton(entryListButtonData.getTitle());
                 entriesPanel.add(button);
-
                 button.addActionListener(
                         (ActionEvent e)-> {
                             if (e.getSource().equals(button)) {

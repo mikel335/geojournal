@@ -68,17 +68,26 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
     // Get new state data when firePropertyChanged is called on ViewEntryState
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final ViewEntryState newState = (ViewEntryState) evt.getNewValue();
 
-        titleDescArea.setTitle(newState.getTitle());
-        titleDescArea.setDescription(newState.getDescription());
-        imagesCard.updateImagePaths(newState.getImagePaths());
-        mapCard.updateCoords(newState.getLatitude(), newState.getLongitude());
+        if (evt.getNewValue() instanceof ViewEntryState newState) {
+            if (newState.getViewEntryError() != null) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        newState.getViewEntryError(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            } else {
+                titleDescArea.setTitle(newState.getTitle());
+                titleDescArea.setDescription(newState.getDescription());
+                imagesCard.updateImagePaths(newState.getImagePaths());
+                mapCard.updateCoords(newState.getLatitude(), newState.getLongitude());
+            }
+        }
     }
 
     public void addController(ViewEntryController controller) {
         this.controller = controller;
         this.editOptions.setViewEntryController(controller);
-        controller.viewEntry();
     }
 }

@@ -14,7 +14,6 @@ public class Main {
         final JFrame application = builder
                 .addEntryListView()
                 .addChangeSortUseCase()
-                .addOpenEntryUseCase()
                 .addEditImagesView()
                 .addUpdateCoordsView()
                 .addUpdateTextView()
@@ -23,6 +22,7 @@ public class Main {
                 .addEditImagesUseCase()
                 .addUpdateTextUseCase()
                 .addUpdateCoordsUseCase()
+                .addOpenEntryUseCase()
                 .build();
 
         application.pack();

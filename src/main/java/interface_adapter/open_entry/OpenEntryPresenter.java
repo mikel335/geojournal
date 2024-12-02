@@ -8,26 +8,28 @@ import use_case.open_entry.OpenEntryOutputData;
 
 public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
-    private final ViewEntryViewModel viewModel;
+    private final ViewEntryViewModel viewEntryModel;
     private final ViewManagerModel viewManagerModel;
-    public OpenEntryPresenter(ViewEntryViewModel viewModel, ViewManagerModel viewManagerModel) {
-        this.viewModel = viewModel;
+    
+    public OpenEntryPresenter(ViewEntryViewModel viewEntryModel, ViewManagerModel viewManagerModel) {
+        this.viewEntryModel = viewEntryModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void prepareSuccessView(OpenEntryOutputData data) {
-        final ViewEntryState viewState = this.viewModel.getState();
+        final ViewEntryState viewState = this.viewEntryModel.getState();
+
         viewState.setTitle(data.title());
         viewState.setDescription(data.desc());
         viewState.setLatitude(data.latitude());
         viewState.setLongitude(data.longitude());
         viewState.setImagePaths(data.imagePath());
 
-        viewModel.setState(viewState);
-        viewModel.firePropertyChanged();
+        viewEntryModel.setState(viewState);
+        viewEntryModel.firePropertyChanged();
 
-        viewManagerModel.setState(viewModel.getViewName());
+        viewManagerModel.setState(viewEntryModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 

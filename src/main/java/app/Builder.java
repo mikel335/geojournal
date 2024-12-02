@@ -110,13 +110,6 @@ public class Builder{
         return this;
     }
 
-    public Builder addOpenEntryUseCase(){
-        final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
-        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(dataAccess, openEntryOutputBoundary);
-        final OpenEntryController controller = new OpenEntryController(openEntryInteractor);
-        entryListView.setOpenEntryController(controller);
-        return this;
-    }
 
     public Builder addViewEntryView() {
         viewEntryViewModel = new ViewEntryViewModel();
@@ -124,6 +117,14 @@ public class Builder{
         cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
         return this;
     };
+
+    public Builder addOpenEntryUseCase(){
+        final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
+        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(dataAccess, openEntryOutputBoundary);
+        final OpenEntryController controller = new OpenEntryController(openEntryInteractor);
+        entryListView.setOpenEntryController(controller);
+        return this;
+    }
 
     public Builder addEditImagesView() {
         editImagesViewModel = new EditImagesViewModel();

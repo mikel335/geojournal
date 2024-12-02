@@ -14,7 +14,6 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
     @Override
     public void editImages() {
-
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
             ViewEntryOutputData outputData = new ViewEntryOutputData(
@@ -27,7 +26,7 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareEditImagesView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to edit images");
         }
     }
 
@@ -45,7 +44,7 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareUpdateCoordsView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to update coords");
         }
     }
 
@@ -63,13 +62,14 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareEditTextView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to edit text");
         }
     }
 
     public void viewEntry() {
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
+
             ViewEntryOutputData outputData = new ViewEntryOutputData(
                     entryData.getImagePaths(),
                     entryData.getLatitude(),
@@ -79,7 +79,7 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareViewEntryView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry" + e.getMessage());
         }
     }
 }
