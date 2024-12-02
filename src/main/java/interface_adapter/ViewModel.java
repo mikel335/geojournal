@@ -3,6 +3,15 @@ package interface_adapter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * The view model for the clean architecture.
+ * This class pushes work to another class for managing property changes.
+ *
+ * Taken from CSC207 lab 5
+ *
+ * @param <T> The type of state object contained in the model
+ */
+
 public class ViewModel<T> {
     private final String viewName;
 
@@ -40,7 +49,6 @@ public class ViewModel<T> {
      * <p/>
      * For example, the LoggedInView listens for two kinds of property changes;
      * it can use the property name to distinguish which property has changed.
-     *
      * @param propertyName the label for the property that was changed
      */
     public void firePropertyChanged(String propertyName) {
@@ -49,7 +57,6 @@ public class ViewModel<T> {
 
     /**
      * Adds a PropertyChangeListener to this ViewModel.
-     *
      * @param listener The PropertyChangeListener to be added
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
