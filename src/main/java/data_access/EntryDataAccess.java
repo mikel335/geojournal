@@ -1,7 +1,9 @@
 package data_access;
 
 import entity.Entry;
+import entity.EntryFactory;
 import use_case.editImages.EditImagesDataAccessInterface;
+import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
 import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
@@ -10,6 +12,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -17,7 +21,8 @@ import org.json.JSONObject;
 public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateCoordsDataAccessInterface,
         UpdateTextDataAccessInterface,
-        ViewEntryDataAccessInterface {
+        ViewEntryDataAccessInterface,
+        OpenEntryDataAccessInterface {
 
     private Entry currentEntry;
     private final Map<Integer, Entry> allEntries;
@@ -37,7 +42,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
                 "Test Description",
                 new HashMap<>(),
                 43.6532,
-                -79.3832
+                -79.3832,
+                "Mar 3"
         );
         this.allEntries = new HashMap<>();
         this.allEntries.put(1, this.currentEntry);
@@ -182,7 +188,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
                 jsonObject.getDouble("latitude")
             );
     }
-    
+
 
     public void saveEntryData() {
         File dataFolder = new File(geoJournalLocationData);
@@ -268,5 +274,10 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         entryValues.put("imageIds", imgIds.toString());
 
         return entryValues;
+    }
+
+    @Override
+    public Entry getEntry(int id) {
+        return allEntries.get(id);
     }
 }
