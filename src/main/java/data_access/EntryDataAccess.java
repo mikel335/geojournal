@@ -1,7 +1,10 @@
 package data_access;
 
 import entity.Entry;
+import use_case.change_sort.ChangeSortDataAccessInterface;
+import use_case.createEntry.CreateEntryDataAccessInterface;
 import use_case.editImages.EditImagesDataAccessInterface;
+import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
 import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
@@ -9,6 +12,8 @@ import use_case.viewEntry.ViewEntryDataAccessInterface;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,30 +23,27 @@ import org.json.JSONObject;
 public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateCoordsDataAccessInterface,
         UpdateTextDataAccessInterface,
-        ViewEntryDataAccessInterface {
+        ViewEntryDataAccessInterface,
+        OpenEntryDataAccessInterface,
+        ChangeSortDataAccessInterface,
+        CreateEntryDataAccessInterface {
 
     private Entry currentEntry;
     private final Map<Integer, Entry> allEntries;
     private static final String geoJournalLocationData = System.getProperty("user.home") + File.separator + "geoJournalApplicationData";
 
 
-    // TODO for testing
     public Map<Integer, Entry> getAllEntries() {
         return allEntries;
     }
-    // TODO remove this. This is for testing purposes
-    public EntryDataAccess() {
 
-        this.currentEntry = new Entry(
-                1,
-                "Test Title",
-                "Test Description",
-                new HashMap<>(),
-                43.6532,
-                -79.3832
-        );
+    public EntryDataAccess() {
         this.allEntries = new HashMap<>();
-        this.allEntries.put(1, this.currentEntry);
+        readApplicationData();
+    }
+
+    public void setCurrentEntry(int id) {
+        this.currentEntry = allEntries.get(id);
     }
 
     @Override
@@ -119,20 +121,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         return currentEntry;
     }
 
-    public static void main(String [] args) {
-        EntryDataAccess entryDataAccess = new EntryDataAccess();
-        entryDataAccess.readApplicationData();
-        for(Entry entry : entryDataAccess.getAllEntries().values()) {
-            System.out.println("Entries Generated");
-            System.out.println(entry.getId());
-            System.out.println(entry.getTitle());
-            System.out.println(entry.getDescription());
-            System.out.println(entry.getLatitude());
-            System.out.println(entry.getLongitude());
-            System.out.println(entry.getImagePaths());
-        }
-    }
-
     private void readApplicationData() {
         File dataFolder = new File(geoJournalLocationData);
         File dataFile = new File(geoJournalLocationData + File.separator + "data.json");
@@ -180,10 +168,11 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
                 jsonObject.getString("description"),
                 imgData,
                 jsonObject.getDouble("longitude"),
-                jsonObject.getDouble("latitude")
+                jsonObject.getDouble("latitude"),
+                jsonObject.getString("date")
             );
     }
-    
+
 
     public void saveEntryData() {
         File dataFolder = new File(geoJournalLocationData);
@@ -259,6 +248,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         entryValues.put("latitude", String.valueOf(entry.getLatitude()));
         entryValues.put("longitude", String.valueOf(entry.getLongitude()));
         entryValues.put("id", String.valueOf(entry.getId()));
+        entryValues.put("date", String.valueOf(entry.getDate()));
 
         JSONObject imgIds = new JSONObject();
 
@@ -269,5 +259,34 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         entryValues.put("imageIds", imgIds.toString());
 
         return entryValues;
+    }
+
+    @Override
+    public Entry getEntry(int id) {
+        return allEntries.get(id);
+    }
+
+    @Override
+    public Map<Integer, Entry> getEntryList() {
+        return this.allEntries;
+    }
+
+    @Override
+    public Entry createEntry() {
+
+        int newId = Collections.max(this.allEntries.keySet()) + 1;
+        Entry newEntry = new Entry(
+                newId,
+                "New Entry",
+                "",
+                new HashMap<>(),
+                0,
+                0,
+                String.valueOf(new Date().getTime())
+        );
+
+        this.currentEntry = newEntry;
+        this.allEntries.put(newId, newEntry);
+        return newEntry;
     }
 }

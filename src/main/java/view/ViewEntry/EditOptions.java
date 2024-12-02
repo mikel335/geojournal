@@ -10,6 +10,7 @@ public class EditOptions extends JPanel {
     private final JButton editText;
     private final JButton changeEntryCoords;
     private final JButton editImages;
+    private final JButton returnToEntries;
 
     public EditOptions(ViewEntryController controller) {
         this.viewEntryController = controller;
@@ -18,10 +19,12 @@ public class EditOptions extends JPanel {
         editText = new JButton("Edit Text");
         changeEntryCoords = new JButton("Change Geo Coordinates");
         editImages = new JButton("Edit Images");
+        returnToEntries = new JButton("Return to All Entries");
 
         add(editText);
         add(changeEntryCoords);
         add(editImages);
+        add(returnToEntries);
     }
 
     public void setViewEntryController(ViewEntryController viewEntryController) {
@@ -37,6 +40,10 @@ public class EditOptions extends JPanel {
 
         editImages.addActionListener(_ -> {
             viewEntryController.editImages();
+        });
+
+        returnToEntries.addActionListener(_ -> {
+            viewEntryController.returnToHome();
         });
     }
 }

@@ -1,110 +1,135 @@
 package view;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.html.ListView;
 
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ListState;
 import interface_adapter.change_sort.ListViewModel;
 
-import interface_adapter.change_sort.ChangeSortController;
+import interface_adapter.createEntry.CreateEntryController;
+import interface_adapter.open_entry.OpenEntryController;
+import use_case.change_sort.EntryListButtonData;
+import use_case.change_sort.SortMethod;
 
-// TODO: Needs Entry views and stuff to be added
 /**
  * The view for when the user is looking at the list of entries.
  */
-public class EntryListView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "list";
+public class EntryListView extends JPanel implements PropertyChangeListener {
 
-    private final ListViewModel listViewModel;
     private ChangeSortController changeSortController;
+    private OpenEntryController openEntryController;
+    private CreateEntryController createEntryController;
 
-    private final ArrayList<JLabel> entries;
-
-    private final JButton ascendingButton;
-    private final JButton descendingButton;
+    private final JPanel entriesPanel;
 
     public EntryListView(ListViewModel listViewModel) {
-        this.listViewModel = listViewModel;
+        this.setLayout(new BorderLayout());
         listViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Entries");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        final JPanel buttons = new JPanel();
-        ascendingButton = new JButton(ListViewModel.ASCENDING_BUTTON_LABEL);
-        buttons.add(ascendingButton);
-        descendingButton = new JButton(ListViewModel.DESCENDING_BUTTON_LABEL);
-        buttons.add(descendingButton);
+        this.entriesPanel = new JPanel();
+        this.populateEntryButtons(listViewModel.getState().getEntryList());
 
-        this.entries = new ArrayList<JLabel>();
-        final JPanel entries = new JPanel();
-        for (String titles : listViewModel.getState().getList()[0]) {
-            final JLabel label = new JLabel(titles);
-            this.entries.add(label);
-            entries.add(label);
-        }
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        final JButton dateAsc = new JButton("Date Ascending");
+        final JButton dateDesc = new JButton("Date Descending");
+        final JButton titleAsc = new JButton("Title Ascending");
+        final JButton titleDesc = new JButton("Title Descending");
+        final JButton createEntry = new JButton("Create Entry");
 
+        dateAsc.addActionListener((ActionEvent _)-> {
+            changeSortController.execute(SortMethod.DATE_ASCENDING);
+        });
 
-        ascendingButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (e.getSource().equals(ascendingButton)) {
-                        changeSortController.execute(0);
-                    }
-                }
-            }
-        );
+        dateDesc.addActionListener((ActionEvent _)-> {
+            changeSortController.execute(SortMethod.DATE_DESCENDING);
+        });
 
-        descendingButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (e.getSource().equals(descendingButton)) {
-                        changeSortController.execute(1);
-                    }
-                }
-            }
-        );
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        titleAsc.addActionListener((ActionEvent _)-> {
+            changeSortController.execute(SortMethod.TITLE_ASCENDING);
+        });
 
-        this.add(title);
-        this.add(buttons);
-        this.add(entries);
-    }
+        titleDesc.addActionListener((ActionEvent _)-> {
+            changeSortController.execute(SortMethod.TITLE_DESCENDING);
+        });
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Cancel not implemented yet.");
+        createEntry.addActionListener((ActionEvent _)-> {
+            createEntryController.createEntry();
+        });
+
+        buttonPanel.add(dateAsc);
+        buttonPanel.add(dateDesc);
+        buttonPanel.add(titleAsc);
+        buttonPanel.add(titleDesc);
+        buttonPanel.add(createEntry);
+
+        this.add(title, BorderLayout.NORTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(entriesPanel, BorderLayout.CENTER);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final ListState state = (ListState) evt.getNewValue();
-        System.out.println(state.toString());
-        System.out.println(state.getList()[0].size());
-        for (int i = 0; i < state.getList()[0].size(); i++) {
-            entries.get(i).setText(state.getList()[0].get(i));
+        if (evt.getNewValue() instanceof ListState state) {
+            if(state.getErrorMessage() != null) {
+                JOptionPane.showMessageDialog(null, state.getErrorMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                this.populateEntryButtons(state.getEntryList());
+            }
         }
+
     }
 
     public String getViewName() {
-        return viewName;
+        return "listView";
     }
 
     public void setChangeSortController(ChangeSortController controller) {
         this.changeSortController = controller;
+        controller.execute(SortMethod.DATE_ASCENDING);
+    }
+
+    public void setOpenEntryController(OpenEntryController controller) {
+        this.openEntryController = controller;
+    }
+
+    private void populateEntryButtons(ArrayList<EntryListButtonData > entryList) {
+        entriesPanel.removeAll();
+        entriesPanel.validate();
+        entriesPanel.repaint();
+
+        if (entryList != null ) {
+            for (EntryListButtonData entryListButtonData : entryList) {
+                final JButton button = new JButton(entryListButtonData.getTitle());
+                entriesPanel.add(button);
+                button.addActionListener(
+                        (ActionEvent e)-> {
+                            if (e.getSource().equals(button)) {
+                                openEntryController.execute(entryListButtonData.getId());
+                            }
+                        }
+                );
+            }
+            entriesPanel.revalidate();
+            entriesPanel.repaint();
+        }
+    }
+
+    public void addCreateEntryController(CreateEntryController createEntryController) {
+        this.createEntryController = createEntryController;
     }
 }

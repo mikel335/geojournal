@@ -13,15 +13,19 @@ public class Main {
         final Builder builder = new Builder();
         final JFrame application = builder
                 .addEntryListView()
-                .addChangeSortUseCase()
                 .addEditImagesView()
                 .addUpdateCoordsView()
                 .addUpdateTextView()
+                .addWeatherViewModel()
                 .addViewEntryView()
+                .addCreateEntryUseCase()
+                .addChangeSortUseCase()
+                .addWeatherUseCase()
                 .addViewEntryUseCase()
                 .addEditImagesUseCase()
                 .addUpdateTextUseCase()
                 .addUpdateCoordsUseCase()
+                .addOpenEntryUseCase()
                 .build();
 
         application.pack();

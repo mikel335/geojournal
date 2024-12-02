@@ -4,13 +4,13 @@ package use_case.open_entry;
  * The input data for the open entry use case.
  */
 public class OpenEntryInputData {
-    private final String title;
+    private final int id;
 
-    public OpenEntryInputData(String title) {
-        this.title = title;
+    public OpenEntryInputData(int id) {
+        this.id = id;
     }
 
-    String getTitle() {
-        return title;
+    int getID() {
+        return id;
     }
 }

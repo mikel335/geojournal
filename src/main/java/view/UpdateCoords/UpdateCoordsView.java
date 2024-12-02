@@ -1,6 +1,7 @@
 package view.UpdateCoords;
 
 import interface_adapter.updateCoords.UpdateCoordsController;
+import interface_adapter.updateCoords.UpdateCoordsState;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
 
 import javax.swing.*;
@@ -70,8 +71,20 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        this.coordEditBoxes.setLatitudeText(String.valueOf(viewModel.getState().getLatitude()));
-        this.coordEditBoxes.setLongitudeText(String.valueOf(viewModel.getState().getLongitude()));
+        if (evt.getNewValue() instanceof UpdateCoordsState newState) {
+            if (newState.getUpdateCoordsError() != null) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        newState.getUpdateCoordsError(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+            else {
+                this.coordEditBoxes.setLatitudeText(String.valueOf(viewModel.getState().getLatitude()));
+                this.coordEditBoxes.setLongitudeText(String.valueOf(viewModel.getState().getLongitude()));
+            }
+        }
     }
 }
 

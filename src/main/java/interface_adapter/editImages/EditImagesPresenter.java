@@ -21,11 +21,7 @@ public class EditImagesPresenter implements EditImagesOutputBoundary {
         this.viewEntryViewModel = viewEntryViewModel;
         this.viewManagerModel = viewManagerModel;
     }
-
-    // TODO Add in a "save" view that returns to viewEntry
-    // TODO figure out a way to end up on the correct tab
-    // TODO get rid of error on success
-
+    
     // Return to edit images screen on success
     @Override
     public void prepareSuccessView(EditImagesOutputData outputData) {

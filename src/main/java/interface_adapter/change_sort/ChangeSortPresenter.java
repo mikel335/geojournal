@@ -19,8 +19,10 @@ public class ChangeSortPresenter implements ChangeSortOutputBoundary{
     @Override
     public void prepareSuccessView(ChangeSortOutputData outputData) {
         final ListState listState = entryListViewModel.getState();
-        listState.setList(outputData.getEntries());
-        listState.setSort(outputData.getSortMethod());
+
+        listState.setEntryList(outputData.orderedEntries());
+        listState.setSortMethod(outputData.sortMethod());
+
         this.entryListViewModel.setState(listState);
         this.entryListViewModel.firePropertyChanged();
 
@@ -30,6 +32,10 @@ public class ChangeSortPresenter implements ChangeSortOutputBoundary{
 
     @Override
     public void prepareFailView(String message) {
-        // Empty because this use case cannot fail.
+        final ListState listState = entryListViewModel.getState();
+        listState.setErrorMessage(message);
+
+        this.entryListViewModel.setState(listState);
+        this.entryListViewModel.firePropertyChanged();
     }
 }
