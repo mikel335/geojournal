@@ -12,7 +12,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 
 public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateCoordsDataAccessInterface,
@@ -24,6 +24,10 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     private static final String geoJournalLocationData = System.getProperty("user.home") + File.separator + "geoJournalApplicationData";
 
 
+    // TODO for testing
+    public Map<Integer, Entry> getAllEntries() {
+        return allEntries;
+    }
     // TODO remove this. This is for testing purposes
     public EntryDataAccess() {
 
@@ -43,7 +47,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     public void addImageToCurrentEntry(String imagePath) {
         // Make sure all the folders exist
         createImageFolders();
-
 
         // Copy the image to the images folder
         InputStream is;
@@ -116,13 +119,70 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     }
 
     public static void main(String [] args) {
-        EntryDataAccess test = new EntryDataAccess();
-        test.saveEntryData();
+        EntryDataAccess entryDataAccess = new EntryDataAccess();
+        entryDataAccess.readApplicationData();
+        for(Entry entry : entryDataAccess.getAllEntries().values()) {
+            System.out.println("Entries Generated");
+            System.out.println(entry.getId());
+            System.out.println(entry.getTitle());
+            System.out.println(entry.getDescription());
+            System.out.println(entry.getLatitude());
+            System.out.println(entry.getLongitude());
+            System.out.println(entry.getImagePaths());
+        }
     }
 
-    private void readFile() {
+    private void readApplicationData() {
+        File dataFolder = new File(geoJournalLocationData);
+        File dataFile = new File(geoJournalLocationData + File.separator + "data.json");
+        try {
+            if (dataFolder.mkdir()) {
+                System.out.println("Created a new folder at" + geoJournalLocationData);
+            }
+            if (dataFile.createNewFile()) {
+                System.out.println("Created new data file at " + dataFile.getAbsolutePath());
+            }
 
+            String jsonData = Files.readString(dataFile.toPath());
+
+            if (!jsonData.isEmpty()) {
+
+                JSONObject fileData = new JSONObject(jsonData);
+
+                for (String data : fileData.keySet()) {
+                    JSONObject entryData = (JSONObject) fileData.get(data);
+                    this.allEntries.put(
+                            Integer.parseInt(entryData.get("id").toString()),
+                            createEntryFromJSON(entryData)
+                    );
+                }
+            }
+
+        } catch(IOException e) {
+            System.out.println("There was a problem reading the data file");
+            e.printStackTrace();
+        }
     }
+
+    private Entry createEntryFromJSON(JSONObject jsonObject) {
+        Map<Integer, String> imgData = new HashMap<>();
+
+        JSONObject imgIds = new JSONObject(jsonObject.getString("imageIds"));
+
+        for (String imgId : imgIds.keySet()) {
+            imgData.put(Integer.parseInt(imgId), imgIds.getString(imgId));
+        }
+
+        return new Entry(
+                jsonObject.getInt("id"),
+                jsonObject.getString("title"),
+                jsonObject.getString("description"),
+                imgData,
+                jsonObject.getDouble("longitude"),
+                jsonObject.getDouble("latitude")
+            );
+    }
+    
 
     public void saveEntryData() {
         File dataFolder = new File(geoJournalLocationData);
@@ -130,18 +190,11 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         try {
             if (dataFolder.mkdir()) {
                 System.out.println("Created a new folder at" + geoJournalLocationData);
-            } else {
-                System.out.println("Folder already exists");
             }
             if (dataFile.createNewFile()) {
                 System.out.println("Created new data file at " + dataFile.getAbsolutePath());
             }
-            else {
-                System.out.println("File already exists");
-            }
-            if (serializeApplicationDataToFile(dataFile)) {
-                System.out.println("Saved application data successfully");
-            }
+            serializeApplicationDataToFile(dataFile);
 
         } catch(IOException e) {
             System.out.println("There was an issue saving the data");
@@ -179,37 +232,41 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
             }
         } catch(Exception e) {
             System.out.println("There was an issue saving the images");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-
-
-
     }
 
-    private boolean serializeApplicationDataToFile(File file) {
-        Map<String, Map<String, String>> applicationData = new HashMap<>();
+    private void serializeApplicationDataToFile(File file) {
+        JSONObject appData = new JSONObject();
+
         for (Integer entryId : allEntries.keySet()) {
-            applicationData.put(Integer.toString(entryId), getEntryKeyValues(allEntries.get(entryId)));
+            appData.put(Integer.toString(entryId), serializeEntry(allEntries.get(entryId)));
         }
 
         try {
-            FileWriter dataWriter = new FileWriter(file, false);
-            dataWriter.write(new JSONObject(applicationData).toString());
-            dataWriter.close();
-            return true;
+            Files.writeString(file.toPath(), appData.toString());
         } catch (IOException _) {
-            return false;
+            System.out.println("Failed to serialize application data");
         }
     }
 
-    private static Map<String, String> getEntryKeyValues(Entry entry) {
-        Map<String, String> entryValues = new HashMap<>();
+    private static JSONObject serializeEntry(Entry entry) {
+        JSONObject entryValues = new JSONObject();
+
         entryValues.put("title", entry.getTitle());
         entryValues.put("description", entry.getDescription());
         entryValues.put("latitude", String.valueOf(entry.getLatitude()));
         entryValues.put("longitude", String.valueOf(entry.getLongitude()));
         entryValues.put("id", String.valueOf(entry.getId()));
-        entryValues.put("imageIds", entry.getImagePaths().toString());
+
+        JSONObject imgIds = new JSONObject();
+
+        for (Integer id : entry.getImagePaths().keySet()) {
+            imgIds.put(Integer.toString(id), String.valueOf(entry.getImagePaths().get(id)));
+        }
+
+        entryValues.put("imageIds", imgIds.toString());
+
         return entryValues;
     }
 }
