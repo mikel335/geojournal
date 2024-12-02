@@ -34,4 +34,20 @@ public class UpdateTextInteractor implements UpdateTextInputBoundary {
             updateTextPresenter.prepareFailView(e.getMessage());
         }
     }
+
+    @Override
+    public void cancelUpdate() {
+        try {
+            //Just run the success view (return to view entry) with no change to the text
+            Entry currentEntry = updateTextDataAccess.getCurrentEntry();
+            final UpdateTextOutputData outputData = new UpdateTextOutputData(
+                    currentEntry.getTitle(),
+                    currentEntry.getDescription());
+            updateTextPresenter.prepareSuccessView(outputData);
+
+        } catch (Exception e) {
+            // Handle failed update
+            updateTextPresenter.prepareFailView(e.getMessage());
+        }
+    }
 }

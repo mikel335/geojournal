@@ -10,7 +10,12 @@ public interface EditImagesInputBoundary {
 
     /**
      * Deletes an image from the entry
-     * @param deleteImageInputData
+     * @param deleteImageInputData new image data
      */
     void deleteImage(DeleteImageInputData deleteImageInputData);
+
+    /**
+     * Returns to view entry screen when editing is done
+     */
+    void returnToEntryView();
 }

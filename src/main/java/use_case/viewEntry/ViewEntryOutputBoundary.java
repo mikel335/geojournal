@@ -21,6 +21,12 @@ public interface ViewEntryOutputBoundary {
     void prepareEditTextView(ViewEntryOutputData outputData);
 
     /**
+     * Prepares the view to view the entry
+     * @param outputData the entry data
+     */
+    void prepareViewEntryView(ViewEntryOutputData outputData);
+
+    /**
      * Prepares the failure view
      * @param errorMessage the explanation of the failure
      */

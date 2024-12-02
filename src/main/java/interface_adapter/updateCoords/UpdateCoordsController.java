@@ -11,8 +11,8 @@ public class UpdateCoordsController {
 
     }
 
-    public void execute(double latitude, double longitude) {
-        final UpdateCoordsInputData updateCoordsInputData = new UpdateCoordsInputData(latitude, longitude);
+    public void execute(String latitude, String longitude) {
+        final UpdateCoordsInputData updateCoordsInputData = new UpdateCoordsInputData(longitude, latitude);
         updateCoordsInteractor.execute(updateCoordsInputData);
     }
 }

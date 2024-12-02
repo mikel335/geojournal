@@ -14,7 +14,16 @@ public class Main {
         final JFrame application = builder
                 .addEntryListView()
                 .addChangeSortUseCase()
+                .addEditImagesView()
+                .addUpdateCoordsView()
+                .addUpdateTextView()
+                .addViewEntryView()
+                .addViewEntryUseCase()
+                .addEditImagesUseCase()
+                .addUpdateTextUseCase()
+                .addUpdateCoordsUseCase()
                 .build();
+
         application.pack();
         application.setVisible(true);
     }
