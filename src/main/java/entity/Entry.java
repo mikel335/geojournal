@@ -81,4 +81,8 @@ public class Entry {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+    public int getNewImgId() {
+        return newImgId;
+    }
 }
