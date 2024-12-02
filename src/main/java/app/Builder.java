@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import data_access.EntryDataAccess;
+import data_access.WeatherDataAccess;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
@@ -27,6 +28,10 @@ import interface_adapter.updateText.UpdateTextPresenter;
 import interface_adapter.updateText.UpdateTextViewModel;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryPresenter;
+import interface_adapter.viewEntry.ViewEntryViewModel;
+import interface_adapter.weather.WeatherController;
+import interface_adapter.weather.WeatherPresenter;
+import interface_adapter.weather.WeatherViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
@@ -48,6 +53,9 @@ import use_case.updateText.UpdateTextOutputBoundary;
 import use_case.viewEntry.ViewEntryInputBoundary;
 import use_case.viewEntry.ViewEntryInteractor;
 import use_case.viewEntry.ViewEntryOutputBoundary;
+import use_case.weathercheck.WeatherInputBoundary;
+import use_case.weathercheck.WeatherInteractor;
+import use_case.weathercheck.WeatherOutputBoundary;
 import view.EntryListView;
 import view.ViewManager;
 
@@ -72,6 +80,9 @@ public class Builder{
     // Filesystem storage access
     private final EntryDataAccess dataAccess = new EntryDataAccess();
 
+    // Weather API data
+    private final WeatherDataAccess weatherDataAccess = new WeatherDataAccess();
+
     private EntryListView entryListView;
     private ListViewModel listViewModel;
 
@@ -87,6 +98,8 @@ public class Builder{
 
     private UpdateTextViewModel updateTextViewModel;
     private UpdateTextView updateTextView;
+
+    private WeatherViewModel weatherViewModel;
 
     public Builder(){
         cardPanel.setLayout(cardLayout);
@@ -109,10 +122,15 @@ public class Builder{
         return this;
     }
 
+    public Builder addWeatherViewModel() {
+        weatherViewModel = new WeatherViewModel();
+        return this;
+    }
+
 
     public Builder addViewEntryView() {
         viewEntryViewModel = new ViewEntryViewModel();
-        viewEntryView = new ViewEntryView(viewEntryViewModel);
+        viewEntryView = new ViewEntryView(viewEntryViewModel, weatherViewModel);
         cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
         return this;
     };
@@ -146,6 +164,21 @@ public class Builder{
         return this;
     }
 
+    public Builder addWeatherUseCase() {
+        final WeatherOutputBoundary weatherPresenter = new WeatherPresenter(
+                weatherViewModel
+        );
+
+        final WeatherInputBoundary weatherInteractor = new WeatherInteractor(
+                weatherDataAccess,
+                weatherPresenter
+        );
+
+        final WeatherController controller = new WeatherController(weatherInteractor);
+        viewEntryView.addWeatherController(controller);
+
+        return this;
+    }
     public Builder addCreateEntryUseCase() {
         final CreateEntryOutputBoundary createEntryPresenter = new CreateEntryPresenter(
                     viewManagerModel,
@@ -177,7 +210,7 @@ public class Builder{
         );
 
         final ViewEntryController controller = new ViewEntryController(viewEntryInteractor);
-        viewEntryView.addController(controller);
+        viewEntryView.addViewEntryController(controller);
         return this;
     }
 
@@ -234,6 +267,8 @@ public class Builder{
 
         return this;
     }
+
+
 
     public JFrame build(){
         final JFrame application = new JFrame("Entries");

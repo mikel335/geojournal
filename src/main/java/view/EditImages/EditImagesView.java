@@ -1,6 +1,7 @@
 package view.EditImages;
 
 import interface_adapter.editImages.EditImagesController;
+import interface_adapter.editImages.EditImagesState;
 import interface_adapter.editImages.EditImagesViewModel;
 import view.Components.ImageDisplayPanel;
 
@@ -73,6 +74,11 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getNewValue() instanceof EditImagesState newState) {
+            if (newState.getEditImageError() != null) {
+                JOptionPane.showMessageDialog(null, newState.getEditImageError(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
         this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
     }
 
