@@ -33,6 +33,6 @@ public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-
+        // TODO add error message to state
     }
 }

@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import data_access.DataAccessObject;
 import data_access.EntryDataAccess;
 import entity.EntryFactory;
 import entity.EntryListFactory;
@@ -71,8 +70,6 @@ public class Builder{
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
-    private final DataAccessObject dao = new DataAccessObject();
-
     // Filesystem storage access
     private final EntryDataAccess dataAccess = new EntryDataAccess();
 
@@ -107,7 +104,7 @@ public class Builder{
     public Builder addChangeSortUseCase(){
         final ChangeSortOutputBoundary changeSortOutputBoundary = new ChangeSortPresenter(viewManagerModel, listViewModel);
         final ChangeSortInputBoundary changeSortInteractor = new ChangeSortInteractor(
-                dao,changeSortOutputBoundary, entryListFactory);
+                dataAccess ,changeSortOutputBoundary, entryListFactory);
         final ChangeSortController controller = new ChangeSortController(changeSortInteractor);
         entryListView.setChangeSortController(controller);
         return this;

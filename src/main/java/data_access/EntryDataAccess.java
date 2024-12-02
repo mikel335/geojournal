@@ -2,6 +2,7 @@ package data_access;
 
 import entity.Entry;
 import entity.EntryFactory;
+import use_case.change_sort.ChangeSortDataAccessInterface;
 import use_case.editImages.EditImagesDataAccessInterface;
 import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
@@ -22,7 +23,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateCoordsDataAccessInterface,
         UpdateTextDataAccessInterface,
         ViewEntryDataAccessInterface,
-        OpenEntryDataAccessInterface {
+        OpenEntryDataAccessInterface,
+        ChangeSortDataAccessInterface {
 
     private Entry currentEntry;
     private final Map<Integer, Entry> allEntries;
@@ -281,5 +283,10 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     @Override
     public Entry getEntry(int id) {
         return allEntries.get(id);
+    }
+
+    @Override
+    public Map<Integer, Entry> getEntryList() {
+        return this.allEntries;
     }
 }

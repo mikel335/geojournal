@@ -1,6 +1,8 @@
 package use_case.change_sort;
 
-import entity.EntryList;
+import entity.Entry;
+
+import java.util.Map;
 
 /**
  * The interface of the data access object for the change sort use case.
@@ -8,7 +10,6 @@ import entity.EntryList;
 public interface ChangeSortDataAccessInterface {
     /**
      * Updates the system to record the entry list's sort method.
-     * @param entryList the entrylist whose sort method is to be updated
      */
-    void changeSortAndUpdate(EntryList entryList);
+    Map<Integer, Entry> getEntryList();
 }

@@ -1,7 +1,11 @@
 package use_case.change_sort;
 
+import entity.Entry;
 import entity.EntryList;
 import entity.EntryListFactory;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * The change sort interactor.
@@ -21,12 +25,21 @@ public class ChangeSortInteractor implements ChangeSortInputBoundary{
 
     @Override
     public void execute(ChangeSortInputData changeSortInputData) {
-        final EntryList entryList = entryListFactory.create(changeSortInputData.getSortMethod());
-        dataAccessObject.changeSortAndUpdate(entryList);
 
-        final ChangeSortOutputData changeSortOutputData = new ChangeSortOutputData(entryList.getSortMethod(),
-                false,
-                entryList.getEntries());
-        presenter.prepareSuccessView(changeSortOutputData);
+        try {
+            ArrayList<EntryListButtonData> sortedEntries = new ArrayList<>();
+
+            for (Entry entry : dataAccessObject.getEntryList().values()) {
+                sortedEntries.add(new EntryListButtonData(entry));
+            }
+            sortedEntries.sort(new EntryListButtonDataComparitor(changeSortInputData.getSortMethod()));
+
+            ChangeSortOutputData output = new ChangeSortOutputData(changeSortInputData.getSortMethod(), sortedEntries);
+
+            presenter.prepareSuccessView(output);
+
+        } catch(Exception e) {
+            presenter.prepareFailView("There was an issue accessing the entries" + e.getMessage());
+        }
     }
 }

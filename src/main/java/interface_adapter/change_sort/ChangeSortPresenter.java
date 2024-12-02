@@ -20,7 +20,7 @@ public class ChangeSortPresenter implements ChangeSortOutputBoundary{
     public void prepareSuccessView(ChangeSortOutputData outputData) {
         final ListState listState = entryListViewModel.getState();
         listState.setList(outputData.getEntries());
-        listState.setSort(outputData.getSortMethod());
+        listState.setSort(outputData.sortMethod());
         this.entryListViewModel.setState(listState);
         this.entryListViewModel.firePropertyChanged();
 
