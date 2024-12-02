@@ -17,6 +17,7 @@ public class Main {
                 .addUpdateCoordsView()
                 .addUpdateTextView()
                 .addViewEntryView()
+                .addCreateEntryUseCase()
                 .addChangeSortUseCase()
                 .addViewEntryUseCase()
                 .addEditImagesUseCase()

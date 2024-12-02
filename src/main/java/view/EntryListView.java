@@ -18,6 +18,7 @@ import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ListState;
 import interface_adapter.change_sort.ListViewModel;
 
+import interface_adapter.createEntry.CreateEntryController;
 import interface_adapter.open_entry.OpenEntryController;
 import use_case.change_sort.EntryListButtonData;
 import use_case.change_sort.SortMethod;
@@ -29,6 +30,7 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     private ChangeSortController changeSortController;
     private OpenEntryController openEntryController;
+    private CreateEntryController createEntryController;
 
     private final JPanel entriesPanel;
 
@@ -47,6 +49,7 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
         final JButton dateDesc = new JButton("Date Descending");
         final JButton titleAsc = new JButton("Title Ascending");
         final JButton titleDesc = new JButton("Title Descending");
+        final JButton createEntry = new JButton("Create Entry");
 
         dateAsc.addActionListener((ActionEvent _)-> {
             changeSortController.execute(SortMethod.DATE_ASCENDING);
@@ -64,10 +67,15 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
             changeSortController.execute(SortMethod.TITLE_DESCENDING);
         });
 
+        createEntry.addActionListener((ActionEvent _)-> {
+            createEntryController.createEntry();
+        });
+
         buttonPanel.add(dateAsc);
         buttonPanel.add(dateDesc);
         buttonPanel.add(titleAsc);
         buttonPanel.add(titleDesc);
+        buttonPanel.add(createEntry);
 
         this.add(title, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.SOUTH);
@@ -119,5 +127,9 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
             entriesPanel.revalidate();
             entriesPanel.repaint();
         }
+    }
+
+    public void addCreateEntryController(CreateEntryController createEntryController) {
+        this.createEntryController = createEntryController;
     }
 }

@@ -2,6 +2,7 @@ package data_access;
 
 import entity.Entry;
 import use_case.change_sort.ChangeSortDataAccessInterface;
+import use_case.createEntry.CreateEntryDataAccessInterface;
 import use_case.editImages.EditImagesDataAccessInterface;
 import use_case.open_entry.OpenEntryDataAccessInterface;
 import use_case.updateCoords.UpdateCoordsDataAccessInterface;
@@ -11,6 +12,8 @@ import use_case.viewEntry.ViewEntryDataAccessInterface;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +24,8 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
         UpdateTextDataAccessInterface,
         ViewEntryDataAccessInterface,
         OpenEntryDataAccessInterface,
-        ChangeSortDataAccessInterface {
+        ChangeSortDataAccessInterface,
+        CreateEntryDataAccessInterface {
 
     private Entry currentEntry;
     private final Map<Integer, Entry> allEntries;
@@ -264,5 +268,24 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     @Override
     public Map<Integer, Entry> getEntryList() {
         return this.allEntries;
+    }
+
+    @Override
+    public Entry createEntry() {
+
+        int newId = Collections.max(this.allEntries.keySet()) + 1;
+        Entry newEntry = new Entry(
+                newId,
+                "New Entry",
+                "",
+                new HashMap<>(),
+                0,
+                0,
+                String.valueOf(new Date().getTime())
+        );
+
+        this.currentEntry = newEntry;
+        this.allEntries.put(newId, newEntry);
+        return newEntry;
     }
 }

@@ -11,6 +11,8 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
+import interface_adapter.createEntry.CreateEntryController;
+import interface_adapter.createEntry.CreateEntryPresenter;
 import interface_adapter.open_entry.OpenEntryController;
 import interface_adapter.open_entry.OpenEntryPresenter;
 import interface_adapter.viewEntry.ViewEntryViewModel;
@@ -28,6 +30,9 @@ import interface_adapter.viewEntry.ViewEntryPresenter;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.createEntry.CreateEntryInputBoundary;
+import use_case.createEntry.CreateEntryInteractor;
+import use_case.createEntry.CreateEntryOutputBoundary;
 import use_case.open_entry.OpenEntryInputBoundary;
 import use_case.open_entry.OpenEntryInteractor;
 import use_case.open_entry.OpenEntryOutputBoundary;
@@ -141,6 +146,21 @@ public class Builder{
         return this;
     }
 
+    public Builder addCreateEntryUseCase() {
+        final CreateEntryOutputBoundary createEntryPresenter = new CreateEntryPresenter(
+                    viewManagerModel,
+                    viewEntryViewModel,
+                    listViewModel
+                );
+        final CreateEntryInputBoundary createEntryInteractor = new CreateEntryInteractor(
+                dataAccess,
+                createEntryPresenter
+        );
+
+        final CreateEntryController controller = new CreateEntryController(createEntryInteractor);
+        entryListView.addCreateEntryController(controller);
+        return this;
+    }
 
     public Builder addViewEntryUseCase() {
         final ViewEntryOutputBoundary viewEntryPresenter = new ViewEntryPresenter(
