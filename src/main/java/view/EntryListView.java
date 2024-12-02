@@ -23,7 +23,7 @@ import interface_adapter.open_entry.OpenEntryController;
 /**
  * The view for when the user is looking at the list of entries.
  */
-public class EntryListView extends JPanel implements ActionListener, PropertyChangeListener {
+public class EntryListView extends JPanel implements PropertyChangeListener {
     private final String viewName = "list";
 
     private final ListViewModel listViewModel;
@@ -32,6 +32,7 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
 
     private final HashMap<String, Integer> entries;
     private final ArrayList<JButton> buttons;
+    private final ArrayList<Integer> indices;
 
     private final JButton ascendingButton;
     private final JButton descendingButton;
@@ -44,26 +45,28 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
         final JLabel title = new JLabel("Entries");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        final JPanel buttons = new JPanel();
+        final JPanel buttonPanel = new JPanel();
         ascendingButton = new JButton(ListViewModel.ASCENDING_BUTTON_LABEL);
-        buttons.add(ascendingButton);
+        buttonPanel.add(ascendingButton);
         descendingButton = new JButton(ListViewModel.DESCENDING_BUTTON_LABEL);
-        buttons.add(descendingButton);
+        buttonPanel.add(descendingButton);
 
         this.entries = new HashMap<String, Integer>();
         this.buttons = new ArrayList<JButton>();
+        this.indices = new ArrayList<Integer>();
         final JPanel entries = new JPanel();
         for (int i = 0; i < listViewModel.getState().getList()[0].size(); i++) {
             final JButton button = new JButton(listViewModel.getState().getList()[0].get(i));
             this.entries.put(listViewModel.getState().getList()[1].get(i), Integer.parseInt(listViewModel.getState().getList()[2].get(i)));
             entries.add(button);
             this.buttons.add(button);
+            this.indices.add(i);
             final int j = i;
             button.addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             if (e.getSource().equals(button)) {
-                                openEntryController.execute(Integer.parseInt(listViewModel.getState().getList()[2].get(j)));
+                                openEntryController.execute(Integer.parseInt(listViewModel.getState().getList()[2].get(indices.get(buttons.indexOf(button)))));
                             }
                         }
                     }
@@ -92,13 +95,8 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
         );
 
         this.add(title);
-        this.add(buttons);
+        this.add(buttonPanel);
         this.add(entries);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Cancel not implemented yet.");
     }
 
     @Override
@@ -107,6 +105,7 @@ public class EntryListView extends JPanel implements ActionListener, PropertyCha
         int i = 0;
         for (JButton button : buttons) {
             button.setText(state.getList()[0].get(i));
+            indices.set(i, state.getList()[0].size()-1-i);
             i++;
         }
     }

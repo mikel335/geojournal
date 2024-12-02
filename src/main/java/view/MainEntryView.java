@@ -65,7 +65,7 @@ public class MainEntryView extends JPanel {
     }
 
     public String getViewName() {
-        return "MainEntryView";
+        return "viewEntry";
     }
 
 //    public static void main(String[] args) {
