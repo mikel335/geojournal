@@ -5,10 +5,11 @@ import view.TextBoxView.EditTextView;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainEntryView extends JPanel {
+public class MainEntryView extends JFrame {
 
     public MainEntryView() {
         setSize(700, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         /*
@@ -64,14 +65,10 @@ public class MainEntryView extends JPanel {
         switchTabsButtonPanel.add(mapButton);
     }
 
-    public String getViewName() {
-        return "viewEntry";
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            MainEntryView demo = new MainEntryView();
+            demo.setVisible(true);
+        });
     }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            MainEntryView demo = new MainEntryView();
-//            demo.setVisible(true);
-//        });
-//    }
 }

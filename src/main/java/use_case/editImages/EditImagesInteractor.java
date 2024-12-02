@@ -49,4 +49,14 @@ public class EditImagesInteractor implements EditImagesInputBoundary {
             editImagePresenter.prepareFailView(e.getMessage());
         }
     }
+
+    @Override
+    public void returnToEntryView() {
+        try {
+            EditImagesOutputData editImagesOutputData = new EditImagesOutputData(editImageDataAccess.getCurrentEntry().getImagePaths());
+            editImagePresenter.prepareDoneEditingView(editImagesOutputData);
+        } catch (Exception e) {
+            editImagePresenter.prepareFailView(e.getMessage());
+        }
+    }
 }

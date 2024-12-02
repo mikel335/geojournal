@@ -15,4 +15,9 @@ public interface ViewEntryInputBoundary {
      * Go to edit text view
      */
     void editText();
+
+    /**
+     * Go to view entry view
+     */
+    void viewEntry();
 }

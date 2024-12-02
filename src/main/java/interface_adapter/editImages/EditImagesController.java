@@ -20,4 +20,8 @@ public class EditImagesController {
         final DeleteImageInputData deleteImageInputData = new DeleteImageInputData(id);
         this.addImageInteractor.deleteImage(deleteImageInputData);
     }
+
+    public void returnToEntryView() {
+        this.addImageInteractor.returnToEntryView();
+    }
 }
