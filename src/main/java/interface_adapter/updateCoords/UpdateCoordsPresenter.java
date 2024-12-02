@@ -25,9 +25,6 @@ public class UpdateCoordsPresenter implements UpdateCoordsOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-    // TODO figure out a way to end up on the correct tab
-    // TODO get rid of error on success
-
     // On success switch back to entry view
     @Override
     public void prepareSuccessView(UpdateCoordsOutputData outputData) {

@@ -1,11 +1,8 @@
 package interface_adapter.viewEntry;
 
-import entity.Entry;
-
 import java.util.Map;
 
 public class ViewEntryState {
-    private Entry entry;
 
     // Title and description
     private String title;

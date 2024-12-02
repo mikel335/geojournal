@@ -1,6 +1,7 @@
 package view.UpdateText;
 
 import interface_adapter.updateText.UpdateTextController;
+import interface_adapter.updateText.UpdateTextState;
 import interface_adapter.updateText.UpdateTextViewModel;
 
 import javax.swing.*;
@@ -67,8 +68,15 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        this.titleDescEditBoxes.setTitleText(viewModel.getState().getTitle());
-        this.titleDescEditBoxes.setDescriptionText(viewModel.getState().getDescription());
+        if(evt.getNewValue() instanceof UpdateTextState newState) {
+            if (newState.getUpdateTextError() != null) {
+                JOptionPane.showMessageDialog(this, newState.getUpdateTextError(), "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                this.titleDescEditBoxes.setTitleText(newState.getTitle());
+                this.titleDescEditBoxes.setDescriptionText(newState.getDescription());
+            }
+
+        }
     }
 }
 

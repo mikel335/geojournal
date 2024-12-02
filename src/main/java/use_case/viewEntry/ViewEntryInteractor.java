@@ -1,6 +1,12 @@
 package use_case.viewEntry;
 
 import entity.Entry;
+import use_case.change_sort.ChangeSortOutputData;
+import use_case.change_sort.EntryListButtonData;
+import use_case.change_sort.EntryListButtonDataComparitor;
+import use_case.change_sort.SortMethod;
+
+import java.util.ArrayList;
 
 public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
@@ -14,7 +20,6 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
 
     @Override
     public void editImages() {
-
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
             ViewEntryOutputData outputData = new ViewEntryOutputData(
@@ -27,7 +32,7 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareEditImagesView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to edit images");
         }
     }
 
@@ -45,7 +50,7 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareUpdateCoordsView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to update coords");
         }
     }
 
@@ -63,13 +68,30 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareEditTextView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry to edit text");
+        }
+    }
+
+    @Override
+    public void returnToList() {
+        try {
+            ArrayList<EntryListButtonData> sortedEntries = new ArrayList<>();
+            for (Entry entry : viewEntryDataAccess.getEntryList().values()) {
+                sortedEntries.add(new EntryListButtonData(entry));
+            }
+            sortedEntries.sort(new EntryListButtonDataComparitor(SortMethod.DATE_ASCENDING));
+            ChangeSortOutputData output = new ChangeSortOutputData(SortMethod.DATE_ASCENDING, sortedEntries);
+
+            viewEntryPresenter.prepareEntryList(output);
+        } catch (Exception e) {
+            viewEntryPresenter.prepareFailView("There was an issue returning to the main page");
         }
     }
 
     public void viewEntry() {
         try {
             Entry entryData = viewEntryDataAccess.getCurrentEntry();
+
             ViewEntryOutputData outputData = new ViewEntryOutputData(
                     entryData.getImagePaths(),
                     entryData.getLatitude(),
@@ -79,7 +101,7 @@ public class ViewEntryInteractor implements ViewEntryInputBoundary {
             viewEntryPresenter.prepareViewEntryView(outputData);
 
         } catch (Exception e) {
-            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry");
+            viewEntryPresenter.prepareFailView("There was an issue retrieving data for the current entry" + e.getMessage());
         }
     }
 }

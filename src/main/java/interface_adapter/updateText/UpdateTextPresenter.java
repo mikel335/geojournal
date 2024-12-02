@@ -19,8 +19,7 @@ public class UpdateTextPresenter implements UpdateTextOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-    // TODO figure out a way to end up on the correct tab
-    // TODO Remove error message on success
+
     // Return to the view entry page on success
     @Override
     public void prepareSuccessView(UpdateTextOutputData outputData) {

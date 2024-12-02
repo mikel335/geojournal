@@ -6,15 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import data_access.DataAccessObject;
 import data_access.EntryDataAccess;
-import entity.EntryFactory;
-import data_access.EntryDataAccess;
-import entity.EntryListFactory;
+import data_access.WeatherDataAccess;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ChangeSortPresenter;
 import interface_adapter.change_sort.ListViewModel;
+import interface_adapter.createEntry.CreateEntryController;
+import interface_adapter.createEntry.CreateEntryPresenter;
 import interface_adapter.open_entry.OpenEntryController;
 import interface_adapter.open_entry.OpenEntryPresenter;
 import interface_adapter.viewEntry.ViewEntryViewModel;
@@ -30,9 +29,15 @@ import interface_adapter.updateText.UpdateTextViewModel;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryPresenter;
 import interface_adapter.viewEntry.ViewEntryViewModel;
+import interface_adapter.weather.WeatherController;
+import interface_adapter.weather.WeatherPresenter;
+import interface_adapter.weather.WeatherViewModel;
 import use_case.change_sort.ChangeSortInputBoundary;
 import use_case.change_sort.ChangeSortInteractor;
 import use_case.change_sort.ChangeSortOutputBoundary;
+import use_case.createEntry.CreateEntryInputBoundary;
+import use_case.createEntry.CreateEntryInteractor;
+import use_case.createEntry.CreateEntryOutputBoundary;
 import use_case.open_entry.OpenEntryInputBoundary;
 import use_case.open_entry.OpenEntryInteractor;
 import use_case.open_entry.OpenEntryOutputBoundary;
@@ -48,8 +53,10 @@ import use_case.updateText.UpdateTextOutputBoundary;
 import use_case.viewEntry.ViewEntryInputBoundary;
 import use_case.viewEntry.ViewEntryInteractor;
 import use_case.viewEntry.ViewEntryOutputBoundary;
+import use_case.weathercheck.WeatherInputBoundary;
+import use_case.weathercheck.WeatherInteractor;
+import use_case.weathercheck.WeatherOutputBoundary;
 import view.EntryListView;
-import view.MainEntryView;
 import view.ViewManager;
 
 // New View stuff
@@ -66,24 +73,18 @@ public class Builder{
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
 
-    // TODO figure out if we need this EntryFactory
-    // private final EntryFactory entryFactory = new EntryFactory();
-    private final EntryListFactory entryListFactory = new EntryListFactory();
-
     // View Manager to manage which view to display
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
-    private final DataAccessObject dao = new DataAccessObject();
-    private final EntryDataAccess edao = new EntryDataAccess();
-
     // Filesystem storage access
     private final EntryDataAccess dataAccess = new EntryDataAccess();
 
+    // Weather API data
+    private final WeatherDataAccess weatherDataAccess = new WeatherDataAccess();
+
     private EntryListView entryListView;
     private ListViewModel listViewModel;
-    private ViewEntryViewModel viewEntryViewModel;
-    private MainEntryView mainEntryView;
 
     // ViewEntry use case
     private ViewEntryView viewEntryView;
@@ -98,6 +99,8 @@ public class Builder{
     private UpdateTextViewModel updateTextViewModel;
     private UpdateTextView updateTextView;
 
+    private WeatherViewModel weatherViewModel;
+
     public Builder(){
         cardPanel.setLayout(cardLayout);
     }
@@ -110,36 +113,35 @@ public class Builder{
         return this;
     }
 
-    public Builder addEntryView(){
-        viewEntryViewModel = new ViewEntryViewModel();
-        mainEntryView = new MainEntryView();
-        cardPanel.add(mainEntryView, mainEntryView.getViewName());
-        return this;
-    }
-
     public Builder addChangeSortUseCase(){
         final ChangeSortOutputBoundary changeSortOutputBoundary = new ChangeSortPresenter(viewManagerModel, listViewModel);
         final ChangeSortInputBoundary changeSortInteractor = new ChangeSortInteractor(
-                dao,changeSortOutputBoundary, entryListFactory);
+                dataAccess ,changeSortOutputBoundary);
         final ChangeSortController controller = new ChangeSortController(changeSortInteractor);
         entryListView.setChangeSortController(controller);
         return this;
     }
 
+    public Builder addWeatherViewModel() {
+        weatherViewModel = new WeatherViewModel();
+        return this;
+    }
+
+
+    public Builder addViewEntryView() {
+        viewEntryViewModel = new ViewEntryViewModel();
+        viewEntryView = new ViewEntryView(viewEntryViewModel, weatherViewModel);
+        cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
+        return this;
+    };
+
     public Builder addOpenEntryUseCase(){
         final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
-        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(edao, openEntryOutputBoundary, entryFactory);
+        final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(dataAccess, openEntryOutputBoundary);
         final OpenEntryController controller = new OpenEntryController(openEntryInteractor);
         entryListView.setOpenEntryController(controller);
         return this;
     }
-
-    public Builder addViewEntryView() {
-        viewEntryViewModel = new ViewEntryViewModel();
-        viewEntryView = new ViewEntryView(viewEntryViewModel);
-        cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
-        return this;
-    };
 
     public Builder addEditImagesView() {
         editImagesViewModel = new EditImagesViewModel();
@@ -162,6 +164,36 @@ public class Builder{
         return this;
     }
 
+    public Builder addWeatherUseCase() {
+        final WeatherOutputBoundary weatherPresenter = new WeatherPresenter(
+                weatherViewModel
+        );
+
+        final WeatherInputBoundary weatherInteractor = new WeatherInteractor(
+                weatherDataAccess,
+                weatherPresenter
+        );
+
+        final WeatherController controller = new WeatherController(weatherInteractor);
+        viewEntryView.addWeatherController(controller);
+
+        return this;
+    }
+    public Builder addCreateEntryUseCase() {
+        final CreateEntryOutputBoundary createEntryPresenter = new CreateEntryPresenter(
+                    viewManagerModel,
+                    viewEntryViewModel,
+                    listViewModel
+                );
+        final CreateEntryInputBoundary createEntryInteractor = new CreateEntryInteractor(
+                dataAccess,
+                createEntryPresenter
+        );
+
+        final CreateEntryController controller = new CreateEntryController(createEntryInteractor);
+        entryListView.addCreateEntryController(controller);
+        return this;
+    }
 
     public Builder addViewEntryUseCase() {
         final ViewEntryOutputBoundary viewEntryPresenter = new ViewEntryPresenter(
@@ -169,7 +201,8 @@ public class Builder{
                 editImagesViewModel,
                 updateCoordsViewModel,
                 updateTextViewModel,
-                viewManagerModel);
+                viewManagerModel,
+                listViewModel);
 
         final ViewEntryInputBoundary viewEntryInteractor = new ViewEntryInteractor(
                 viewEntryPresenter,
@@ -177,7 +210,7 @@ public class Builder{
         );
 
         final ViewEntryController controller = new ViewEntryController(viewEntryInteractor);
-        viewEntryView.addController(controller);
+        viewEntryView.addViewEntryController(controller);
         return this;
     }
 
@@ -235,14 +268,15 @@ public class Builder{
         return this;
     }
 
+
+
     public JFrame build(){
         final JFrame application = new JFrame("Entries");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         application.add(cardPanel);
 
-        // TODO change this back to the entry list
-        viewManagerModel.setState(viewEntryViewModel.getViewName());
+        viewManagerModel.setState(entryListView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         return application;

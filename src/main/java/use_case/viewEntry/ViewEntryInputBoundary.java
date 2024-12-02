@@ -17,6 +17,11 @@ public interface ViewEntryInputBoundary {
     void editText();
 
     /**
+     * Go back to all entries
+     */
+    void returnToList();
+
+    /**
      * Go to view entry view
      */
     void viewEntry();
