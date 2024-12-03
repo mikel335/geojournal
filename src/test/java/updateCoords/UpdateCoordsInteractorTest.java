@@ -54,7 +54,7 @@ class UpdateCoordsInteractorTest {
 
             @Override
             public void prepareFailView(String errorMessage) {
-                assertEquals("(Latitude: " + 100.0 + ", Longitude:" + 200.0 + ") is not a valid set of coordinates.", errorMessage);
+                assertEquals("(Latitude: " + 100.0 + ", Longitude: " + 200.0 + ") is not a valid set of coordinates.", errorMessage);
             }
 
         };
