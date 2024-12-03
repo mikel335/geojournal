@@ -74,6 +74,7 @@ public class Builder{
 
     // View Manager to manage which view to display
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
+    private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     // Filesystem storage access
     private final EntryDataAccess dataAccess = new EntryDataAccess();
