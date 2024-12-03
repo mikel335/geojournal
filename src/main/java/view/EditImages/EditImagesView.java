@@ -50,7 +50,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         doneButton.addActionListener(this);
         buttonPanel.add(doneButton);
 
-        imageDisplayPanel.setPreferredSize(new Dimension(1200, 1200));
+        imageDisplayPanel.setPreferredSize(new Dimension(1200, 750));
 
         setLayout(new BorderLayout());
         add(imageDisplayPanel, BorderLayout.NORTH);
