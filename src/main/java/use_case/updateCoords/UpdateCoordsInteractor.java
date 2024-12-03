@@ -19,7 +19,7 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
         try {
             latitude = Double.parseDouble(updateCoordsInputData.latitude());
         } catch (Exception _) {
-            updateCoordsPresenter.prepareFailView("This is not a valid latitude value" + updateCoordsInputData.latitude());
+            updateCoordsPresenter.prepareFailView("This is not a valid latitude value: " + updateCoordsInputData.latitude());
             return;
         }
 
@@ -27,7 +27,7 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
         try {
             longitude = Double.parseDouble(updateCoordsInputData.longitude());
         } catch (Exception _) {
-            updateCoordsPresenter.prepareFailView("This is not a valid longitude value " + updateCoordsInputData.longitude());
+            updateCoordsPresenter.prepareFailView("This is not a valid longitude value: " + updateCoordsInputData.longitude());
             return;
         }
 
