@@ -43,5 +43,8 @@ public class OpenEntryPresenter implements OpenEntryOutputBoundary {
 
         viewManagerModel.setState(viewEntryModel.getViewName());
         viewManagerModel.firePropertyChanged();
+
+        viewState.setViewEntryError(null);
+        viewEntryModel.setState(viewState);
     }
 }

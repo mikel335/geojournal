@@ -1,6 +1,8 @@
 package view.ViewEntry;
 
 import interface_adapter.viewEntry.ViewEntryController;
+import view.Components.Colors;
+import view.Components.StyledButton;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,12 +17,13 @@ public class EditOptions extends JPanel {
 
     public EditOptions(ViewEntryController controller) {
         this.viewEntryController = controller;
-        setLayout(new GridLayout(3,1));
+        setLayout(new GridLayout(2,2, 10, 10));
+        setBackground(Colors.lightBlue);
 
-        editText = new JButton("Edit Text");
-        changeEntryCoords = new JButton("Change Geo Coordinates");
-        editImages = new JButton("Edit Images");
-        returnToEntries = new JButton("Return to All Entries");
+        editText = new StyledButton("Edit Text");
+        changeEntryCoords = new StyledButton("Change Geo Coordinates");
+        editImages = new StyledButton("Edit Images");
+        returnToEntries = new StyledButton("Return to All Entries");
 
         add(editText);
         add(changeEntryCoords);

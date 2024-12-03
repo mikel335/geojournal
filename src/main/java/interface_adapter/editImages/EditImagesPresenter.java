@@ -43,6 +43,9 @@ public class EditImagesPresenter implements EditImagesOutputBoundary {
         this.editImagesViewModel.setState(newEditImageState);
         this.editImagesViewModel.firePropertyChanged();
 
+        newEditImageState.setEditImageError(null);
+        this.editImagesViewModel.setState(newEditImageState);
+
     }
 
     @Override

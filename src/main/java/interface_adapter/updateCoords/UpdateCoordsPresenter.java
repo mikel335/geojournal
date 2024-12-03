@@ -49,6 +49,9 @@ public class UpdateCoordsPresenter implements UpdateCoordsOutputBoundary {
         // Update the state
         this.updateCoordsView.setState(newUpdateCoordsState);
         this.updateCoordsView.firePropertyChanged();
+
+        newUpdateCoordsState.setUpdateCoordsError(null);
+        this.updateCoordsView.setState(newUpdateCoordsState);
     }
 
 }

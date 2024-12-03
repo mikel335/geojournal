@@ -3,12 +3,11 @@ package view.EditImages;
 import interface_adapter.editImages.EditImagesController;
 import interface_adapter.editImages.EditImagesState;
 import interface_adapter.editImages.EditImagesViewModel;
+import view.Components.Colors;
 import view.Components.ImageDisplayPanel;
+import view.Components.StyledButton;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,24 +30,27 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
     private final ImageDisplayPanel imageDisplayPanel;
 
     public EditImagesView(EditImagesViewModel editImagesViewModel) {
+        setBackground(Colors.lightBlue);
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         this.editImagesViewModel = editImagesViewModel;
         this.editImagesViewModel.addPropertyChangeListener(this);
-        this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths(), false);
+        this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths());
 
         // Button panel that gives us add image and done buttons
         JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Colors.lightBlue);
 
-        uploadButton = new JButton("Upload Image");
-        uploadButton.setForeground(Color.GREEN.darker());
+        uploadButton = new StyledButton("Upload Image");
+        uploadButton.setForeground(Color.WHITE);
         uploadButton.addActionListener(this);
         buttonPanel.add(uploadButton);
 
-        doneButton = new JButton("Done");
-        doneButton.setForeground(Color.BLUE);
+        doneButton = new StyledButton("Done");
+        doneButton.setForeground(Color.GREEN);
         doneButton.addActionListener(this);
         buttonPanel.add(doneButton);
 
-        imageDisplayPanel.setPreferredSize(new Dimension(1200, 700));
+        imageDisplayPanel.setPreferredSize(new Dimension(1200, 1200));
 
         setLayout(new BorderLayout());
         add(imageDisplayPanel, BorderLayout.NORTH);
@@ -95,5 +97,6 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
     public void setEditImagesController(EditImagesController editImagesController) {
         this.editImagesController = editImagesController;
         this.imageDisplayPanel.updateImagePanelControllers(editImagesController);
+        this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
     }
 }

@@ -82,7 +82,7 @@ public class Entry {
      */
     public void addImagePath(String path) {
         imagePaths.put(newImgId, path);
-        newImgId++;
+        newImgId = newImgId + 1;
     }
 
     /**

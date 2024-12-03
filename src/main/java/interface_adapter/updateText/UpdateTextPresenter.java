@@ -47,5 +47,8 @@ public class UpdateTextPresenter implements UpdateTextOutputBoundary {
         // Update the state
         this.updateTextView.setState(newUpdateTextState);
         this.updateTextView.firePropertyChanged();
+
+        newUpdateTextState.setUpdateTextError(null);
+        this.updateTextView.setState(newUpdateTextState);
     }
 }

@@ -1,5 +1,7 @@
 package view.ViewEntry;
 
+import view.Components.Colors;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -9,6 +11,8 @@ public class SelectCardHeader extends JPanel {
 
     public SelectCardHeader(JPanel contentCards) {
         setLayout(new FlowLayout(FlowLayout.RIGHT));
+        setBackground(Colors.lightBlue);
+
         JButton imagesButton = new JButton("Images");
         JButton mapButton = new JButton("Map");
         imagesButton.setEnabled(false);

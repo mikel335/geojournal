@@ -1,11 +1,12 @@
 package view.UpdateCoords;
 
+import view.Components.Colors;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -19,7 +20,14 @@ public class CoordEditBoxes extends JPanel {
     public CoordEditBoxes(String latitude, String longitude) {
 
         this.latitudeField = new JTextField(latitude);
+        this.latitudeField.setFont(new Font("sans serif", Font.PLAIN, 20));
         this.longitudeField = new JTextField(longitude);
+        this.longitudeField.setFont(new Font("sans serif", Font.PLAIN, 20));
+
+        latitudeField.setColumns(10);
+        longitudeField.setColumns(10);
+
+        setBackground(Colors.lightBlue);
 
         addPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);
         resetPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);
@@ -34,11 +42,17 @@ public class CoordEditBoxes extends JPanel {
         longitudeField.setEditable(true);
 
         JPanel latitudeContainer = new JPanel(new FlowLayout());
-        latitudeContainer.add(new JLabel("Latitude"));
+        latitudeContainer.setBackground(Colors.lightBlue);
+        JLabel latitudeLabel = new JLabel("Latitude");
+        latitudeLabel.setFont(new Font("sans serif", Font.PLAIN, 20));
+        latitudeContainer.add(latitudeLabel);
         latitudeContainer.add(latitudeField);
 
         JPanel longitudeContainer = new JPanel(new FlowLayout());
-        longitudeContainer.add(new JLabel("Longitude"));
+        JLabel longitudeLabel = new JLabel("Longitude");
+        longitudeLabel.setFont(new Font("sans serif", Font.PLAIN, 20));
+        longitudeContainer.setBackground(Colors.lightBlue);
+        longitudeContainer.add(longitudeLabel);
         longitudeContainer.add(longitudeField);
 
         setLayout(new FlowLayout(FlowLayout.CENTER));

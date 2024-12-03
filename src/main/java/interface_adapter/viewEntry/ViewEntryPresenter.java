@@ -130,6 +130,9 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         // Update the state
         this.viewEntryView.setState(newViewEntryState);
         this.viewEntryView.firePropertyChanged();
+
+        newViewEntryState.setViewEntryError(null);
+        this.viewEntryView.setState(newViewEntryState);
     }
 
 }
