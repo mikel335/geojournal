@@ -80,7 +80,7 @@ public class Entry {
      * @param path The image path of the newly added image
      * @return The new image id of this entry
      */
-    public voidgi addImagePath(String path) {
+    public void addImagePath(String path) {
         imagePaths.put(newImgId, path);
         newImgId++;
     }
