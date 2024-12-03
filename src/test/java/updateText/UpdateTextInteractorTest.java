@@ -2,6 +2,7 @@ package updateText;
 
 import data_access.EntryDataAccess;
 
+import entity.Entry;
 import org.junit.jupiter.api.Test;
 import use_case.updateText.*;
 
@@ -13,13 +14,14 @@ class UpdateTextInteractorTest {
     void updateTitleTest() {
         UpdateTextInputData textInputData = new UpdateTextInputData("Spain", "Beautiful country");
         EntryDataAccess data = new EntryDataAccess();
+        Entry entry = data.createEntry();
 
-        data.getCurrentEntry().setTitle("Spain");
+        entry.setTitle("Spain");
 
         UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateTextOutputData outputData) {
-                assertEquals("Spain", data.getCurrentEntry().getTitle());
+                assertEquals("Spain", entry.getTitle());
             }
 
             @Override
@@ -36,13 +38,14 @@ class UpdateTextInteractorTest {
     void updateDescriptionTest() {
         UpdateTextInputData textInputData = new UpdateTextInputData("Spain", "Beautiful country");
         EntryDataAccess data = new EntryDataAccess();
+        Entry entry = data.createEntry();
 
-        data.getCurrentEntry().setDescription("Beautiful country");
+        entry.setDescription("Beautiful country");
 
         UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateTextOutputData outputData) {
-                assertEquals("Beautiful country", data.getCurrentEntry().getDescription());
+                assertEquals("Beautiful country", entry.getDescription());
             }
 
             @Override
@@ -58,12 +61,15 @@ class UpdateTextInteractorTest {
     @Test
     void cancelTest() {
         EntryDataAccess data = new EntryDataAccess();
+        Entry entry = data.createEntry();
+        entry.setTitle("Test Title 1");
+        entry.setDescription("Test Description 1");
 
         UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateTextOutputData outputData) {
-                assertEquals("Test Title", data.getCurrentEntry().getTitle());
-                assertEquals("Test Description", data.getCurrentEntry().getDescription());
+                assertEquals("Test Title 1", entry.getTitle());
+                assertEquals("Test Description 1", entry.getDescription());
             }
 
             @Override

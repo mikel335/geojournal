@@ -4,6 +4,7 @@ import data_access.EntryDataAccess;
 
 import interface_adapter.viewEntry.ViewEntryPresenter;
 import org.junit.jupiter.api.Test;
+import use_case.change_sort.ChangeSortOutputData;
 import use_case.viewEntry.ViewEntryInputBoundary;
 import use_case.viewEntry.ViewEntryInteractor;
 import use_case.viewEntry.ViewEntryOutputBoundary;
@@ -34,6 +35,11 @@ class ViewEntryInteractorTest {
 
             @Override
             public void prepareViewEntryView(ViewEntryOutputData outputData) {
+                fail("Use case is unexpected");
+            }
+
+            @Override
+            public void prepareEntryList(ChangeSortOutputData outputData) {
                 fail("Use case is unexpected");
             }
 

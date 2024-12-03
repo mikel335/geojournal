@@ -2,6 +2,7 @@ package updateCoords;
 
 import data_access.EntryDataAccess;
 
+import entity.Entry;
 import org.junit.jupiter.api.Test;
 import use_case.updateCoords.*;
 
@@ -13,15 +14,16 @@ class UpdateCoordsInteractorTest {
     void updateCoordsTest() {
         UpdateCoordsInputData coordsInputData = new UpdateCoordsInputData("100", "40");
         EntryDataAccess data = new EntryDataAccess();
+        Entry entry = data.createEntry();
 
-        data.getCurrentEntry().setLongitude(100);
-        data.getCurrentEntry().setLatitude(40);
+        entry.setLongitude(100);
+        entry.setLatitude(40);
 
         UpdateCoordsOutputBoundary presenter = new UpdateCoordsOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateCoordsOutputData outputData) {
-                assertEquals(data.getCurrentEntry().getLongitude(), 100);
-                assertEquals(data.getCurrentEntry().getLatitude(), 40);
+                assertEquals(entry.getLongitude(), 100);
+                assertEquals(entry.getLatitude(), 40);
             }
 
             @Override
@@ -38,9 +40,10 @@ class UpdateCoordsInteractorTest {
     void coordinateOutOfBoundsTest() {
         UpdateCoordsInputData coordsInputData = new UpdateCoordsInputData("100", "40");
         EntryDataAccess data = new EntryDataAccess();
+        Entry entry = data.createEntry();
 
-        data.getCurrentEntry().setLongitude(200);
-        data.getCurrentEntry().setLatitude(100);
+        entry.setLongitude(200);
+        entry.setLatitude(100);
 
         UpdateCoordsOutputBoundary presenter = new UpdateCoordsOutputBoundary() {
             @Override
