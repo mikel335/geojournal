@@ -2,8 +2,9 @@ package view.ViewEntry;
 
 import interface_adapter.viewEntry.ViewEntryController;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
 
 public class EditOptions extends JPanel {
     private ViewEntryController viewEntryController;
@@ -27,6 +28,10 @@ public class EditOptions extends JPanel {
         add(returnToEntries);
     }
 
+    /**
+     * Sets the controller for the view entry use case.
+     * @param viewEntryController The new controller for the view entry use case
+     */
     public void setViewEntryController(ViewEntryController viewEntryController) {
         this.viewEntryController = viewEntryController;
 

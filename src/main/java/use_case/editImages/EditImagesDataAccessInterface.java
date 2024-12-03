@@ -2,8 +2,6 @@ package use_case.editImages;
 
 import entity.Entry;
 
-import java.util.Map;
-
 public interface EditImagesDataAccessInterface {
 
     /**
@@ -18,6 +16,10 @@ public interface EditImagesDataAccessInterface {
      * @param id ID of the image to be removed
      */
     void deleteImageFromCurrentEntry(Integer id);
-    
+
+    /**
+     * Gets the current entry whose images are being modified.
+     * @return The entry whose images are being modified
+     */
     Entry getCurrentEntry();
 }

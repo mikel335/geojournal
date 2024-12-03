@@ -6,8 +6,6 @@ import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.editImages.EditImagesOutputBoundary;
 import use_case.editImages.EditImagesOutputData;
 
-import javax.swing.text.View;
-
 public class EditImagesPresenter implements EditImagesOutputBoundary {
 
     private final EditImagesViewModel editImagesViewModel;

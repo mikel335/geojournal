@@ -18,7 +18,6 @@ public class CreateEntryInteractor implements CreateEntryInputBoundary{
     public void execute() {
         try {
             Entry newEntry = createEntryDataAccessInterface.createEntry();
-            
             CreateEntryOutputData output = new CreateEntryOutputData(
                     newEntry.getImagePaths(),
                     newEntry.getLatitude(),

@@ -1,8 +1,12 @@
 package view.UpdateText;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -72,19 +76,35 @@ public class TitleDescEditBoxes extends JPanel {
         }
     }
 
+    /**
+     * Gets the text in the title's textbox.
+     * @return The text currently in the title's textfield
+     */
     public String getTitleText() {
         return titleTextField.getText();
     }
 
+    /**
+     * Gets the text in the description's textfield.
+     * @return The text currently in the description's textfield
+     */
     public String getDescriptionText() {
         return descriptionTextArea.getText();
     }
 
+    /**
+     * Sets the text in the title's textfield.
+     * @param title The text to place in the title's textfield
+     */
     public void setTitleText(String title) {
         titleTextField.setText(title);
         resetPlaceholder(titleTextField, TITLE_PLACEHOLDER);
     }
 
+    /**
+     * Sets the text in the description's textfield.
+     * @param description The text to place in the description's textfield
+     */
     public void setDescriptionText(String description) {
         descriptionTextArea.setText(description);
         resetPlaceholder(descriptionTextArea, DESCRIPTION_PLACEHOLDER);

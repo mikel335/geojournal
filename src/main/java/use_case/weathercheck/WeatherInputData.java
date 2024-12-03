@@ -12,9 +12,18 @@ public class WeatherInputData {
         this.latitude = latitude;
     }
 
+    /**
+     * Gets the longitude of the location of the weather.
+     * @return The longitude of the location of the weather
+     */
     public double getLongitude() {
         return longitude;
     }
+
+    /**
+     * Gets the latitude of the location of the weather.
+     * @return The latitude of the location of the weather
+     */
     public double getLatitude() {
         return latitude;
     }

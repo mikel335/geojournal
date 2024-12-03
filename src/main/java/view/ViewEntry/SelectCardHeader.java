@@ -1,7 +1,9 @@
 package view.ViewEntry;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 
 public class SelectCardHeader extends JPanel {
 

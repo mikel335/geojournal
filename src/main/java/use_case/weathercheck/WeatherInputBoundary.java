@@ -8,6 +8,6 @@ public interface WeatherInputBoundary {
      * Executes the weather use case.
      * @param inputData the input data
      */
-    void checkweather (WeatherInputData inputData);
+    void checkWeather (WeatherInputData inputData);
 }
 

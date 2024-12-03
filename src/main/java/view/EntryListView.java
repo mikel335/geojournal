@@ -1,23 +1,20 @@
 package view;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ListState;
 import interface_adapter.change_sort.ListViewModel;
-
 import interface_adapter.createEntry.CreateEntryController;
 import interface_adapter.open_entry.OpenEntryController;
 import use_case.change_sort.EntryListButtonData;
@@ -94,15 +91,27 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     }
 
+    /**
+     * Gets the view name of the current view.
+     * @return The view name of the current view
+     */
     public String getViewName() {
         return "listView";
     }
 
+    /**
+     * Sets the controller for the change sort use case.
+     * @param controller The controller to use for the change sort use case
+     */
     public void setChangeSortController(ChangeSortController controller) {
         this.changeSortController = controller;
         controller.execute(SortMethod.DATE_ASCENDING);
     }
 
+    /**
+     * Sets the controller for the open entry use case.
+     * @param controller The controller to use for the open entry use case
+     */
     public void setOpenEntryController(OpenEntryController controller) {
         this.openEntryController = controller;
     }
@@ -129,6 +138,10 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Sets the controller for the create entry use case.
+     * @param createEntryController The controller to use for the create entry use case
+     */
     public void addCreateEntryController(CreateEntryController createEntryController) {
         this.createEntryController = createEntryController;
     }

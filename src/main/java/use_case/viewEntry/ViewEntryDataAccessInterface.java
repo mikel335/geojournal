@@ -13,7 +13,8 @@ public interface ViewEntryDataAccessInterface {
     Entry getCurrentEntry();
     
     /**
-     * Gets all the current entries
+     * Gets a map that maps IDs to their respective entry.
+     * @return A map that maps IDs to their respective entry
      */
     Map<Integer, Entry> getEntryList();
 

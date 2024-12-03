@@ -31,16 +31,15 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     private final Map<Integer, Entry> allEntries;
     private static final String geoJournalLocationData = System.getProperty("user.home") + File.separator + "geoJournalApplicationData";
 
-
-    public Map<Integer, Entry> getAllEntries() {
-        return allEntries;
-    }
-
     public EntryDataAccess() {
         this.allEntries = new HashMap<>();
         readApplicationData();
     }
 
+    /**
+     * Sets the current entry to the one with the given ID
+     * @param id The id of the entry to set as the current entry
+     */
     public void setCurrentEntry(int id) {
         this.currentEntry = allEntries.get(id);
     }
@@ -172,8 +171,7 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
             );
     }
 
-
-    public void saveEntryData() {
+    private void saveEntryData() {
         File dataFolder = new File(geoJournalLocationData);
         File dataFile = new File(geoJournalLocationData + File.separator + "data.json");
         try {
@@ -272,7 +270,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
 
     @Override
     public Entry createEntry() {
-
         int newId = 0;
         if (!this.allEntries.isEmpty()) {
             newId = Collections.max(this.allEntries.keySet()) + 1;
