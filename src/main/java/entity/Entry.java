@@ -74,8 +74,6 @@ public class Entry {
         this.description = description;
     }
 
-
-
     /**
      * Adds image path to current entry
      * @param path The image path of the newly added image
@@ -151,5 +149,4 @@ public class Entry {
     public int getNewImgId() {
         return newImgId;
     }
-
 }

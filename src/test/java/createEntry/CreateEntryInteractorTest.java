@@ -23,7 +23,7 @@ class CreateEntryInteractorTest {
         CreateEntryOutputBoundary presenter = new CreateEntryOutputBoundary() {
             @Override
             public void prepareSuccessView(CreateEntryOutputData output) {
-                assertEquals("New Entry", entry1.getTitle());
+                assertEquals("New Entry",output.title());
                 assertEquals("", entry2.getDescription());
                 assertEquals(entry1Id, entry1.getId());
                 assertEquals(entry2Id, entry2.getId());

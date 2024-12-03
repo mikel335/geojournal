@@ -21,7 +21,7 @@ class UpdateTextInteractorTest {
         UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateTextOutputData outputData) {
-                assertEquals("Spain", entry.getTitle());
+                assertEquals("Spain", outputData.title());
             }
 
             @Override
@@ -68,8 +68,8 @@ class UpdateTextInteractorTest {
         UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateTextOutputData outputData) {
-                assertEquals("Test Title 1", entry.getTitle());
-                assertEquals("Test Description 1", entry.getDescription());
+                assertEquals("Test Title 1", outputData.title());
+                assertEquals("Test Description 1", outputData.description());
             }
 
             @Override

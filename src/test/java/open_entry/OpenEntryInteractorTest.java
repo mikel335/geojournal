@@ -2,6 +2,7 @@ package open_entry;
 
 import data_access.EntryDataAccess;
 
+import entity.Entry;
 import org.junit.jupiter.api.Test;
 import use_case.open_entry.*;
 
@@ -12,18 +13,19 @@ class OpenEntryInteractorTest {
     @Test
     void SucessOpenEntryTest(){
         EntryDataAccess data = new EntryDataAccess();
-        OpenEntryInputData openEntryInputData = new OpenEntryInputData(2);
+        OpenEntryInputData openEntryInputData = new OpenEntryInputData(1);
 
+        Entry entry1 = data.createEntry();
+        entry1.setTitle("title 1");
         data.createEntry();
-        data.createEntry();
-        data.createEntry();
-        data.createEntry();
+        Entry entry3 = data.createEntry();
+        entry3.setTitle("title 3");
 
         OpenEntryOutputBoundary presenter = new OpenEntryOutputBoundary() {
             @Override
             public void prepareSuccessView(OpenEntryOutputData outputData) {
-                assertEquals(2, data.getAllEntries().get(2).getId());
-                assertEquals(0, data.getAllEntries().get(0).getId());
+                assertEquals(1, outputData.id());
+
             }
 
             @Override

@@ -51,6 +51,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
 
         updatePanelSize();
         this.addComponentListener(new ComponentAdapter() {
+
             @Override
             public void componentResized(ComponentEvent e) {
                 updatePanelSize();
