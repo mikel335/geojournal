@@ -3,6 +3,8 @@ package view.UpdateText;
 import interface_adapter.updateText.UpdateTextController;
 import interface_adapter.updateText.UpdateTextState;
 import interface_adapter.updateText.UpdateTextViewModel;
+import view.Components.Colors;
+import view.Components.StyledButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,10 +18,14 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
     private UpdateTextController updateTextController;
 
     private final TitleDescEditBoxes titleDescEditBoxes;
-    final JButton saveButton = new JButton("Save");
-    final JButton cancelButton = new JButton("Cancel");
+    final JButton saveButton = new StyledButton("Save");
+    final JButton cancelButton = new StyledButton("Cancel");
 
     public UpdateTextView(UpdateTextViewModel updateTextModel) {
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        setBackground(Colors.lightBlue);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         this.viewModel = updateTextModel;
         this.viewModel.addPropertyChangeListener(this);
 
@@ -29,6 +35,7 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
         );
 
         JPanel buttonPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        buttonPanel1.setBackground(Colors.lightBlue);
 
         // configuring buttons
         saveButton.setSize(150, 75);
@@ -43,9 +50,8 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
         buttonPanel1.add(saveButton, BorderLayout.EAST);
         buttonPanel1.add(cancelButton, BorderLayout.WEST);
 
-        setLayout(new BorderLayout());
-        add(titleDescEditBoxes, BorderLayout.NORTH); // Text area view at the top
-        add(buttonPanel1, BorderLayout.CENTER); // Button panel at the bottom (aligned right)
+        add(titleDescEditBoxes); // Text area view at the top
+        add(buttonPanel1); // Button panel at the bottom (aligned right)
     }
 
     @Override

@@ -11,6 +11,10 @@ public class ChangeSortInputData {
         this.sort_method = sort_method;
     }
 
+    /**
+     * Gets the new sort method.
+     * @return The new sort method
+     */
     SortMethod getSortMethod() {
         return sort_method;
     }

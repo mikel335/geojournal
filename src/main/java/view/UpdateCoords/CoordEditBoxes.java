@@ -1,6 +1,10 @@
 package view.UpdateCoords;
 
-import javax.swing.*;
+import view.Components.Colors;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -16,7 +20,14 @@ public class CoordEditBoxes extends JPanel {
     public CoordEditBoxes(String latitude, String longitude) {
 
         this.latitudeField = new JTextField(latitude);
+        this.latitudeField.setFont(new Font("sans serif", Font.PLAIN, 20));
         this.longitudeField = new JTextField(longitude);
+        this.longitudeField.setFont(new Font("sans serif", Font.PLAIN, 20));
+
+        latitudeField.setColumns(10);
+        longitudeField.setColumns(10);
+
+        setBackground(Colors.lightBlue);
 
         addPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);
         resetPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);
@@ -31,11 +42,17 @@ public class CoordEditBoxes extends JPanel {
         longitudeField.setEditable(true);
 
         JPanel latitudeContainer = new JPanel(new FlowLayout());
-        latitudeContainer.add(new JLabel("Latitude"));
+        latitudeContainer.setBackground(Colors.lightBlue);
+        JLabel latitudeLabel = new JLabel("Latitude");
+        latitudeLabel.setFont(new Font("sans serif", Font.PLAIN, 20));
+        latitudeContainer.add(latitudeLabel);
         latitudeContainer.add(latitudeField);
 
         JPanel longitudeContainer = new JPanel(new FlowLayout());
-        longitudeContainer.add(new JLabel("Longitude"));
+        JLabel longitudeLabel = new JLabel("Longitude");
+        longitudeLabel.setFont(new Font("sans serif", Font.PLAIN, 20));
+        longitudeContainer.setBackground(Colors.lightBlue);
+        longitudeContainer.add(longitudeLabel);
         longitudeContainer.add(longitudeField);
 
         setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -74,21 +91,37 @@ public class CoordEditBoxes extends JPanel {
         }
     }
 
+    /**
+     * Gets the values in the latitude textbox.
+     * @return The current value that the user inputted in the latitude textbox
+     */
     public String getLatitudeText() {
         return latitudeField.getText();
     }
 
+    /**
+     * Gets the values in the longitude textbox.
+     * @return The current value that the user inputted in the longitude textbox
+     */
     public String getLongitudeText() {
         return longitudeField.getText();
     }
 
-    public void setLatitudeText(String title) {
-        latitudeField.setText(title);
+    /**
+     * Sets the value in the latitude textbox.
+     * @param lati The value of the text box to set to.
+     */
+    public void setLatitudeText(String lati) {
+        latitudeField.setText(lati);
         resetPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);
     }
 
-    public void setLongitudeText(String description) {
-        longitudeField.setText(description);
+    /**
+     * Sets the value in the latitude textbox.
+     * @param longi The value of the text box to set to.
+     */
+    public void setLongitudeText(String longi) {
+        longitudeField.setText(longi);
         resetPlaceholder(longitudeField, LONGITUDE_PLACEHOLDER);
     }
 }

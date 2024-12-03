@@ -112,7 +112,6 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         final ListState listState = entryListViewModel.getState();
 
         listState.setEntryList(outputData.orderedEntries());
-        listState.setSortMethod(outputData.sortMethod());
 
         this.entryListViewModel.setState(listState);
         this.entryListViewModel.firePropertyChanged();
@@ -131,6 +130,9 @@ public class ViewEntryPresenter implements ViewEntryOutputBoundary {
         // Update the state
         this.viewEntryView.setState(newViewEntryState);
         this.viewEntryView.firePropertyChanged();
+
+        newViewEntryState.setViewEntryError(null);
+        this.viewEntryView.setState(newViewEntryState);
     }
 
 }

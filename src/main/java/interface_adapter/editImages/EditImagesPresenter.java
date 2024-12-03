@@ -6,8 +6,6 @@ import interface_adapter.viewEntry.ViewEntryViewModel;
 import use_case.editImages.EditImagesOutputBoundary;
 import use_case.editImages.EditImagesOutputData;
 
-import javax.swing.text.View;
-
 public class EditImagesPresenter implements EditImagesOutputBoundary {
 
     private final EditImagesViewModel editImagesViewModel;
@@ -44,6 +42,9 @@ public class EditImagesPresenter implements EditImagesOutputBoundary {
         // Update the view model with the new state
         this.editImagesViewModel.setState(newEditImageState);
         this.editImagesViewModel.firePropertyChanged();
+
+        newEditImageState.setEditImageError(null);
+        this.editImagesViewModel.setState(newEditImageState);
 
     }
 

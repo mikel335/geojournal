@@ -21,7 +21,6 @@ public class ChangeSortPresenter implements ChangeSortOutputBoundary{
         final ListState listState = entryListViewModel.getState();
 
         listState.setEntryList(outputData.orderedEntries());
-        listState.setSortMethod(outputData.sortMethod());
 
         this.entryListViewModel.setState(listState);
         this.entryListViewModel.firePropertyChanged();
@@ -37,5 +36,8 @@ public class ChangeSortPresenter implements ChangeSortOutputBoundary{
 
         this.entryListViewModel.setState(listState);
         this.entryListViewModel.firePropertyChanged();
+
+        listState.setErrorMessage(null);
+        this.entryListViewModel.setState(listState);
     }
 }

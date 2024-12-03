@@ -1,9 +1,6 @@
 package interface_adapter.updateCoords;
 
-import entity.Entry;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.editImages.EditImagesState;
-import interface_adapter.editImages.EditImagesViewModel;
 
 import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
@@ -52,6 +49,9 @@ public class UpdateCoordsPresenter implements UpdateCoordsOutputBoundary {
         // Update the state
         this.updateCoordsView.setState(newUpdateCoordsState);
         this.updateCoordsView.firePropertyChanged();
+
+        newUpdateCoordsState.setUpdateCoordsError(null);
+        this.updateCoordsView.setState(newUpdateCoordsState);
     }
 
 }

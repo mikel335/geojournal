@@ -42,3 +42,4 @@ class EditImagesInteractorTest {
         interactor.addImage(addImageInputData);
     }
 }
+

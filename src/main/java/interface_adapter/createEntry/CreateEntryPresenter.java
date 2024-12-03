@@ -44,5 +44,8 @@ public class CreateEntryPresenter implements CreateEntryOutputBoundary {
 
         this.entryListViewModel.setState(newState);
         this.entryListViewModel.firePropertyChanged();
+
+        newState.setErrorMessage(null);
+        this.entryListViewModel.setState(newState);
     }
 }

@@ -16,5 +16,9 @@ public interface UpdateTextDataAccessInterface {
      */
     void setDescription(String description);
 
+    /**
+     * Gets the entry whose text are being modified.
+     * @return The entry whose text is being modified
+     */
     Entry getCurrentEntry();
 }

@@ -1,5 +1,7 @@
 package view.UpdateText;
 
+import view.Components.Colors;
+
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
@@ -14,10 +16,14 @@ public class TitleDescEditBoxes extends JPanel {
     private final static String DESCRIPTION_PLACEHOLDER = "Enter description ...";
 
     public TitleDescEditBoxes(String title, String description) {
-        
+        setBackground(Colors.lightBlue);
+
         //Setting up the view
         this.titleTextField = new JTextField(title);
+        this.titleTextField.setFont(new Font("sans serif", Font.PLAIN, 20));
+
         this.descriptionTextArea = new JTextArea(description);
+        this.descriptionTextArea.setFont(new Font("sans serif", Font.PLAIN, 20));
 
         addPlaceholder(titleTextField, TITLE_PLACEHOLDER);
         resetPlaceholder(titleTextField, TITLE_PLACEHOLDER);
@@ -36,7 +42,7 @@ public class TitleDescEditBoxes extends JPanel {
         JScrollPane titleScrollPane = new JScrollPane(titleTextField);
         JScrollPane descriptionScrollPane = new JScrollPane(descriptionTextArea);
 
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(0, 30));
         add(titleScrollPane, BorderLayout.NORTH);
         add(descriptionScrollPane, BorderLayout.CENTER);
     }
@@ -72,19 +78,35 @@ public class TitleDescEditBoxes extends JPanel {
         }
     }
 
+    /**
+     * Gets the text in the title's textbox.
+     * @return The text currently in the title's textfield
+     */
     public String getTitleText() {
         return titleTextField.getText();
     }
 
+    /**
+     * Gets the text in the description's textfield.
+     * @return The text currently in the description's textfield
+     */
     public String getDescriptionText() {
         return descriptionTextArea.getText();
     }
 
+    /**
+     * Sets the text in the title's textfield.
+     * @param title The text to place in the title's textfield
+     */
     public void setTitleText(String title) {
         titleTextField.setText(title);
         resetPlaceholder(titleTextField, TITLE_PLACEHOLDER);
     }
 
+    /**
+     * Sets the text in the description's textfield.
+     * @param description The text to place in the description's textfield
+     */
     public void setDescriptionText(String description) {
         descriptionTextArea.setText(description);
         resetPlaceholder(descriptionTextArea, DESCRIPTION_PLACEHOLDER);

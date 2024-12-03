@@ -19,7 +19,6 @@ public class UpdateTextPresenter implements UpdateTextOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-
     // Return to the view entry page on success
     @Override
     public void prepareSuccessView(UpdateTextOutputData outputData) {
@@ -48,5 +47,8 @@ public class UpdateTextPresenter implements UpdateTextOutputBoundary {
         // Update the state
         this.updateTextView.setState(newUpdateTextState);
         this.updateTextView.firePropertyChanged();
+
+        newUpdateTextState.setUpdateTextError(null);
+        this.updateTextView.setState(newUpdateTextState);
     }
 }

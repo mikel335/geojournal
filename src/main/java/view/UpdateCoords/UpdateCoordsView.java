@@ -3,9 +3,13 @@ package view.UpdateCoords;
 import interface_adapter.updateCoords.UpdateCoordsController;
 import interface_adapter.updateCoords.UpdateCoordsState;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
+import view.Components.Colors;
+import view.Components.StyledButton;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -16,10 +20,12 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
     private UpdateCoordsController updateCoordsController;
 
     private final CoordEditBoxes coordEditBoxes;
-    final JButton saveButton = new JButton("Save");
-    final JButton cancelButton = new JButton("Cancel");
+    final JButton saveButton = new StyledButton("Save");
+    final JButton cancelButton = new StyledButton("Cancel");
 
     public UpdateCoordsView(UpdateCoordsViewModel updateCoordsViewModel) {
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        setBackground(Colors.lightBlue);
         this.viewModel = updateCoordsViewModel;
         this.viewModel.addPropertyChangeListener(this);
 
@@ -29,6 +35,7 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
         );
 
         JPanel buttonPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        buttonPanel1.setBackground(Colors.lightBlue);
 
         // configuring buttons
         saveButton.setSize(150, 75);
@@ -65,6 +72,10 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
         }
     }
 
+    /**
+     * Sets the controller for the update coordinates use case.
+     * @param updateCoordsController The new controller to set to
+     */
     public void setUpdateCoordsController(UpdateCoordsController updateCoordsController) {
         this.updateCoordsController = updateCoordsController;
     }

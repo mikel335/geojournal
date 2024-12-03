@@ -1,7 +1,5 @@
 package use_case.open_entry;
 
-import use_case.change_sort.ChangeSortInputData;
-
 /**
  * The open entry use case.
  */

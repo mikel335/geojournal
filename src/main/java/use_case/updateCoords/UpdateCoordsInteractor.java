@@ -13,7 +13,6 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
         this.updateCoordsPresenter = updateCoordsPresenter;
     }
 
-
     @Override
     public void execute(UpdateCoordsInputData updateCoordsInputData) {
         double latitude;
@@ -43,7 +42,7 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
             updateCoordsPresenter.prepareSuccessView(outputData);
         }
         else {
-            updateCoordsPresenter.prepareFailView("(Latitude: " + latitude + ", Longitude:" + longitude + ") is not a valid set of coordinates.");
+            updateCoordsPresenter.prepareFailView("(Latitude: " + latitude + ", Longitude: " + longitude + ") is not a valid set of coordinates.");
         }
     }
 }
