@@ -1,5 +1,7 @@
 package view.ViewEntry;
 
+import view.Components.Colors;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -14,8 +16,7 @@ public class TitleDescription extends JPanel {
     JTextArea descriptionLabel;
 
     public TitleDescription(String title, String description) {
-        // TODO make this look less wonky
-        // TODO add scroll bar
+        setBackground(Colors.lightBlue);
         this.titleLabel = new JLabel(title);
         this.titleLabel.setFont(new Font("Sans Serif", Font.BOLD, 30));
         this.titleLabel.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));

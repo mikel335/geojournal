@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -18,7 +17,8 @@ import interface_adapter.createEntry.CreateEntryController;
 import interface_adapter.open_entry.OpenEntryController;
 import use_case.change_sort.EntryListButtonData;
 import use_case.change_sort.SortMethod;
-import view.Components.EntryListButton;
+import view.Components.Colors;
+import view.Components.StyledButton;
 
 /**
  * The view for when the user is looking at the list of entries.
@@ -33,22 +33,20 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     private final JPanel entriesPanel;
 
-    private final Color bgColor = new Color(0xb1, 0xd4, 0xe0);
-
     public EntryListView(ListViewModel listViewModel) {
 
         setSize(1200, 800);
         setLayout(new BorderLayout(30, 30));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-        setBackground(bgColor);
+        setBackground(Colors.lightBlue);
 
 
         listViewModel.addPropertyChangeListener(this);
 
         final JPanel titleAndLogo = new JPanel(new BorderLayout());
-        titleAndLogo.setBackground(bgColor);
+        titleAndLogo.setBackground(Colors.lightBlue);
 
-        final JButton createEntry = new EntryListButton("New Entry +");
+        final JButton createEntry = new StyledButton("New Entry +");
         final JLabel title = new JLabel("All GeoJournal Entries");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setVerticalAlignment(SwingConstants.TOP);
@@ -76,14 +74,14 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
         buttonPanel.setLayout(new GridLayout(1,5, 10,0));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         buttonPanel.setPreferredSize(new Dimension(1200, 100));
-        buttonPanel.setBackground(bgColor);
+        buttonPanel.setBackground(Colors.lightBlue);
 
         final JLabel description = new JLabel("Sort By: ");
         description.setFont(new Font("sans serif", Font.BOLD, 40));
-        final JButton dateAsc = new EntryListButton("Date Ascending");
-        final JButton dateDesc = new EntryListButton("Date Descending");
-        final JButton titleAsc = new EntryListButton("Title Ascending");
-        final JButton titleDesc = new EntryListButton("Title Descending");
+        final JButton dateAsc = new StyledButton("Date Ascending");
+        final JButton dateDesc = new StyledButton("Date Descending");
+        final JButton titleAsc = new StyledButton("Title Ascending");
+        final JButton titleDesc = new StyledButton("Title Descending");
 
         buttonPanel.add(description);
         buttonPanel.add(dateAsc);
@@ -167,11 +165,11 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
                 final JPanel entryPanel = new JPanel();
                 entryPanel.setLayout(new BorderLayout());
-                entryPanel.setBackground(bgColor);
+                entryPanel.setBackground(Colors.lightBlue);
                 entryPanel.setPreferredSize(new Dimension(-1,100));
-                entryPanel.setBorder(BorderFactory.createMatteBorder(4,0,5,0, bgColor));
+                entryPanel.setBorder(BorderFactory.createMatteBorder(4,0,5,0, Colors.lightBlue));
 
-                final JButton button = new EntryListButton(entryListButtonData.getTitle());
+                final JButton button = new StyledButton(entryListButtonData.getTitle());
                 button.setFont(SANS_SERIF);
                 button.setPreferredSize(new Dimension(400, 80));
 
