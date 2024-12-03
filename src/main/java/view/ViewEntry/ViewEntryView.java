@@ -19,6 +19,7 @@ import java.beans.PropertyChangeListener;
 
 public class ViewEntryView extends JPanel implements PropertyChangeListener {
     private ViewEntryController controller;
+    private ViewEntryViewModel viewModel;
 
     private final TitleDescription titleDescArea;
     private final ImageDisplayPanel imagesCard;
@@ -30,6 +31,7 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
 
     public ViewEntryView(ViewEntryViewModel viewModel, WeatherViewModel weatherViewModel) {
         viewModel.addPropertyChangeListener(this);
+        this.viewModel=viewModel;
         setBackground(Colors.lightBlue);
 
         setSize(1200, 800);

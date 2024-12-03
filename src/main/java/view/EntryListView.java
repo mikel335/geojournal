@@ -41,17 +41,17 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
     private OpenEntryController openEntryController;
     private CreateEntryController createEntryController;
     private final GridLayout gridLayout;
+    private final ListViewModel listViewModel;
 
     private final JPanel entriesPanel;
 
     public EntryListView(ListViewModel listViewModel) {
-
         setSize(1200, 800);
         setLayout(new BorderLayout(30, 30));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         setBackground(Colors.lightBlue);
 
-
+        this.listViewModel = listViewModel;
         listViewModel.addPropertyChangeListener(this);
 
         final JPanel titleAndLogo = new JPanel(new BorderLayout());
