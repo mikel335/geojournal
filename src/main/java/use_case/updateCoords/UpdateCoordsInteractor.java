@@ -42,7 +42,7 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
             updateCoordsPresenter.prepareSuccessView(outputData);
         }
         else {
-            updateCoordsPresenter.prepareFailView("(Latitude: " + latitude + ", Longitude:" + longitude + ") is not a valid set of coordinates.");
+            updateCoordsPresenter.prepareFailView("(Latitude: " + latitude + ", Longitude: " + longitude + ") is not a valid set of coordinates.");
         }
     }
 }
