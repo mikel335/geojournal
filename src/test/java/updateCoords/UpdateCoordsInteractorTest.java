@@ -1,65 +1,48 @@
-package updateCoords;
-
-import data_access.EntryDataAccess;
+package use_case.updateCoords;
 
 import entity.Entry;
-import org.junit.jupiter.api.Test;
-import use_case.updateCoords.*;
 
-import java.util.HashMap;
+public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
 
-import static org.junit.jupiter.api.Assertions.*;
+    private final UpdateCoordsDataAccessInterface coordsDataAccess;
+    private final UpdateCoordsOutputBoundary updateCoordsPresenter;
 
-class UpdateCoordsInteractorTest {
-
-    @Test
-    void successUpdateCoordsTest() {
-        UpdateCoordsInputData coordsInputData = new UpdateCoordsInputData("100", "40");
-        EntryDataAccess data = new EntryDataAccess();
-        Entry entry = data.createEntry();
-        entry.setLongitude(100);
-        entry.setLatitude(40);
-
-        UpdateCoordsOutputBoundary presenter = new UpdateCoordsOutputBoundary() {
-            @Override
-            public void prepareSuccessView(UpdateCoordsOutputData outputData) {
-                assertEquals(outputData.longitude(), 100);
-                assertEquals(outputData.latitude(), 40);
-            }
-
-            @Override
-            public void prepareFailView(String errorMessage) {
-                fail("Use case success is unexpected.");
-            }
-        };
-
-        UpdateCoordsInputBoundary interactor = new UpdateCoordsInteractor(data, presenter);
-        interactor.execute(coordsInputData);
+    public UpdateCoordsInteractor(UpdateCoordsDataAccessInterface coordsDataAccess,
+                                  UpdateCoordsOutputBoundary updateCoordsPresenter) {
+        this.coordsDataAccess = coordsDataAccess;
+        this.updateCoordsPresenter = updateCoordsPresenter;
     }
 
-    @Test
-    void failureCoordinateOutOfBoundsTest() {
-        UpdateCoordsInputData coordsInputData = new UpdateCoordsInputData("200", "100");
-        EntryDataAccess data = new EntryDataAccess();
+    @Override
+    public void execute(UpdateCoordsInputData updateCoordsInputData) {
+        double latitude;
+        try {
+            latitude = Double.parseDouble(updateCoordsInputData.latitude());
+        } catch (Exception _) {
+            updateCoordsPresenter.prepareFailView("This is not a valid latitude value" + updateCoordsInputData.latitude());
+            return;
+        }
 
-        Entry entry = data.createEntry();
-        entry.setLongitude(200);
-        entry.setLatitude(100);
+        double longitude;
+        try {
+            longitude = Double.parseDouble(updateCoordsInputData.longitude());
+        } catch (Exception _) {
+            updateCoordsPresenter.prepareFailView("This is not a valid longitude value " + updateCoordsInputData.longitude());
+            return;
+        }
 
-        UpdateCoordsOutputBoundary presenter = new UpdateCoordsOutputBoundary() {
-            @Override
-            public void prepareSuccessView(UpdateCoordsOutputData outputData) {
-                fail("Use case success is unexpected.");
-            }
+        if (90 >= Math.abs(latitude) && 180 >= Math.abs(longitude)) {
+            coordsDataAccess.setCoordinates(latitude, longitude);
 
-            @Override
-            public void prepareFailView(String errorMessage) {
-                assertEquals("(Latitude: " + 100.0 + ", Longitude:" + 200.0 + ") is not a valid set of coordinates.", errorMessage);
-            }
+            Entry updatedEntry = coordsDataAccess.getCurrentEntry();
+            final UpdateCoordsOutputData outputData = new UpdateCoordsOutputData(
+                    updatedEntry.getLatitude(),
+                    updatedEntry.getLongitude());
 
-        };
-
-        UpdateCoordsInputBoundary interactor = new UpdateCoordsInteractor(data, presenter);
-        interactor.execute(coordsInputData);
+            updateCoordsPresenter.prepareSuccessView(outputData);
+        }
+        else {
+            updateCoordsPresenter.prepareFailView("(Latitude: " + latitude + ", Longitude: " + longitude + ") is not a valid set of coordinates.");
+        }
     }
 }
