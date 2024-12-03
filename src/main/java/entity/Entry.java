@@ -55,10 +55,9 @@ public class Entry {
         this.description = description;
     }
 
-    public int addImagePath(String path) {
+    public void addImagePath(String path) {
         imagePaths.put(newImgId, path);
         newImgId++;
-        return newImgId;
     }
 
     public void removeImagePath(Integer id) {
