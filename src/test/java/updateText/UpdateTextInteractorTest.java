@@ -59,6 +59,42 @@ class UpdateTextInteractorTest {
     }
 
     @Test
+    void failureEditTest() {
+        UpdateTextInputData textInputData = new UpdateTextInputData("","");
+        UpdateTextDataAccessInterface data = new UpdateTextDataAccessInterface() {
+            @Override
+            public void setTitle(String title) {
+                // Not needed
+            }
+
+            @Override
+            public void setDescription(String description) {
+                // Not needed
+            }
+
+            @Override
+            public Entry getCurrentEntry() {
+                throw new RuntimeException("Simulated data access failure.");
+            }
+        };
+
+        UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
+            @Override
+            public void prepareSuccessView(UpdateTextOutputData outputData) {
+                fail("Use case failure is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                assertEquals("Simulated data access failure.", errorMessage);
+            }
+        };
+
+        UpdateTextInputBoundary interactor = new UpdateTextInteractor(presenter, data);
+        interactor.execute(textInputData);
+    }
+
+    @Test
     void successCancelTest() {
         EntryDataAccess data = new EntryDataAccess();
         Entry entry = data.createEntry();
@@ -75,6 +111,41 @@ class UpdateTextInteractorTest {
             @Override
             public void prepareFailView(String errorMessage) {
                 fail("Use case failure is unexpected.");
+            }
+        };
+
+        UpdateTextInputBoundary interactor = new UpdateTextInteractor(presenter, data);
+        interactor.cancelUpdate();
+    }
+
+    @Test
+    void failureCancelTest() {
+        UpdateTextDataAccessInterface data = new UpdateTextDataAccessInterface() {
+            @Override
+            public void setTitle(String title) {
+                // Not needed
+            }
+
+            @Override
+            public void setDescription(String description) {
+                // Not needed
+            }
+
+            @Override
+            public Entry getCurrentEntry() {
+                throw new RuntimeException("Simulated data access failure.");
+            }
+        };
+
+        UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
+            @Override
+            public void prepareSuccessView(UpdateTextOutputData outputData) {
+                fail("Use case failure is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                assertEquals("Simulated data access failure.", errorMessage);
             }
         };
 
