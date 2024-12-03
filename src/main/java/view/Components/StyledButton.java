@@ -1,7 +1,10 @@
 package view.Components;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 
 public class StyledButton extends JButton {
     public StyledButton(String text) {

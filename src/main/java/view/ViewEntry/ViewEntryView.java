@@ -11,7 +11,6 @@ import view.Components.ImageDisplayPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;

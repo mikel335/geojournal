@@ -9,7 +9,11 @@ import use_case.updateCoords.UpdateCoordsDataAccessInterface;
 import use_case.updateText.UpdateTextDataAccessInterface;
 import use_case.viewEntry.ViewEntryDataAccessInterface;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Collections;
@@ -136,7 +140,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
             if (!jsonData.isEmpty()) {
 
                 JSONObject fileData = new JSONObject(jsonData);
-                System.out.println(fileData.toString());
 
                 for (String data : fileData.keySet()) {
                     JSONObject entryData = (JSONObject) fileData.get(data);

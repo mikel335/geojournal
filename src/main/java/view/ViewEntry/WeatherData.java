@@ -5,10 +5,19 @@ import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 import view.Components.Colors;
 
-import javax.swing.*;
-import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+
 
 public class WeatherData extends JPanel implements PropertyChangeListener {
     private WeatherController weatherController;
@@ -27,7 +36,7 @@ public class WeatherData extends JPanel implements PropertyChangeListener {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Colors.lightBlue);
-        setAlignmentX(Component.LEFT_ALIGNMENT);
+        setAlignmentX(JPanel.LEFT_ALIGNMENT);
 
         JPanel temperaturePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         temperaturePanel.setBackground(Colors.lightBlue);

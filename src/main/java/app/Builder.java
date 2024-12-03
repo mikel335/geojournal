@@ -1,6 +1,5 @@
 package app;
 
-import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -63,6 +62,8 @@ import view.EditImages.EditImagesView;
 import view.UpdateCoords.UpdateCoordsView;
 import view.UpdateText.UpdateTextView;
 import view.ViewEntry.ViewEntryView;
+
+import java.awt.CardLayout;
 
 /**
  * The Builder puts the CA architecture together.

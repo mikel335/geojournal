@@ -2,7 +2,13 @@ package view.Components;
 
 import interface_adapter.editImages.EditImagesController;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+
 import java.awt.BorderLayout;
 import java.awt.Image;
 
