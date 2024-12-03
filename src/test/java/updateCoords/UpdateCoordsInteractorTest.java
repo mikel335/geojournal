@@ -6,8 +6,6 @@ import entity.Entry;
 import org.junit.jupiter.api.Test;
 import use_case.updateCoords.*;
 
-import java.util.HashMap;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class UpdateCoordsInteractorTest {
@@ -23,8 +21,8 @@ class UpdateCoordsInteractorTest {
         UpdateCoordsOutputBoundary presenter = new UpdateCoordsOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateCoordsOutputData outputData) {
-                assertEquals(outputData.longitude(), 100);
-                assertEquals(outputData.latitude(), 40);
+                assertEquals(100, outputData.longitude());
+                assertEquals(40, outputData.latitude());
             }
 
             @Override
