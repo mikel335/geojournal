@@ -1,16 +1,37 @@
-# geojournal
+# Geojournal
 
-Team Members:
+### Team Members:
 Michael Zhang, David Jiang, Eric Cheong, Sebastien Psarianos
 
-User Stories:
+### Purpose:
+Geojournal is an app where the user can keep a journal record of where they have been. It was made to allow users to easily find places they have been to.
 
-1. John went to the Alps over the summer and has decided to record the pictures and experiences into the journal. He created a new entry and inputted the pictures into the entry.
+### Contents:
+1. [Features](#Features)
+2. [Installation](#Installation)
+3. [Usage](#Usage)
+4. [License](#License)
+5. [Feedback](#Feedback)
+6. [Contributions](#Contributions)
 
-2. Jeffrey went on a hike in the forest and found a cave. He checked online and couldn’t find any information on it. He decided to use GeoJournal to record the cave. He gave it a name, pinned its coordinates on the embedded map because the cave has no address. He can now find the cave easily by starting a GPS route with the map.
+### Features:
+1. **Sorting:** Journal entries can be sorted by date oldest to newest and vice versa
+2. **Sorting:** Journal entries can be sortedby title alphabetically and reverse-alphbetically
+3. **Image Saving:** Images can be saved individually for each entry
+4. **Location Saving:** The locations for each entry can be saved individually (through latitude and longitude)
+5. **Map Display:** A map displaying the location will be shown
+6. **Weather Information:** Some weather information, such as the temperature for the location, will be given
+7. **Writing & Reading:** The journal allows the user to write descriptions for each journal entry and title them
 
-3. George is looking for apartments to rent. He uses GeoJournal to keep track of the apartments he looks at. He uses the text box for descriptions to write about what he thinks about each apartment so he can show his friend who he wants to be roommates with so they can make a decision on which apartment to rent.
+### Installation:
 
-4. Patrick uses GeoJournal for storing restuarants he went to. He wants to go to a restuarant that he made an entry for a while ago. He uses the list of entries where every entry hes made is recorded on. The default placements of the entries are newest first so he sorts by oldest to find the entry. He then sorts by newest again to go back to the default.
+### Usage:
 
-5. Jimmy found a bar that he liked so he made an entry for it. the bar changed its name and address so Jimmy edited those things. The bar closed down to Jimmy deleted the entry.
+### License:
+This project is licensed under the terms of the MIT license.
+
+### Feedback:
+This project is not accepting feedback.
+
+### Contributions:
+Contributions to the project are closed. 
