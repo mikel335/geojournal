@@ -11,14 +11,26 @@ public class WeatherOutputData {
         this.description = description;
     }
 
+    /**
+     * Gets the location of the weather
+     * @return The location of the weather
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Gets the temperature of the weather.
+     * @return The temperature of the weather
+     */
     public double getTemperature() {
         return temperature;
     }
 
+    /**
+     * Gets the description of the weather.
+     * @return The description of the weather
+     */
     public String getDescription() {
         return description;
     }

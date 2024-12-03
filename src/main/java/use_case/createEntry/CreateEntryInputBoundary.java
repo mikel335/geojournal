@@ -4,5 +4,5 @@ public interface CreateEntryInputBoundary {
     /**
      * Executes the create entry use case
      */
-    public void execute();
+    void execute();
 }

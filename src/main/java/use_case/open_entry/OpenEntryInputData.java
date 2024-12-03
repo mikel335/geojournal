@@ -10,6 +10,10 @@ public class OpenEntryInputData {
         this.id = id;
     }
 
+    /**
+     * Gets the id of the entry to open
+     * @return The ID of the entry to open
+     */
     int getID() {
         return id;
     }

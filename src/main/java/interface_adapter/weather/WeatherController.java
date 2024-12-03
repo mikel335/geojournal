@@ -23,6 +23,6 @@ WeatherController {
     public void execute(double longitude, double latitude) {
         final WeatherInputData signupInputData = new WeatherInputData(longitude, latitude);
 
-        weatherUseCaseInteractor.checkweather(signupInputData);
+        weatherUseCaseInteractor.checkWeather(signupInputData);
     }
 }
