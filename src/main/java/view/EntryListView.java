@@ -1,16 +1,15 @@
 package view;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import interface_adapter.change_sort.ChangeSortController;
 import interface_adapter.change_sort.ListState;
@@ -19,34 +18,78 @@ import interface_adapter.createEntry.CreateEntryController;
 import interface_adapter.open_entry.OpenEntryController;
 import use_case.change_sort.EntryListButtonData;
 import use_case.change_sort.SortMethod;
+import view.Components.EntryListButton;
 
 /**
  * The view for when the user is looking at the list of entries.
  */
 public class EntryListView extends JPanel implements PropertyChangeListener {
 
+    public static final Font SANS_SERIF = new Font("sans serif", Font.BOLD, 20);
     private ChangeSortController changeSortController;
     private OpenEntryController openEntryController;
     private CreateEntryController createEntryController;
+    private final GridLayout gridLayout;
 
     private final JPanel entriesPanel;
 
+    private final Color bgColor = new Color(0xb1, 0xd4, 0xe0);
+
     public EntryListView(ListViewModel listViewModel) {
-        this.setLayout(new BorderLayout());
+
+        setSize(1200, 800);
+        setLayout(new BorderLayout(30, 30));
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        setBackground(bgColor);
+
+
         listViewModel.addPropertyChangeListener(this);
 
-        final JLabel title = new JLabel("Entries");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JPanel titleAndLogo = new JPanel(new BorderLayout());
+        titleAndLogo.setBackground(bgColor);
 
-        this.entriesPanel = new JPanel();
+        final JButton createEntry = new EntryListButton("New Entry +");
+        final JLabel title = new JLabel("All GeoJournal Entries");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setVerticalAlignment(SwingConstants.TOP);
+        title.setFont(new Font ("Sans serif", Font.BOLD, 40));
+
+        final ImageIcon logo = new ImageIcon("./logo.png");
+        Image resizedImage = logo.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        final JLabel logoPanel = new JLabel(resizedIcon);
+        titleAndLogo.add(logoPanel, BorderLayout.WEST);
+        titleAndLogo.add(title, BorderLayout.CENTER);
+        titleAndLogo.add(createEntry, BorderLayout.EAST);
+
+        gridLayout = new GridLayout(1, 1,0,0);
+        entriesPanel = new JPanel(gridLayout);
+
+        JScrollPane scrollPane = new JScrollPane(entriesPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBorder(new EmptyBorder(0,0,0,0));
+
         this.populateEntryButtons(listViewModel.getState().getEntryList());
 
-        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        final JButton dateAsc = new JButton("Date Ascending");
-        final JButton dateDesc = new JButton("Date Descending");
-        final JButton titleAsc = new JButton("Title Ascending");
-        final JButton titleDesc = new JButton("Title Descending");
-        final JButton createEntry = new JButton("Create Entry");
+        final JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1,5, 10,0));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        buttonPanel.setPreferredSize(new Dimension(1200, 100));
+        buttonPanel.setBackground(bgColor);
+
+        final JLabel description = new JLabel("Sort By: ");
+        description.setFont(new Font("sans serif", Font.BOLD, 40));
+        final JButton dateAsc = new EntryListButton("Date Ascending");
+        final JButton dateDesc = new EntryListButton("Date Descending");
+        final JButton titleAsc = new EntryListButton("Title Ascending");
+        final JButton titleDesc = new EntryListButton("Title Descending");
+
+        buttonPanel.add(description);
+        buttonPanel.add(dateAsc);
+        buttonPanel.add(dateDesc);
+        buttonPanel.add(titleAsc);
+        buttonPanel.add(titleDesc);
 
         dateAsc.addActionListener((ActionEvent _)-> {
             changeSortController.execute(SortMethod.DATE_ASCENDING);
@@ -72,11 +115,10 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
         buttonPanel.add(dateDesc);
         buttonPanel.add(titleAsc);
         buttonPanel.add(titleDesc);
-        buttonPanel.add(createEntry);
 
-        this.add(title, BorderLayout.NORTH);
+        this.add(titleAndLogo, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
-        this.add(entriesPanel, BorderLayout.CENTER);
     }
 
     @Override
@@ -118,13 +160,29 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
 
     private void populateEntryButtons(ArrayList<EntryListButtonData > entryList) {
         entriesPanel.removeAll();
-        entriesPanel.validate();
-        entriesPanel.repaint();
 
         if (entryList != null ) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("'Created': MM, dd, yyyy 'at' HH:mm");
             for (EntryListButtonData entryListButtonData : entryList) {
-                final JButton button = new JButton(entryListButtonData.getTitle());
-                entriesPanel.add(button);
+
+                final JPanel entryPanel = new JPanel();
+                entryPanel.setLayout(new BorderLayout());
+                entryPanel.setBackground(bgColor);
+                entryPanel.setPreferredSize(new Dimension(-1,100));
+                entryPanel.setBorder(BorderFactory.createMatteBorder(4,0,5,0, bgColor));
+
+                final JButton button = new EntryListButton(entryListButtonData.getTitle());
+                button.setFont(SANS_SERIF);
+                button.setPreferredSize(new Dimension(400, 80));
+
+                Date entryDate = new Date(Long.parseLong(entryListButtonData.getDate()));
+                final JLabel label = new JLabel(dateFormat.format(entryDate));
+                label.setFont(SANS_SERIF);
+
+                entryPanel.add(button, BorderLayout.WEST);
+                entryPanel.add(label, BorderLayout.EAST);
+
+                entriesPanel.add(entryPanel);
                 button.addActionListener(
                         (ActionEvent e)-> {
                             if (e.getSource().equals(button)) {
@@ -135,6 +193,10 @@ public class EntryListView extends JPanel implements PropertyChangeListener {
             }
             entriesPanel.revalidate();
             entriesPanel.repaint();
+
+            int rows = Math.ceilDiv(entryList.size(), 1);
+            this.gridLayout.setRows(rows);
+            this.gridLayout.setColumns(1);
         }
     }
 

@@ -33,7 +33,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
     public EditImagesView(EditImagesViewModel editImagesViewModel) {
         this.editImagesViewModel = editImagesViewModel;
         this.editImagesViewModel.addPropertyChangeListener(this);
-        this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths(), false);
+        this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths(), true);
 
         // Button panel that gives us add image and done buttons
         JPanel buttonPanel = new JPanel(new FlowLayout());
