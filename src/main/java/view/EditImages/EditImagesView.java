@@ -36,7 +36,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         setBackground(Colors.lightBlue);
         this.editImagesViewModel = editImagesViewModel;
         this.editImagesViewModel.addPropertyChangeListener(this);
-        this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths(), true);
+        this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths());
 
         // Button panel that gives us add image and done buttons
         JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -99,5 +99,6 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
     public void setEditImagesController(EditImagesController editImagesController) {
         this.editImagesController = editImagesController;
         this.imageDisplayPanel.updateImagePanelControllers(editImagesController);
+        this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
     }
 }

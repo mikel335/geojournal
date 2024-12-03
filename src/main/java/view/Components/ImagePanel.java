@@ -10,32 +10,19 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 
 public class ImagePanel extends JPanel {
-    private boolean editMode = false;
-    private EditImagesController editImagesController;
+    private final int id;
 
     public ImagePanel(String path, int id) {
+        setLayout(new BorderLayout());
+        this.id = id;
+
         ImageIcon imageIcon = new ImageIcon(path);
 
         Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(350, 350, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
 
-        if (editMode) {
-            JButton deleteSingleImageButton = new JButton("Delete");
-            add(deleteSingleImageButton, BorderLayout.SOUTH);
-            deleteSingleImageButton.addActionListener(_ -> editImagesController.deleteImage(id));
-        }
-
-        setLayout(new BorderLayout());
         add(new JLabel(resizedIcon), BorderLayout.CENTER);
-    }
-
-    /**
-     * Sets whether or not the user is currently in edit mode.
-     * @param editMode Whether or not the user is current in edit mode.
-     */
-    public void setEditMode(boolean editMode) {
-        this.editMode = editMode;
     }
 
     /**
@@ -43,6 +30,10 @@ public class ImagePanel extends JPanel {
      * @param editImagesController The controller for the edit images use case
      */
     public void setEditImagesController(EditImagesController editImagesController) {
-        this.editImagesController = editImagesController;
+        if (editImagesController != null) {
+            JButton deleteSingleImageButton = new StyledButton("Delete");
+            add(deleteSingleImageButton, BorderLayout.SOUTH);
+            deleteSingleImageButton.addActionListener(_ -> editImagesController.deleteImage(id));
+        }
     }
 }

@@ -38,7 +38,7 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         // Prefill everything with the state data
-        this.imagesCard = new ImageDisplayPanel(viewModel.getState().getImagePaths(), false);
+        this.imagesCard = new ImageDisplayPanel(viewModel.getState().getImagePaths());
         this.mapCard = new MapCard(
                 viewModel.getState().getLatitude(),
                 viewModel.getState().getLongitude()
