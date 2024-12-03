@@ -1,5 +1,7 @@
 package view.UpdateCoords;
 
+import view.Components.Colors;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,6 +22,10 @@ public class CoordEditBoxes extends JPanel {
 
         this.latitudeField = new JTextField(latitude);
         this.longitudeField = new JTextField(longitude);
+        latitudeField.setColumns(10);
+        longitudeField.setColumns(10);
+
+        setBackground(Colors.lightBlue);
 
         addPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);
         resetPlaceholder(latitudeField, LATITUDE_PLACEHOLDER);

@@ -1,12 +1,13 @@
 package view.UpdateText;
 
+import view.Components.Colors;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -18,7 +19,8 @@ public class TitleDescEditBoxes extends JPanel {
     private final static String DESCRIPTION_PLACEHOLDER = "Enter description ...";
 
     public TitleDescEditBoxes(String title, String description) {
-        
+        setBackground(Colors.lightBlue);
+
         //Setting up the view
         this.titleTextField = new JTextField(title);
         this.descriptionTextArea = new JTextArea(description);

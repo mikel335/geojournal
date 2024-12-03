@@ -3,7 +3,9 @@ package view.EditImages;
 import interface_adapter.editImages.EditImagesController;
 import interface_adapter.editImages.EditImagesState;
 import interface_adapter.editImages.EditImagesViewModel;
+import view.Components.Colors;
 import view.Components.ImageDisplayPanel;
+import view.Components.StyledButton;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -31,20 +33,22 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
     private final ImageDisplayPanel imageDisplayPanel;
 
     public EditImagesView(EditImagesViewModel editImagesViewModel) {
+        setBackground(Colors.lightBlue);
         this.editImagesViewModel = editImagesViewModel;
         this.editImagesViewModel.addPropertyChangeListener(this);
         this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths(), true);
 
         // Button panel that gives us add image and done buttons
         JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Colors.lightBlue);
 
-        uploadButton = new JButton("Upload Image");
-        uploadButton.setForeground(Color.GREEN.darker());
+        uploadButton = new StyledButton("Upload Image");
+        uploadButton.setForeground(Color.WHITE);
         uploadButton.addActionListener(this);
         buttonPanel.add(uploadButton);
 
-        doneButton = new JButton("Done");
-        doneButton.setForeground(Color.BLUE);
+        doneButton = new StyledButton("Done");
+        doneButton.setForeground(Color.GREEN);
         doneButton.addActionListener(this);
         buttonPanel.add(doneButton);
 

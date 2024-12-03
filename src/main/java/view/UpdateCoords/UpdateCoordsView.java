@@ -3,6 +3,8 @@ package view.UpdateCoords;
 import interface_adapter.updateCoords.UpdateCoordsController;
 import interface_adapter.updateCoords.UpdateCoordsState;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
+import view.Components.Colors;
+import view.Components.StyledButton;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -20,10 +22,11 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
     private UpdateCoordsController updateCoordsController;
 
     private final CoordEditBoxes coordEditBoxes;
-    final JButton saveButton = new JButton("Save");
-    final JButton cancelButton = new JButton("Cancel");
+    final JButton saveButton = new StyledButton("Save");
+    final JButton cancelButton = new StyledButton("Cancel");
 
     public UpdateCoordsView(UpdateCoordsViewModel updateCoordsViewModel) {
+        setBackground(Colors.lightBlue);
         this.viewModel = updateCoordsViewModel;
         this.viewModel.addPropertyChangeListener(this);
 
@@ -33,6 +36,7 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
         );
 
         JPanel buttonPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        buttonPanel1.setBackground(Colors.lightBlue);
 
         // configuring buttons
         saveButton.setSize(150, 75);
