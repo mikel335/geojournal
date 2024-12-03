@@ -89,4 +89,8 @@ public class Entry {
     public int getNewImgId() {
         return newImgId;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
