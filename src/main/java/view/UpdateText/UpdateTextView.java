@@ -22,6 +22,7 @@ public class UpdateTextView extends JPanel implements ActionListener, PropertyCh
     final JButton cancelButton = new StyledButton("Cancel");
 
     public UpdateTextView(UpdateTextViewModel updateTextModel) {
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         setBackground(Colors.lightBlue);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

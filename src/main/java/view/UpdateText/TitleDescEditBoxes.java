@@ -2,10 +2,7 @@ package view.UpdateText;
 
 import view.Components.Colors;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -23,7 +20,10 @@ public class TitleDescEditBoxes extends JPanel {
 
         //Setting up the view
         this.titleTextField = new JTextField(title);
+        this.titleTextField.setFont(new Font("sans serif", Font.PLAIN, 20));
+
         this.descriptionTextArea = new JTextArea(description);
+        this.descriptionTextArea.setFont(new Font("sans serif", Font.PLAIN, 20));
 
         addPlaceholder(titleTextField, TITLE_PLACEHOLDER);
         resetPlaceholder(titleTextField, TITLE_PLACEHOLDER);
@@ -42,7 +42,7 @@ public class TitleDescEditBoxes extends JPanel {
         JScrollPane titleScrollPane = new JScrollPane(titleTextField);
         JScrollPane descriptionScrollPane = new JScrollPane(descriptionTextArea);
 
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(0, 30));
         add(titleScrollPane, BorderLayout.NORTH);
         add(descriptionScrollPane, BorderLayout.CENTER);
     }

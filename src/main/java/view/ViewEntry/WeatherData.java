@@ -66,8 +66,12 @@ public class WeatherData extends JPanel implements PropertyChangeListener {
                 JOptionPane.showMessageDialog(this, weatherState.getErrorMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                temperature.setText(Double.toString(weatherState.getTemperature()));
-                location.setText(weatherState.getLocation());
+                temperature.setText(weatherState.getTemperature() + "C");
+                if (weatherState.getLocation().isEmpty()) {
+                    location.setText("Couldn't locate weather station");
+                } else {
+                    location.setText(weatherState.getLocation());
+                }
                 description.setText(weatherState.getDescription());
             }
         }

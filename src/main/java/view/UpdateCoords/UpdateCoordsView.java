@@ -6,9 +6,7 @@ import interface_adapter.updateCoords.UpdateCoordsViewModel;
 import view.Components.Colors;
 import view.Components.StyledButton;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -26,6 +24,7 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
     final JButton cancelButton = new StyledButton("Cancel");
 
     public UpdateCoordsView(UpdateCoordsViewModel updateCoordsViewModel) {
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         setBackground(Colors.lightBlue);
         this.viewModel = updateCoordsViewModel;
         this.viewModel.addPropertyChangeListener(this);

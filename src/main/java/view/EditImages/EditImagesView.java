@@ -7,10 +7,7 @@ import view.Components.Colors;
 import view.Components.ImageDisplayPanel;
 import view.Components.StyledButton;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,6 +31,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
 
     public EditImagesView(EditImagesViewModel editImagesViewModel) {
         setBackground(Colors.lightBlue);
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         this.editImagesViewModel = editImagesViewModel;
         this.editImagesViewModel.addPropertyChangeListener(this);
         this.imageDisplayPanel = new ImageDisplayPanel(editImagesViewModel.getState().getImagePaths());
@@ -52,7 +50,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         doneButton.addActionListener(this);
         buttonPanel.add(doneButton);
 
-        imageDisplayPanel.setPreferredSize(new Dimension(1200, 700));
+        imageDisplayPanel.setPreferredSize(new Dimension(1200, 1200));
 
         setLayout(new BorderLayout());
         add(imageDisplayPanel, BorderLayout.NORTH);
