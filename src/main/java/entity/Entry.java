@@ -86,11 +86,12 @@ public class Entry {
 
     public String getDate() { return date; }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public int getNewImgId() {
         return newImgId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 }

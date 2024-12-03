@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UpdateTextInteractorTest {
 
     @Test
-    void updateTitleTest() {
+    void successTitleTest() {
         UpdateTextInputData textInputData = new UpdateTextInputData("Spain", "Beautiful country");
         EntryDataAccess data = new EntryDataAccess();
         Entry entry = data.createEntry();
@@ -35,7 +35,7 @@ class UpdateTextInteractorTest {
     }
 
     @Test
-    void updateDescriptionTest() {
+    void successDescriptionTest() {
         UpdateTextInputData textInputData = new UpdateTextInputData("Spain", "Beautiful country");
         EntryDataAccess data = new EntryDataAccess();
         Entry entry = data.createEntry();
@@ -45,7 +45,7 @@ class UpdateTextInteractorTest {
         UpdateTextOutputBoundary presenter = new UpdateTextOutputBoundary() {
             @Override
             public void prepareSuccessView(UpdateTextOutputData outputData) {
-                assertEquals("Beautiful country", entry.getDescription());
+                assertEquals("Beautiful country", outputData.description());
             }
 
             @Override
@@ -59,7 +59,7 @@ class UpdateTextInteractorTest {
     }
 
     @Test
-    void cancelTest() {
+    void successCancelTest() {
         EntryDataAccess data = new EntryDataAccess();
         Entry entry = data.createEntry();
         entry.setTitle("Test Title 1");
