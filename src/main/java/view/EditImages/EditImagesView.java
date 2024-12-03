@@ -52,7 +52,8 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         updatePanelSize();
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                updatePanelSize();
+                Rectangle r = this.getBounds();
+                imageDisplayPanel.setPreferredSize(new Dimension(r.width - 100, r.height - 160));
             }
         });
 
@@ -92,7 +93,6 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
             }
         }
         this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
-        updatePanelSize();
     }
 
     /**
@@ -103,10 +103,5 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         this.editImagesController = editImagesController;
         this.imageDisplayPanel.updateImagePanelControllers(editImagesController);
         this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
-    }
-
-    private void updatePanelSize(){
-        Rectangle r = this.getBounds();
-        imageDisplayPanel.setPreferredSize(new Dimension(r.width - 100, r.height - 160));
     }
 }
