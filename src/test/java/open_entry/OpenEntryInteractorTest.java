@@ -13,17 +13,19 @@ class OpenEntryInteractorTest {
     @Test
     void SucessOpenEntryTest(){
         EntryDataAccess data = new EntryDataAccess();
-        OpenEntryInputData openEntryInputData = new OpenEntryInputData(2);
+        OpenEntryInputData openEntryInputData = new OpenEntryInputData(1);
 
         Entry entry1 = data.createEntry();
+        entry1.setTitle("title 1");
         data.createEntry();
         Entry entry3 = data.createEntry();
+        entry3.setTitle("title 3");
 
         OpenEntryOutputBoundary presenter = new OpenEntryOutputBoundary() {
             @Override
             public void prepareSuccessView(OpenEntryOutputData outputData) {
-                assertEquals(3, entry3.getId());
-                assertEquals(1, entry1.getId());
+                assertEquals(1, outputData.id());
+
             }
 
             @Override
