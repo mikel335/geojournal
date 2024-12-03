@@ -278,11 +278,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
             newId = Collections.max(this.allEntries.keySet()) + 1;
         }
 
-        int newId = 0;
-        if (!this.allEntries.isEmpty()) {
-            newId = Collections.max(this.allEntries.keySet()) + 1;
-        }
-
         Entry newEntry = new Entry(
                 newId,
                 "New Entry",
