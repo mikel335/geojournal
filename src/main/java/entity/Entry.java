@@ -75,6 +75,7 @@ public class Entry {
     }
 
 
+
     /**
      * Adds image path to current entry
      * @param path The image path of the newly added image
@@ -138,6 +139,11 @@ public class Entry {
      */
     public String getDate() { return date; }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
     /**
      * Gets the newest image id of the current entry.
      * @return The newest image id of the current entry
@@ -145,4 +151,5 @@ public class Entry {
     public int getNewImgId() {
         return newImgId;
     }
+
 }
