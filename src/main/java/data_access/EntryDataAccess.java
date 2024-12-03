@@ -271,9 +271,11 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     @Override
     public Entry createEntry() {
         int newId = 0;
+
         if (!this.allEntries.isEmpty()) {
             newId = Collections.max(this.allEntries.keySet()) + 1;
         }
+
         Entry newEntry = new Entry(
                 newId,
                 "New Entry",

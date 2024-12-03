@@ -35,113 +35,112 @@ public class Entry {
     }
 
     /**
-     * Gets the ID of this entry.
-     * @return The id of this entry
+     * Gets the ID of the current entry.
+     * @return The id of the current entry
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Gets the title of this entry.
-     * @return The title of this entry
+     * Gets the title of the current entry.
+     * @return The title of the current entry
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Sets the title of this entry.
-     * @param title The new title of this entry
+     * Sets the title of the current entry.
+     * @param title The new title of the current entry
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * Gets the description of this entry.
-     * @return The description of this entry
+     * Gets the description of the current entry.
+     * @return The description of the current entry
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Sets the description of this entry.
-     * @param description The new description of this entry
+     * Sets the description of the current entry.
+     * @param description The new description of the current entry
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
+
     /**
-     * Gets the image path of this entry.
+     * Adds image path to current entry
      * @param path The image path of the newly added image
-     * @return The new image id of this entry
      */
-    public int addImagePath(String path) {
+    public void addImagePath(String path) {
         imagePaths.put(newImgId, path);
         newImgId++;
-        return newImgId;
     }
 
     /**
-     * Removes the image path of the given image id of this entry.
-     * @param id The id of the image of this entry to be removed
+     * Removes the image from the current entry.
+     * @param id The id of the image of the current entry to be removed
      */
     public void removeImagePath(Integer id) {
         imagePaths.remove(id);
     }
 
     /**
-     * Gets the image paths of this entry.
-     * @return A map whose keys are the image IDs and values are the corresponding image paths of this entry
+     * Gets the image paths of the current entry.
+     * @return A map whose keys are the image IDs and values are the corresponding image paths of the current entry
      */
     public Map<Integer, String> getImagePaths() {
         return imagePaths;
     }
 
     /**
-     * Gets the longitude of this entry.
-     * @return The longitude of this entry
+     * Gets the longitude of the current entry.
+     * @return The longitude of the current entry
      */
     public double getLongitude() {
         return longitude;
     }
 
     /**
-     * Sets the longitude of this entry.
-     * @param longitude The latitude of this entry
+     * Sets the longitude of the current entry.
+     * @param longitude The latitude of the current entry
      */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     /**
-     * Gets the latitude of this entry.
-     * @return The latitude of this entry
+     * Gets the latitude of the current entry.
+     * @return The latitude of the current entry
      */
     public double getLatitude() {
         return latitude;
     }
 
     /**
-     * Sets the latitude of this entry.
-     * @param latitude The latitude of this entry
+     * Sets the latitude of the current entry.
+     * @param latitude The latitude of the current entry
      */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
     /**
-     * Gets the date of this entry.
-     * @return The date of this entry
+     * Gets the date of the current entry.
+     * @return The date of the current entry
      */
     public String getDate() { return date; }
 
     /**
-     * Gets the newest image id of this entry.
-     * @return The newest image id of this entry
+     * Gets the newest image id of the current entry.
+     * @return The newest image id of the current entry
      */
     public int getNewImgId() {
         return newImgId;
