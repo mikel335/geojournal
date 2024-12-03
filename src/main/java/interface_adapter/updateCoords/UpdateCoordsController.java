@@ -11,6 +11,11 @@ public class UpdateCoordsController {
 
     }
 
+    /**
+     * Executes the update coordinate use case
+     * @param latitude The new latitude
+     * @param longitude The new longitude
+     */
     public void execute(String latitude, String longitude) {
         final UpdateCoordsInputData updateCoordsInputData = new UpdateCoordsInputData(longitude, latitude);
         updateCoordsInteractor.execute(updateCoordsInputData);

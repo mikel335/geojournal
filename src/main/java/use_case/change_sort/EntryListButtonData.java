@@ -2,8 +2,6 @@ package use_case.change_sort;
 
 import entity.Entry;
 
-import java.util.Date;
-
 public class EntryListButtonData {
     private final int id;
     private final String title;

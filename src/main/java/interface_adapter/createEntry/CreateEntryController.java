@@ -8,6 +8,9 @@ public class CreateEntryController {
     public CreateEntryController(CreateEntryInputBoundary interactor) {
         this.interactor = interactor;
     }
-    
+
+    /**
+     * Executes the creation of an entry based on the given interactor.
+     */
     public void createEntry(){ this.interactor.execute(); }
 }
