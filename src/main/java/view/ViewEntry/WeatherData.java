@@ -4,8 +4,12 @@ import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -57,10 +61,19 @@ public class WeatherData extends JPanel implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Sets the controller to use for the weather fetching use case.
+     * @param weatherController The controller to use for the weather fetching use case
+     */
     public void setWeatherController(WeatherController weatherController) {
         this.weatherController = weatherController;
     }
 
+    /**
+     * Refreshes the weather data
+     * @param latitude The latitude of the location at which to fetch the weather data of
+     * @param longitude The longitude of the location at which to fetch the weather data of
+     */
     public void refreshWeatherData(double latitude, double longitude) {
         if(weatherController != null)  {
             this.weatherController.execute(latitude, longitude);

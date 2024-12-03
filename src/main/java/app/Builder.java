@@ -28,7 +28,6 @@ import interface_adapter.updateText.UpdateTextPresenter;
 import interface_adapter.updateText.UpdateTextViewModel;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryPresenter;
-import interface_adapter.viewEntry.ViewEntryViewModel;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherPresenter;
 import interface_adapter.weather.WeatherViewModel;
@@ -105,6 +104,10 @@ public class Builder{
         cardPanel.setLayout(cardLayout);
     }
 
+    /**
+     * Adds the entry list view.
+     * @return A Builder with the EntryListView initialized
+     */
     public Builder addEntryListView(){
         listViewModel = new ListViewModel();
         entryListView = new EntryListView(listViewModel);
@@ -113,6 +116,63 @@ public class Builder{
         return this;
     }
 
+    /**
+     * Adds the weather view model.
+     * @return A Builder with WeatherViewModel initialized
+     */
+    public Builder addWeatherViewModel() {
+        weatherViewModel = new WeatherViewModel();
+        return this;
+    }
+
+    /**
+     * Adds the entry view.
+     * @return A Builder with the ViewEntryView initialized
+     */
+    public Builder addViewEntryView() {
+        viewEntryViewModel = new ViewEntryViewModel();
+        viewEntryView = new ViewEntryView(viewEntryViewModel, weatherViewModel);
+        cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the edit images view.
+     * @return A Builder with EditImagesView initialized
+     */
+    public Builder addEditImagesView() {
+        editImagesViewModel = new EditImagesViewModel();
+        editImagesView = new EditImagesView(editImagesViewModel);
+        cardPanel.add(editImagesView, editImagesViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the update coords view.
+     * @return A Builder with the UpdateCoordsView initialized
+     */
+    public Builder addUpdateCoordsView() {
+        updateCoordsViewModel = new UpdateCoordsViewModel();
+        updateCoordsView = new UpdateCoordsView(updateCoordsViewModel);
+        cardPanel.add(updateCoordsView, updateCoordsViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the update text view.
+     * @return A Builder with the UpdateTextView initialized
+     */
+    public Builder addUpdateTextView() {
+        updateTextViewModel = new UpdateTextViewModel();
+        updateTextView = new UpdateTextView(updateTextViewModel);
+        cardPanel.add(updateTextView, updateTextViewModel.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the change sort use case.
+     * @return A Builder with the change sort use case's associated parts initialized
+     */
     public Builder addChangeSortUseCase(){
         final ChangeSortOutputBoundary changeSortOutputBoundary = new ChangeSortPresenter(viewManagerModel, listViewModel);
         final ChangeSortInputBoundary changeSortInteractor = new ChangeSortInteractor(
@@ -122,19 +182,10 @@ public class Builder{
         return this;
     }
 
-    public Builder addWeatherViewModel() {
-        weatherViewModel = new WeatherViewModel();
-        return this;
-    }
-
-
-    public Builder addViewEntryView() {
-        viewEntryViewModel = new ViewEntryViewModel();
-        viewEntryView = new ViewEntryView(viewEntryViewModel, weatherViewModel);
-        cardPanel.add(viewEntryView, viewEntryViewModel.getViewName());
-        return this;
-    };
-
+    /**
+     * Adds the open entry use case.
+     * @return A Builder with the open entry use case's associated parts initialized
+     */
     public Builder addOpenEntryUseCase(){
         final OpenEntryOutputBoundary openEntryOutputBoundary = new OpenEntryPresenter(viewEntryViewModel, viewManagerModel);
         final OpenEntryInputBoundary openEntryInteractor = new OpenEntryInteractor(dataAccess, openEntryOutputBoundary);
@@ -143,27 +194,10 @@ public class Builder{
         return this;
     }
 
-    public Builder addEditImagesView() {
-        editImagesViewModel = new EditImagesViewModel();
-        editImagesView = new EditImagesView(editImagesViewModel);
-        cardPanel.add(editImagesView, editImagesViewModel.getViewName());
-        return this;
-    }
-
-    public Builder addUpdateCoordsView() {
-        updateCoordsViewModel = new UpdateCoordsViewModel();
-        updateCoordsView = new UpdateCoordsView(updateCoordsViewModel);
-        cardPanel.add(updateCoordsView, updateCoordsViewModel.getViewName());
-        return this;
-    }
-
-    public Builder addUpdateTextView() {
-        updateTextViewModel = new UpdateTextViewModel();
-        updateTextView = new UpdateTextView(updateTextViewModel);
-        cardPanel.add(updateTextView, updateTextViewModel.getViewName());
-        return this;
-    }
-
+    /**
+     * Adds the check weather use case.
+     * @return A Builder with the check weather use case's associated parts initialized
+     */
     public Builder addWeatherUseCase() {
         final WeatherOutputBoundary weatherPresenter = new WeatherPresenter(
                 weatherViewModel
@@ -179,6 +213,11 @@ public class Builder{
 
         return this;
     }
+
+    /**
+     * Adds the create entry use case.
+     * @return A Builder with the create entry use case's associated parts initialized
+     */
     public Builder addCreateEntryUseCase() {
         final CreateEntryOutputBoundary createEntryPresenter = new CreateEntryPresenter(
                     viewManagerModel,
@@ -195,6 +234,10 @@ public class Builder{
         return this;
     }
 
+    /**
+     * Adds the view entry use case.
+     * @return A Builder with the view entry use case's associated parts initialized
+     */
     public Builder addViewEntryUseCase() {
         final ViewEntryOutputBoundary viewEntryPresenter = new ViewEntryPresenter(
                 viewEntryViewModel,
@@ -214,6 +257,10 @@ public class Builder{
         return this;
     }
 
+    /**
+     * Adds the update text use case.
+     * @return A Builder with the update text use case's associated parts initialized
+     */
     public Builder addUpdateTextUseCase() {
         final UpdateTextOutputBoundary updateTextPresenter = new UpdateTextPresenter(
                 updateTextViewModel,
@@ -232,6 +279,10 @@ public class Builder{
         return this;
     }
 
+    /**
+     * Adds the add/edit images use case.
+     * @return A Builder with the add/edit images use case's associated parts initialized
+     */
     public Builder addEditImagesUseCase() {
         final EditImagesOutputBoundary editImagesPresenter = new EditImagesPresenter(
                 editImagesViewModel,
@@ -250,6 +301,10 @@ public class Builder{
         return this;
     }
 
+    /**
+     * Adds the change update coordinates case.
+     * @return A Builder with the update coordinates use case's associated parts initialized
+     */
     public Builder addUpdateCoordsUseCase() {
         final UpdateCoordsOutputBoundary updateCoordsPresenter = new UpdateCoordsPresenter(
             updateCoordsViewModel,
@@ -268,8 +323,10 @@ public class Builder{
         return this;
     }
 
-
-
+    /**
+     * Creates a JFrame with the default view open.
+     * @return A JFrame with the default view (entry list) open
+     */
     public JFrame build(){
         final JFrame application = new JFrame("Entries");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

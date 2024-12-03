@@ -11,6 +11,9 @@ public interface UpdateCoordsDataAccessInterface {
      */
     void setCoordinates(double latitude, double longitude);
 
+    /**
+     * Gets the current entry whose coordinates are being updated.
+     * @return The entry whose coordinates are being updated.
+     */
     Entry getCurrentEntry();
-
 }

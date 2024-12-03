@@ -4,8 +4,12 @@ import interface_adapter.updateText.UpdateTextController;
 import interface_adapter.updateText.UpdateTextState;
 import interface_adapter.updateText.UpdateTextViewModel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
