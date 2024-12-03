@@ -8,12 +8,11 @@ import view.Components.ImageDisplayPanel;
 import view.Components.StyledButton;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -50,7 +49,12 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         doneButton.addActionListener(this);
         buttonPanel.add(doneButton);
 
-        imageDisplayPanel.setPreferredSize(new Dimension(1200, 750));
+        updatePanelSize();
+        this.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                updatePanelSize();
+            }
+        });
 
         setLayout(new BorderLayout());
         add(imageDisplayPanel, BorderLayout.NORTH);
@@ -88,6 +92,7 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
             }
         }
         this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
+        updatePanelSize();
     }
 
     /**
@@ -98,5 +103,10 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         this.editImagesController = editImagesController;
         this.imageDisplayPanel.updateImagePanelControllers(editImagesController);
         this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
+    }
+
+    private void updatePanelSize(){
+        Rectangle r = this.getBounds();
+        imageDisplayPanel.setPreferredSize(new Dimension(r.width - 100, r.height - 160));
     }
 }
