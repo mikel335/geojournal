@@ -37,10 +37,18 @@ public class UpdateCoordsState {
         this.longitude = longitude;
     }
 
+    /**
+     * Gets the error message for updating coordinates
+     * @return The error message for updating coordinates
+     */
     public String getUpdateCoordsError() {
         return updateCoordsError;
     }
 
+    /**
+     * Sets the error message for updating coordinates
+     * @param updateCoordsError The new error message for updating coordinates
+     */
     public void setUpdateCoordsError(String updateCoordsError) {
         this.updateCoordsError = updateCoordsError;
     }

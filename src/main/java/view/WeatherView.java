@@ -1,12 +1,8 @@
 package view;
 
-import data_access.WeatherDataAccess;
 import interface_adapter.weather.WeatherController;
-import interface_adapter.weather.WeatherPresenter;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
-import use_case.weathercheck.WeatherInputBoundary;
-import use_case.weathercheck.WeatherInteractor;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -107,19 +103,19 @@ public class WeatherView extends JFrame implements ActionListener, PropertyChang
     public void setWeatherController(WeatherController weatherController) {
         this.weatherController = weatherController;
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            WeatherViewModel weatherViewModel = new WeatherViewModel();
-
-            final WeatherDataAccess weatherDataAccessObject = new WeatherDataAccess();
-            final WeatherPresenter weatherPresenter = new WeatherPresenter(weatherViewModel);
-            final WeatherInputBoundary weatherInteractor = new WeatherInteractor(weatherDataAccessObject, weatherPresenter);
-            WeatherController weatherController = new WeatherController(weatherInteractor);
-
-            WeatherView demo = new WeatherView(weatherViewModel, weatherController);
-            demo.setVisible(true);
-        });
-    }
+    // TODO: Remove this when done testing
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            WeatherViewModel weatherViewModel = new WeatherViewModel();
+//
+//            final WeatherDataAccess weatherDataAccessObject = new WeatherDataAccess();
+//            final WeatherPresenter weatherPresenter = new WeatherPresenter(weatherViewModel);
+//            final WeatherInputBoundary weatherInteractor = new WeatherInteractor(weatherDataAccessObject, weatherPresenter);
+//            WeatherController weatherController = new WeatherController(weatherInteractor);
+//
+//            WeatherView demo = new WeatherView(weatherViewModel, weatherController);
+//            demo.setVisible(true);
+//        });
+//    }
 }
 

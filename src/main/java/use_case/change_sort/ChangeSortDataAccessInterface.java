@@ -8,8 +8,10 @@ import java.util.Map;
  * The interface of the data access object for the change sort use case.
  */
 public interface ChangeSortDataAccessInterface {
+
     /**
-     * Updates the system to record the entry list's sort method.
+     * Gets the map that maps the id to each entry.
+     * @return A map that maps IDs to their respective entries.
      */
     Map<Integer, Entry> getEntryList();
 }

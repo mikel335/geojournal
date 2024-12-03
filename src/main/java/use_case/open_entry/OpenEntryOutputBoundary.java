@@ -1,7 +1,5 @@
 package use_case.open_entry;
 
-import use_case.change_sort.ChangeSortOutputData;
-
 /**
  * The output boundary for the open entry use case.
  */

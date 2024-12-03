@@ -2,8 +2,10 @@ package view.Components;
 
 import interface_adapter.editImages.EditImagesController;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.*;
 
 public class ImageDisplayPanel extends JPanel {
@@ -28,9 +30,12 @@ public class ImageDisplayPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-
-    // Note all IDs are unique to an image even after it has been removed
+    /**
+     * Updates the image paths based on the given map.
+     * @param imagePaths A map that maps each image's ID to their image path
+     */
     public void updateImagePaths(Map<Integer, String> imagePaths) {
+        // Note all IDs are unique to an image even after it has been removed
         if (imagePaths == null) {
             return;
         }
@@ -65,6 +70,10 @@ public class ImageDisplayPanel extends JPanel {
         this.gridLayout.setVgap(10);
     }
 
+    /**
+     * Updates the image panel controllers.
+     * @param controller The edit image use case's controller
+     */
     public void updateImagePanelControllers(EditImagesController controller) {
         for (ImagePanel imagePanel : this.imagePanelById.values()) {
             imagePanel.setEditMode(editMode);

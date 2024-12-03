@@ -5,8 +5,14 @@ import interface_adapter.editImages.EditImagesState;
 import interface_adapter.editImages.EditImagesViewModel;
 import view.Components.ImageDisplayPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -82,6 +88,10 @@ public class EditImagesView extends JPanel implements ActionListener, PropertyCh
         this.imageDisplayPanel.updateImagePaths(editImagesViewModel.getState().getImagePaths());
     }
 
+    /**
+     * Sets the controller for editing images.
+     * @param editImagesController The desired controller for editing images
+     */
     public void setEditImagesController(EditImagesController editImagesController) {
         this.editImagesController = editImagesController;
         this.imageDisplayPanel.updateImagePanelControllers(editImagesController);

@@ -4,8 +4,12 @@ import interface_adapter.updateCoords.UpdateCoordsController;
 import interface_adapter.updateCoords.UpdateCoordsState;
 import interface_adapter.updateCoords.UpdateCoordsViewModel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -65,6 +69,10 @@ public class UpdateCoordsView extends JPanel implements ActionListener, Property
         }
     }
 
+    /**
+     * Sets the controller for the update coordinates use case.
+     * @param updateCoordsController The new controller to set to
+     */
     public void setUpdateCoordsController(UpdateCoordsController updateCoordsController) {
         this.updateCoordsController = updateCoordsController;
     }

@@ -13,7 +13,6 @@ public class UpdateCoordsInteractor implements UpdateCoordsInputBoundary {
         this.updateCoordsPresenter = updateCoordsPresenter;
     }
 
-
     @Override
     public void execute(UpdateCoordsInputData updateCoordsInputData) {
         double latitude;

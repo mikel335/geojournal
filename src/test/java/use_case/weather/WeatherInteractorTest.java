@@ -39,7 +39,7 @@ class WeatherInteractorTest {
         };
 
         WeatherInteractor interactor = new WeatherInteractor(mockWeatherDataAccess, successPresenter);
-        interactor.checkweather(inputData);
+        interactor.checkWeather(inputData);
     }
 
     @Test
@@ -66,7 +66,7 @@ class WeatherInteractorTest {
         };
 
         WeatherInteractor interactor = new WeatherInteractor(mockWeatherDataAccess, failurePresenter);
-        interactor.checkweather(inputData);
+        interactor.checkWeather(inputData);
     }
 }
 

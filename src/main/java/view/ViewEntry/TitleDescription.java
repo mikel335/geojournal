@@ -1,7 +1,13 @@
 package view.ViewEntry;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 
 public class TitleDescription extends JPanel {
     JLabel titleLabel;
@@ -32,12 +38,19 @@ public class TitleDescription extends JPanel {
         add(descriptionLabel);
     }
 
-
+    /**
+     * Sets the title of the entry.
+     * @param title The title of the entry to set to
+     */
     public void setTitle(String title) {
         titleLabel.setText(title);
         titleLabel.repaint();
     }
 
+    /**
+     * Sets the description of the entry.
+     * @param description The description of the entry to set to
+     */
     public void setDescription(String description) {
         descriptionLabel.setText(description);
         descriptionLabel.repaint();

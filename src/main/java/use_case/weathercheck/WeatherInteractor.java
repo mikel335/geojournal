@@ -13,7 +13,7 @@ public class WeatherInteractor implements WeatherInputBoundary {
     }
 
     @Override
-    public void checkweather(WeatherInputData inputData) {
+    public void checkWeather(WeatherInputData inputData) {
         try {
             Weather weather = weatherDataAccessObject.checkWeather(inputData.getLatitude(), inputData.getLongitude());
             WeatherOutputData outputData = new WeatherOutputData(

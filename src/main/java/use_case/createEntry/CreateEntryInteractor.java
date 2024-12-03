@@ -26,11 +26,9 @@ public class CreateEntryInteractor implements CreateEntryInputBoundary{
                     newEntry.getDescription()
             );
 
-
             createEntryPresenter.prepareSuccessView(output);
 
         } catch (Exception e) {
-            System.out.println(e.toString());
             createEntryPresenter.prepareFailView("There was an issue creating the entry");
         }
     }

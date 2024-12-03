@@ -1,8 +1,10 @@
 package use_case.change_sort;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 
+/**
+ * A class for comparing the buttons in different ways so as to determine the sorting order.
+ */
 public class EntryListButtonDataComparitor implements Comparator<EntryListButtonData> {
 
     SortMethod sortMethod;

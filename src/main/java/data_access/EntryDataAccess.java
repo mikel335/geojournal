@@ -31,11 +31,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
     private final Map<Integer, Entry> allEntries;
     private static final String geoJournalLocationData = System.getProperty("user.home") + File.separator + "geoJournalApplicationData";
 
-
-    public Map<Integer, Entry> getAllEntries() {
-        return allEntries;
-    }
-
     public EntryDataAccess() {
         this.allEntries = new HashMap<>();
         readApplicationData();

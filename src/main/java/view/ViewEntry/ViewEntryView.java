@@ -1,6 +1,5 @@
 package view.ViewEntry;
 
-import entity.Weather;
 import interface_adapter.viewEntry.ViewEntryController;
 import interface_adapter.viewEntry.ViewEntryState;
 import interface_adapter.viewEntry.ViewEntryViewModel;
@@ -8,8 +7,12 @@ import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherViewModel;
 import view.Components.ImageDisplayPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -99,11 +102,19 @@ public class ViewEntryView extends JPanel implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Adds the view entry controller.
+     * @param controller The controller to use for the view entry use case
+     */
     public void addViewEntryController(ViewEntryController controller) {
         this.controller = controller;
         this.editOptions.setViewEntryController(controller);
     }
 
+    /**
+     * Adds the weather controller.
+     * @param weatherController The controller for the weather fetching use case
+     */
     public void addWeatherController(WeatherController weatherController) {
         weatherData.setWeatherController(weatherController);
     }
