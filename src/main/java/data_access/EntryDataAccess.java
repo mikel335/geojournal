@@ -140,7 +140,6 @@ public class EntryDataAccess implements EditImagesDataAccessInterface,
             if (!jsonData.isEmpty()) {
 
                 JSONObject fileData = new JSONObject(jsonData);
-                System.out.println(fileData.toString());
 
                 for (String data : fileData.keySet()) {
                     JSONObject entryData = (JSONObject) fileData.get(data);
