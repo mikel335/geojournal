@@ -18,9 +18,6 @@ public class EntryListButtonDataComparitor implements Comparator<EntryListButton
             case DATE_ASCENDING -> {
                 return o1.getDate().compareTo(o2.getDate());
             }
-            case DATE_DESCENDING -> {
-                return o2.getDate().compareTo(o1.getDate());
-            }
             case TITLE_ASCENDING -> {
                 return o1.getTitle().compareTo(o2.getTitle());
             }
@@ -28,7 +25,8 @@ public class EntryListButtonDataComparitor implements Comparator<EntryListButton
                 return o2.getTitle().compareTo(o1.getTitle());
             }
             default -> {
-                return 0;
+                // DATE_DESCENDING is considered default
+                return o2.getDate().compareTo(o1.getDate());
             }
         }
     }
