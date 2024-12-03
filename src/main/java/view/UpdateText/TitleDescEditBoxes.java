@@ -2,11 +2,17 @@ package view.UpdateText;
 
 import view.Components.Colors;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.text.JTextComponent;
-import java.awt.*;
+import javax.swing.JScrollPane;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
 public class TitleDescEditBoxes extends JPanel {
 

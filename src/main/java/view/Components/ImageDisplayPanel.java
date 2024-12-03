@@ -6,7 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.*;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
 
 public class ImageDisplayPanel extends JPanel {
     private final Map<Integer, ImagePanel> imagePanelById;

@@ -1,7 +1,6 @@
 package interface_adapter.change_sort;
 
 import use_case.change_sort.EntryListButtonData;
-import use_case.change_sort.SortMethod;
 
 import java.util.ArrayList;
 

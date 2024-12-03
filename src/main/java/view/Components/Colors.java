@@ -1,6 +1,6 @@
 package view.Components;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class Colors {
     public static Color darkBlue = new Color(0x0C,0x2d,0x48);

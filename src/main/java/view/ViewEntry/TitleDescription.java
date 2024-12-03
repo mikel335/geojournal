@@ -2,8 +2,13 @@ package view.ViewEntry;
 
 import view.Components.Colors;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JTextArea;
+import javax.swing.JPanel;
+import javax.swing.BorderFactory;
+import java.awt.Font;
+
+import java.awt.Dimension;
+import java.awt.BorderLayout;
 
 public class TitleDescription extends JPanel {
     JTextArea titleLabel;
