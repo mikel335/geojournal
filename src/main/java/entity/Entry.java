@@ -78,7 +78,6 @@ public class Entry {
     /**
      * Gets the image path of this entry.
      * @param path The image path of the newly added image
-     * @return The new image id of this entry
      */
     public void addImagePath(String path) {
         imagePaths.put(newImgId, path);
