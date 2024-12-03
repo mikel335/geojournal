@@ -23,7 +23,7 @@ class EditImagesInteractorTest {
         EditImagesOutputBoundary presenter = new EditImagesOutputBoundary() {
             @Override
             public void prepareSuccessView(EditImagesOutputData outputData) {
-                assertEquals("test imagepath", entry.getImagePaths().get(0));
+                assertEquals("test imagepath", outputData.imagePaths().get(0)); 
             }
 
             @Override
